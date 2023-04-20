@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import {Route, Routes} from 'react-router-dom';
 import { useState } from 'react'
 
+import Navbar from "./components/Navbar";
+
 import Home from "./pages/Home";
 import Blog from "./pages/Blog";
 import Register from "./pages/Register";
@@ -13,6 +15,7 @@ function App() {
   
   return (
     <div className="App">
+     <Navbar/>
      <Routes>
           <Route path='/' element={<Home/>} />
           <Route path='/Blog' element={<Blog/>} />
