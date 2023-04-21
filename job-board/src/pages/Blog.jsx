@@ -4,6 +4,7 @@ import { useQuery, gql } from "@apollo/client";
 const BLOGS_QUERY = gql`
 {
 posts {
+  date
   id    
   coverPhoto {
     url
@@ -30,7 +31,7 @@ const Blog = () => {
   const { data, loading, error} = useQuery(BLOGS_QUERY);
   if (loading) return (
     <div className="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-      <div className="border-t-transparent border-solid animate-spin  rounded-full border-blue-400 border-8 h-64 w-64"></div>
+      <div className="border-t-transparent border-solid animate-spin  rounded-full border-yellow-400 border-8 h-64 w-64"></div>
     </div>
   );
   if (error) return <pre>{error.message}</pre>
@@ -47,10 +48,10 @@ const Blog = () => {
 
           <article className="flex bg-white transition shadow-md hover:shadow-xl" key={post.coverPhoto.id}>
             <div className="rotate-180 p-2 [writing-mode:_vertical-lr]">
-              <time dateTime="2022-10-10" className="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
-                <span>2023</span>
+              <time dateTime={post.date} assName="flex items-center justify-between gap-4 text-xs font-bold uppercase text-gray-900">
+                <span></span>
                 <span className="w-px flex-1 bg-gray-900/10"></span>
-                <span>Януари 10</span>
+                <span>{post.date}</span>
               </time>
             </div>
             
