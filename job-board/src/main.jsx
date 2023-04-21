@@ -17,6 +17,6 @@ root.render(
   <BrowserRouter>
       <ApolloProvider client={client}>
         <App />
-      </ApolloProvider>,
+      </ApolloProvider>
   </BrowserRouter>
 );

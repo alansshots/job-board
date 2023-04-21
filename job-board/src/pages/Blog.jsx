@@ -1,8 +1,6 @@
 import React from 'react'
 import { useQuery, gql } from "@apollo/client";
 
-import Navbar from '../components/Navbar'
-
 const BLOGS_QUERY = gql`
 {
 posts {
@@ -30,7 +28,11 @@ posts {
 const Blog = () => {
 
   const { data, loading, error} = useQuery(BLOGS_QUERY);
-  if (loading) return "Loading...";
+  if (loading) return (
+    <div className="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
+      <div className="border-t-transparent border-solid animate-spin  rounded-full border-blue-400 border-8 h-64 w-64"></div>
+    </div>
+  );
   if (error) return <pre>{error.message}</pre>
   return (
     <div id="Blog">
@@ -74,7 +76,7 @@ const Blog = () => {
               </div>
 
               <div className="sm:flex sm:items-end sm:justify-end">
-                <a href="#" className="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
+                <a href={"/blog/" + post.slug} className="block bg-yellow-300 px-5 py-3 text-center text-xs font-bold uppercase text-gray-900 transition hover:bg-yellow-400">
                   Прочети
                 </a>
               </div>

@@ -1,12 +1,14 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
 import {Route, Routes} from 'react-router-dom';
-import { useState } from 'react'
+
 
 import Navbar from "./components/Navbar";
 
-import Home from "./pages/Home";
 import Blog from "./pages/Blog";
+import BlogPost from "./pages/BlogPost";
+import Offers from "./pages/Offers";
+
+import Login from "./pages/Login"
 import Register from "./pages/Register";
 
 import './App.css'
@@ -17,8 +19,9 @@ function App() {
     <div className="App">
      <Navbar/>
      <Routes>
-          <Route path='/' element={<Home/>} />
-          <Route path='/Blog' element={<Blog/>} />
+          <Route path='/' element={<Offers/>} />
+          <Route path='/blog' element={<Blog/>} />
+          <Route path='/blog/:slug' element={<BlogPost/>} />
           <Route path='/register' element={<Register/>} />
       </Routes>
     </div>
