@@ -10,7 +10,7 @@ const Filters = () => {
               <ChevronDown/>
             </summary>
 
-            <div class="border-t border-gray-200 bg-white">
+            <div class="border-t border-gray-200 bg-white ">
               <header class="flex items-center justify-between p-4">
                 <span class="text-sm text-gray-700"> 0 Избрани </span>
 

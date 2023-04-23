@@ -5,8 +5,8 @@ const Footer = () => {
   return (
     <div>
         <footer aria-label="Site Footer" class="bg-white">
-            <div class="max-w-4xl px-4 pt-16 pb-8 mx-auto sm:px-6 lg:px-8 lg:pt-24">
-                <div class="pt-8 mt-16 border-t border-gray-100 sm:flex sm:items-center sm:justify-between lg:mt-24">
+            <div class="max-w-4xl px-4 pt-16 pb-8 mx-auto sm:px-6 lg:px-8 lg:pt-4">
+                <div class="pt-8 mt-16 border-t border-gray-100 sm:flex sm:items-center sm:justify-between lg:mt-16">
                 <nav aria-label="Footer Navigation - Support">
                     <ul class="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
                     <li>

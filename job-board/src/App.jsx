@@ -25,6 +25,7 @@ function App() {
           <Route path='/blog' element={<Blog/>} />
           <Route path='/blog/:slug' element={<BlogPost/>} />
           <Route path='/register' element={<Register/>} />
+          <Route path='/login' element={<Login/>} />
           <Route path='/company' element={<CompanyPage/>}/>
       </Routes>
       <Footer/>
