@@ -31,17 +31,28 @@ const Register = () => {
                     </div>
 
                     <div>
-                      <label class="" for="phone">Телефон</label>
+                      <label class="" for="password">Парола</label>
                       <input
                         class="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
+                        placeholder="*********"
+                        type="password"
+                        id="password"
+                      />
+                    </div>
+                  </div>
+
+                  <div> 
+
+                    <div>
+                      <label class="" for="phone">Телефон</label>
+                      <input
+                        class="w-full rounded-lg border-gray-800 border-2 p-3 text-sm mb-4"
                         placeholder="Телефон"
                         type="tel"
                         id="phone"
                       />
                     </div>
-                  </div>
 
-                  <div>
                     <label class="" for="message">Описание</label>
                     <textarea
                       class="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"

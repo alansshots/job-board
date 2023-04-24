@@ -20,9 +20,11 @@ const Navbar = () => {
         </button>
         </NavLink>
 
+        <NavLink to="/login">
         <button className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">          
             Вход
         </button>
+        </NavLink>
 
     </ul>
 </nav>
