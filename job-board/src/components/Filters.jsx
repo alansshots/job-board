@@ -24,7 +24,7 @@ const Filters = () => {
                   <label for="FilterInStock" class="inline-flex items-center gap-2">
                     <input type="checkbox" id="FilterInStock" class="h-5 w-5 rounded border-gray-300" />
                     <span class="text-sm font-medium text-gray-700">
-                      In Stock (5+)
+                      test
                     </span>
                   </label>
                 </li>
@@ -33,7 +33,7 @@ const Filters = () => {
                   <label for="FilterPreOrder" class="inline-flex items-center gap-2">
                     <input type="checkbox" id="FilterPreOrder" class="h-5 w-5 rounded border-gray-300"/>
                     <span class="text-sm font-medium text-gray-700">
-                      Pre Order (3+)
+                      test
                     </span>
                   </label>
                 </li>
@@ -42,7 +42,7 @@ const Filters = () => {
                   <label for="FilterOutOfStock" class="inline-flex items-center gap-2">
                     <input type="checkbox" id="FilterOutOfStock" class="h-5 w-5 rounded border-gray-300" />
                     <span class="text-sm font-medium text-gray-700">
-                      Out of Stock (10+)
+                      test
                     </span>
                   </label>
                 </li>

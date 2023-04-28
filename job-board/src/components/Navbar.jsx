@@ -1,33 +1,40 @@
 import React from 'react'
-import {Link, NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Navbar = () => {
 
   return (
-    <nav className="mx-auto flex max-w-4xl items-center justify-between p-4">
+ <>
+  <div className='bg-white shadow-xl'>
+    <div id='Navbar' className='bg-white m-auto max-w-6xl flex flex-row items-center justify-between'>
+        {/* Logo */}
+        <div className='bg-[#b3fd49] py-4 px-8'>
+            <Link to='/'>
+             <h2>LR</h2>
+            </Link>
+        </div>
 
-        <Link to='/' className='className="inline-flex h-10 w-10 items-center justify-center rounded-lg bg-gray-100"'>
-           <img src='' alt="logo" className='w-24 sm:w-36'/>
-        </Link>
+        <div>
+            <div className='flex flex-row justify-around items-center '>
+                <NavLink to="/offers" className='mx-2 font-semibold'>Обяви</NavLink>
+                <NavLink to="blog" className='mx-2 font-semibold'>Блог</NavLink>
+                <NavLink className='mx-2 mr-1 font-semibold'>Информация</NavLink>
+                <NavLink to="/register" className='mx-1'>
+                    <button className="bg-black text-white py-2 px-4 rounded-2xl">          
+                            Регистрация
+                    </button>
+                </NavLink>
+                <NavLink to="/login" className='mx-1'>
+                    <button className="bg-black text-white py-2 px-4 rounded-2xl">          
+                            Вход
+                    </button>
+                </NavLink>
+            </div>
+        </div>
 
-     <ul className="flex items-center gap-2 text-medium font-bold text-gray-800 uppercase">
-        <NavLink to="/" className={({ isActive }) => isActive ? 'm-4 border-b-2 border-yellow-500' : 'm-4'}>Обяви</NavLink>
-
-        <NavLink  to="/blog" className={({ isActive }) => isActive ? 'm-4 border-b-2 border-yellow-500' : 'm-4'}>Блог</NavLink>
-        <NavLink to="/register">
-        <button className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full bg-gray-800 hover:bg-white text-white hover:text-gray-800 border-2 border-gray-900 focus:outline-none">          
-            Регистрация
-        </button>
-        </NavLink>
-
-        <NavLink to="/login">
-        <button className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full hover:bg-gray-800 hover:text-white border-2 border-gray-900 focus:outline-none">          
-            Вход
-        </button>
-        </NavLink>
-
-    </ul>
-</nav>
+    </div>
+    </div>
+ </>
 
   )
 }
