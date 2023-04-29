@@ -2,7 +2,7 @@ import React from 'react'
 
 const OffersCard = () => {
   return (   
-    <article class="my-4 rounded-xl border-2 border-gray-100 bg-white">
+    <article class="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
         <div class="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
           <a href="#" class="block shrink-0"> 
             <img src="" class="h-14 w-14 rounded-lg object-cover"/>
@@ -22,10 +22,18 @@ const OffersCard = () => {
               </p>
 
               <div class="mt-2 sm:flex sm:items-center sm:gap-2">
-                <div class="flex items-center gap-1 text-gray-500">
-                  <span>$</span>
-                <p class="text-xs">1000 / 1500 лв</p>
-              </div>
+                <span class="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
+                  1000-1500лв
+                </span>
+
+                <span class="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                  3-месеца
+                </span>
+
+                <span class="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                  без опит
+                </span>
+
 
               <span class="hidden sm:block" aria-hidden="true">&middot;</span>
 
@@ -40,7 +48,7 @@ const OffersCard = () => {
       </div>
       
       <div class="flex justify-end">
-        <button class="items-center bg-yellow-300 transition ease-in duration-200 hover:bg-yellow-400 px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold">
+        <button class="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold">
           Свържи се
         </button>
       </div>

@@ -2,14 +2,14 @@ import React from 'react'
 
 import Banner from '../components/Banner'
 import LatestJobs from '../components/LatestJobs'
-import Testimonials from '../components/Testimonials'
+import BlogSection from '../components/BlogSection'
 const Home = () => {
   return (
     <div id='home'>
       <>
       <Banner/>
       <LatestJobs/>
-      <Testimonials/>
+      <BlogSection/>
       </>
     </div>
   )
