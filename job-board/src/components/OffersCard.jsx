@@ -48,7 +48,7 @@ const OffersCard = () => {
       </div>
       
       <div class="flex justify-end">
-        <button class="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold">
+        <button class="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
           Свържи се
         </button>
       </div>

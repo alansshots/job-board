@@ -17,7 +17,7 @@ const Navbar = () => {
         <div>
             <div className='flex flex-row justify-around items-center '>
                 <NavLink to="/offers" className={({ isActive }) => isActive ? 'm-4 border-b-2 border-[#b3fd49] font-semibold mx-4' : 'mx-4 font-semibold duration-100 hover:scale-105'}>Обяви</NavLink>
-                <NavLink to="blog" className={({ isActive }) => isActive ? 'm-4 border-b-2 border-[#b3fd49] font-semibold mx-4' : 'mx-4 mr-10 font-semibold duration-100 hover:scale-105'}>Блог</NavLink>
+                <NavLink to="blog" className={({ isActive }) => isActive ? 'm-4 mr-10 border-b-2 border-[#b3fd49] font-semibold mx-4' : 'mx-4 mr-10 font-semibold duration-100 hover:scale-105'}>Блог</NavLink>
                 <NavLink to="/register" className='mx-1'>
                     <button className="bg-black text-white py-2 px-4 rounded-2xl duration-100 hover:scale-105">          
                             Регистрация
