@@ -5,7 +5,6 @@ import { defaultFieldResolver } from 'graphql';
 const { pathname } = window.location;
 const paths = pathname.split("/").filter(entry => entry !== "");
 const lastPath = paths[paths.length - 1];
-console.log(lastPath)
 
 const BLOG_QUERY = gql`
 {
