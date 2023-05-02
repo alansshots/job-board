@@ -18,7 +18,6 @@ const OffersCard = () => {
       }
       if (data) {
         setOffers(data)
-        console.log(data)
         setFetchError(null)
       }
     }
@@ -31,11 +30,10 @@ const OffersCard = () => {
     {fetchError && (<p>{fetchError}</p>)}
       {offers && (
         <div className="offers">
-          {/* order-by buttons */}
           <div className="smoothie-grid">
             {offers.map(offer => (
 
-              <article id={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
+              <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
               <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
                 <a href="#" className="block shrink-0"> 
                   <img src="" className="h-14 w-14 rounded-lg object-cover"/>
@@ -53,7 +51,8 @@ const OffersCard = () => {
                     </p>
       
                     <div className="mt-2 sm:flex sm:items-center sm:gap-2">
-                      <span className="whitespace-nowrap font-semibold rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
+
+                      <span className="whitespace-nowrap font-semibold rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                         {offer.salary} лв
                       </span>
       

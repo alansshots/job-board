@@ -14,7 +14,7 @@ const Offers = () => {
             <Filters/>
           </div>
           <div className='mx-2 rounded-xl w-full'>
-            <OffersCard/>
+              <OffersCard/>
           </div>
       </div>
     </div>
