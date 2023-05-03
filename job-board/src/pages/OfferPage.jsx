@@ -1,17 +1,20 @@
-import React from 'react'
+import React from 'react';
 import { useEffect, useState } from 'react';
-import supabase from '../config/supabaseClient'
-import { Calendar } from 'react-feather'
+import supabase from '../config/supabaseClient';
+import { Calendar } from 'react-feather';
 const { pathname } = window.location;
 
 const OfferPage = () => {
   const paths = pathname.split("/").filter(entry => entry !== "");
   const lastPath = paths[paths.length - 1];
-  const offer = {};
-  const [fetchError, setFetchError] = useState(null)
-  const [offers, setOffers] = useState(null)
+  
+  const [fetchError, setFetchError] = useState(null);
+  const [offer, setOffer] = useState(null);
+
+  const [companyInfo, setCompanyInfo] = useState(null);
 
   useEffect(() => {
+  // Function to fetch offer info
     const fetchOffers = async () => {
       const { data, error } = await supabase
         .from('Offers')
@@ -20,55 +23,75 @@ const OfferPage = () => {
       
       if (error) {
         setFetchError('Could not fetch the offers')
-        setOffers(null)
+        setOffer(null)
       }
+
       if (data) {
-        setOffers(data)
+        setOffer(data[0])
         console.log(data[0])
         setFetchError(null)
       }
     }
+  // Function to fetch company info
+  // const fetchCompanyInfo = async () => {
+  //   const { data, error } = await supabase
+  //     .from('Offers')
+  //     .select()
+  //     .eq('slug', lastPath)
+    
+  //   if (error) {
+  //     setFetchError('Could not fetch the offers')
+  //     setOffer(null)
+  //   }
+
+  //   if (data) {
+  //     setOffer(data[0])
+  //     console.log(data[0])
+  //     setFetchError(null)
+  //   }
+  // } 
 
     fetchOffers()
   }, [])
 
   return (
     <>
+    {offer && (
     <div id='OfferPage' className='m-auto max-w-6xl flex flex-row items-start justify-center'>
     <div className='mt-6 rounded-xl w-9/12'>
             <div className='bg-white rounded-xl p-6'>
-              <h2 className='text-2xl'>Обявата притежава следните тагове:</h2>
+              <h2 className='text-2xl'>{offer.title}</h2>
               <div className="mt-2 sm:flex sm:items-center sm:gap-2">
               <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md" >
-                  2000 лв
+                  {offer.salary} лв.
               </span>
       
               <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md" >
-                  2 месеца
+                  {offer.experience} години
               </span>
               </div>      
             </div>
             <div className='bg-white rounded-xl p-6 mt-5'>
               <div className='mb-2 flex flex-row items-center'>
                 <Calendar/>
-                <p className='ml-2'></p>
+                <p className='ml-2'>{offer.created_at}</p>
               </div>  
 
-              <h2 className='my-2 font-bold'></h2>
+              <h2 className='my-2 font-bold'>{offer.title}</h2>
 
               <div className='content'>
-                
+                {offer.content}
               </div>
 
               <div className='mt-2'>
                 <ul className='mt-1'>
                   <li className='font-semibold'>
                     <h3>Email за връзка:</h3>
-                    <h3>адавдвад</h3>
+                    <h3>{offer.email}</h3>
                   </li>
                   <li className='font-semibold'>
                     <h3>Tелефон за връзка:</h3>
-                    <h3>29929393003</h3>
+                    <h3>{offer.phone}</h3>
                   </li>
                 </ul>
               </div>
@@ -101,6 +124,7 @@ const OfferPage = () => {
       </div>
       </div>
     </div>
+    )}
     </>
   )
 }
