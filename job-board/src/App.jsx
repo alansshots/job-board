@@ -30,7 +30,9 @@ function App() {
           <Route path='/blog/:slug' element={<BlogPost/>} />
           <Route path='/register' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
-          <Route path='/company' element={<CompanyPage/>}/>
+          <Route path='/company/:slug' element={<CompanyPage/>}/>
+          <Route path='/company/offers/:slug' element={<OfferPage/>} />
+
       </Routes>
       <Footer/>
     </div>

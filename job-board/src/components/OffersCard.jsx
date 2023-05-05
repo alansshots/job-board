@@ -30,7 +30,7 @@ const OffersCard = () => {
     {fetchError && (<p>{fetchError}</p>)}
       {offers && (
         <div className="offers">
-          <div className="smoothie-grid">
+          <div className="offers-grid">
             {offers.map(offer => (
 
               <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">

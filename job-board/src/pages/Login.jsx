@@ -1,14 +1,40 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
+import { Auth } from '@supabase/auth-ui-react';
+import { ThemeSupa } from '@supabase/auth-ui-shared';
+import supabase from '../config/supabaseClient'
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  async function signInUser(){
+    await supabase.auth.signIn();
+    navigate("/offers")
+}
+
+  // supabase.auth.onAuthStateChange( async (event) => {
+  //     if (event == "SIGNED_IN"){
+  //       navigate("/offers");
+  //     } else {
+  //       navigate("/login")
+  //     }
+  // })
+
   return (
     <div id="Login">
       <section className='max-w-4xl m-auto'>
           <div class="mx-auto px-4 py-16 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
               <div class="rounded-lg border-gray-800 border-2 bg-white p-8 shadow-xl lg:col-span-6 lg:p-12">
-                <form action="" class="space-y-4">
+                <Auth
+                    supabaseClient={supabase}
+                    appearance={{theme: ThemeSupa}}
+                    theme='dark'
+                    providers={["facebook"]}
+                
+                />
+                {/* <form action="" class="space-y-4">
 
                   <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
@@ -41,7 +67,7 @@ const Login = () => {
                           <Link to='/register' className='ml-0.5 underline text-sm cursor-pointer'>Регистрация</Link>
                       </div>
                   </div>
-                </form>
+                </form> */}
               </div>
             </div>
           </div>
