@@ -24,23 +24,15 @@ const Login = () => {
   return (
     <div id="Login">
       <section className='max-w-4xl m-auto'>
-          <div class="mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-              <div class="rounded-lg border-gray-800 border-2 bg-white p-8 shadow-xl lg:col-span-6 lg:p-12">
-                <Auth
-                    supabaseClient={supabase}
-                    appearance={{theme: ThemeSupa}}
-                    theme='dark'
-                    providers={["facebook"]}
-                
-                />
-                {/* <form action="" class="space-y-4">
-
-                  <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
+              <div className="rounded-lg border-gray-800 border-2 bg-white p-8 shadow-xl lg:col-span-6 lg:p-12">
+                <form action="" className="space-y-4">
+                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                     <div>
-                      <label class="" for="email">Имейл</label>
+                      <label className="" for="email">Имейл</label>
                       <input
-                        class="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
+                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
                         placeholder="Имейл"
                         type="email"
                         id="email"
@@ -48,9 +40,9 @@ const Login = () => {
                     </div>
 
                     <div>
-                      <label class="" for="password">Парола</label>
+                      <label className="" for="password">Парола</label>
                       <input
-                        class="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
+                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
                         placeholder="*********"
                         type="password"
                         id="password"
@@ -67,7 +59,7 @@ const Login = () => {
                           <Link to='/register' className='ml-0.5 underline text-sm cursor-pointer'>Регистрация</Link>
                       </div>
                   </div>
-                </form> */}
+                </form>
               </div>
             </div>
           </div>

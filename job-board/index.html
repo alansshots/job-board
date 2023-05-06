@@ -6,7 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <link href="https://unpkg.com/swiper/swiper-bundle.min.css" rel="stylesheet" />
-    <title>Vite + React</title>
+    <script src="https://cdn.tiny.cloud/1/m1geg1f2o1m87k2xkwjes7omoei3msfakx2cj8ngf0kkkti9/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        // plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker tinymcespellchecker permanentpen powerpaste advtable advcode editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+        toolbar: 'undo redo | blocks | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | align lineheight | checklist numlist bullist indent outdent | emoticons charmap ',
+        tinycomments_mode: 'embedded',
+        tinycomments_author: 'Author name',
+        mergetags_list: [
+          { value: 'First.Name', title: 'First Name' },
+          { value: 'Email', title: 'Email' },
+        ]
+      });
+    </script>
+    <title>Лятна Работа</title>
   </head>
   <body>
     <div id="root"></div>
