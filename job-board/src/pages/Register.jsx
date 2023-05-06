@@ -24,8 +24,8 @@ const Register = () => {
         options: {
           data: {
             company_name: companyName,
-            phone: "",
-            description: "",
+            phone: phone,
+            description: description
           }
         }
       }
