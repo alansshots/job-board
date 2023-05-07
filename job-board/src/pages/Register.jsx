@@ -2,19 +2,17 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import supabase from '../config/supabaseClient';
-import { Editor } from '@tinymce/tinymce-react';
+import RegistrationSuccess from './RegistrationSuccess';
+import RegistrationFailure from './RegistrationFailure';
 
 const Register = () => {
   const navigate = useNavigate();
+  const [newRegistration, setNewRegistration] = useState(null);
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [description, setDescription] = useState("");
-
-  function ConsoleTest() {
-     console.log("Test Test Test Test Test Test Test Test Test Test");
-  }
 
   async function submitUserData() {
     const { data, error } = await supabase.auth.signUp(
@@ -30,12 +28,35 @@ const Register = () => {
         }
       }
     )
+
+    if(error){
+      setNewRegistration(false);
+    } else {
+      setNewRegistration(true);
+    }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
-    // navigate('/'); 
   }
 
 
   return (
+    <>
+     {(function() {
+                    if (newRegistration == true) {
+                         return (
+                            <>
+                                <RegistrationSuccess/>
+                            </>
+                         );
+                     } 
+                      
+                     if (newRegistration == false){
+                         return (
+                            <>
+                                <RegistrationFailure/>
+                            </>
+                         );
+                    }
+                })()}
     <div id="Register">
         <section className='max-w-4xl m-auto'>
           <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -115,6 +136,7 @@ const Register = () => {
           </div>
         </section>
     </div>
+    </>
   )
 }
 
