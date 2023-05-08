@@ -11,8 +11,7 @@ const Register = () => {
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
-  const [description, setDescription] = useState("");
+  // const [phone, setPhone] = useState("");
 
   async function submitUserData() {
     const { data, error } = await supabase.auth.signUp(
@@ -32,7 +31,7 @@ const Register = () => {
     if(error){
       setNewRegistration(false);
     } else {
-      setNewRegistration(true);
+      setNewRegistration(true); 
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }
@@ -41,100 +40,151 @@ const Register = () => {
   return (
     <>
      {(function() {
-                    if (newRegistration == true) {
-                         return (
-                            <>
-                                <RegistrationSuccess/>
-                            </>
-                         );
-                     } 
-                      
-                     if (newRegistration == false){
-                         return (
-                            <>
-                                <RegistrationFailure/>
-                            </>
-                         );
-                    }
-                })()}
+      if (newRegistration == true) {
+           return (
+              <>
+                  <RegistrationSuccess/>
+              </>
+           );
+       } 
+        
+       if (newRegistration == false){
+           return (
+              <>
+                  <RegistrationFailure/>
+              </>
+           );
+      }
+    })()}
+
     <div id="Register">
-        <section className='max-w-4xl m-auto'>
-          <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-              <div className="rounded-lg border-gray-800 border-2 bg-white p-8 shadow-xl lg:col-span-6 lg:p-12">
-                <form action="" className="space-y-4">
-                  <div>
-                    <label className="" htmlFor="name">Име на Организация</label>
-                    <input
-                      className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                      placeholder="Име на Организация, Компания, Фирма..."
-                      type="text"
-                      id="name"
-                      value={companyName} onChange={e => setCompanyName(e.target.value)}
-                    />
-                  </div>
+    <section class="bg-gray-100 m-auto  max-w-5xl rounded-[30px] border-2 border-black mt-10">
+      <div class="lg:grid lg:grid-cols-12">
+        <section class="relative flex h-32 items-start lg:col-span-5 lg:h-full xl:col-span-6">
 
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                      <label className="" htmlFor="email">Имейл</label>
-                      <input
-                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                        placeholder="Имейл"
-                        type="email"
-                        id="email"
-                        value={email} onChange={e => setEmail(e.target.value)}
-                      />
-                    </div>
+          <div class="hidden lg:relative lg:block lg:p-12">
+            <h2 class="mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
+              Добре дошли LOGO 
+            </h2>
 
-                    <div>
-                      <label className="" htmlFor="password">Парола</label>
-                      <input
-                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                        placeholder="*********"
-                        type="password"
-                        id="password"
-                        value={password}  onChange={e => setPassword(e.target.value)}
-                      />
-                    </div>
-                  </div>
-
-                  <div> 
-
-                    <div>
-                      <label className="" htmlFor="phone">Телефон</label>
-                      <input
-                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm mb-4"
-                        placeholder="Телефон"
-                        type="tel"
-                        id="phone"
-                        value={phone} onChange={e => setPhone(e.target.value)}
-                      />
-                    </div>
-
-                    <label className="" htmlFor="message">Описание</label>
-                    <textarea id="mytextarea"
-                      className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                      placeholder="Mоля, споделете повече информация за вашата компания. Това може да включва дейност, локация... "
-                      rows="8"
-                      value={description} onChange={e => setDescription(e.target.value)}
-                    ></textarea>
-
-                  </div>
-
-                  <div className="mt-4 flex flex-row">
-                      <button onClick={submitUserData} type="button" className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full bg-gray-800 hover:bg-white text-white hover:text-gray-800 border-2 border-gray-900 focus:outline-none">          
-                         Регистрация
-                      </button>
-                      <div className='m-2 flex flex-row justify-center items-center'>
-                          <p className='text-sm'>Имате Профил?</p> 
-                          <Link to='/login' className='ml-0.5 underline text-sm cursor-pointer'>Вход</Link>
-                      </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <p class="mt-4 leading-relaxed ">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
+              dolorum aliquam, quibusdam aperiam voluptatum.
+            </p>
           </div>
         </section>
+
+        <div class="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+          <div class="max-w-xl lg:max-w-3xl">
+            <div class="relative -mt-16 block lg:hidden">
+
+              <h1 class="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl" >
+                Добре дошли LOGO
+              </h1>
+
+              <p class="mt-4 leading-relaxed text-gray-500">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+                nam dolorum aliquam, quibusdam aperiam voluptatum.
+              </p>
+            </div>
+
+            <form action="" class="mt-8 grid grid-cols-6 gap-6">
+            <div class="col-span-6">
+                <label for="companyName" class="block text-sm font-medium text-gray-700">
+                  Име на Компания
+                </label>
+
+                <input
+                  type="text"
+                  id="companyName"
+                  name="company_name"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={companyName} onInput={e => setCompanyName(e.target.value)}
+                />
+              </div>
+
+              <div class="col-span-6">
+                <label for="Email" class="block text-sm font-medium text-gray-700">
+                  E-mail
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={email} onInput={e => setEmail(e.target.value)}
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="Password" class="block text-sm font-medium text-gray-700">
+                  Парола
+                </label>
+
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={password} onInput={e => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div class="col-span-6 sm:col-span-3">
+                <label for="passwordConfirmation" class="block text-sm font-medium text-gray-700">
+                  Потвърди парола
+                </label>
+
+                <input
+                  type="password"
+                  id="passwordConfirmation"
+                  name="password_confirmation"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                />
+              </div>
+
+              {/* <div class="col-span-6">
+                <label for="MarketingAccept" class="flex gap-4">
+                  <input
+                    type="checkbox"
+                    id="MarketingAccept"
+                    name="marketing_accept"
+                    class="h-5 w-5 rounded-md border-gray-200 bg-white shadow-sm"
+                  />
+
+                  <span class="text-sm text-gray-700">
+                    I want to receive emails about events, product updates and
+                    company announcements.
+                  </span>
+                </label>
+              </div> */}
+
+              <div class="col-span-6">
+                <p class="text-sm text-gray-500">
+                Със създаването на акаунт се съгласявате с нашите
+                  <a href="#" class="text-gray-700 underline mx-0.5">общи условия</a>
+                  и
+                  <a href="#" class="text-gray-700 underline  mx-0.5">политика за поверителност</a>.
+                </p>
+              </div>
+
+              <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
+                <button onClick={submitUserData} type='button' class="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
+                  Създаване на профил
+                </button>
+
+                <p class="mt-4 text-sm text-gray-500 sm:mt-0">
+                  Вече имате акаунт?
+                  <Link to="/login" class="text-gray-700 underline mx-0.5">Вход</Link>.
+                </p>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
     </div>
     </>
   )
