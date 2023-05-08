@@ -11,9 +11,12 @@ const Register = () => {
   const [companyName, setCompanyName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // const [phone, setPhone] = useState("");
+  const [phone, setPhone] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   async function submitUserData() {
+
+    if(password == confirmPassword) {
     const { data, error } = await supabase.auth.signUp(
       {
         email: email,
@@ -22,7 +25,6 @@ const Register = () => {
           data: {
             company_name: companyName,
             phone: phone,
-            description: description
           }
         }
       }
@@ -35,6 +37,7 @@ const Register = () => {
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }
+}
 
 
   return (
@@ -116,6 +119,20 @@ const Register = () => {
                   value={email} onInput={e => setEmail(e.target.value)}
                 />
               </div>
+              
+              <div class="col-span-6">
+                <label for="Phone" class="block text-sm font-medium text-gray-700">
+                  Тел. Номер
+                </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={phone} onInput={e => setPhone(e.target.value)}
+                />
+              </div>
 
               <div class="col-span-6 sm:col-span-3">
                 <label for="Password" class="block text-sm font-medium text-gray-700">
@@ -141,6 +158,7 @@ const Register = () => {
                   id="passwordConfirmation"
                   name="password_confirmation"
                   class="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={confirmPassword} onInput={e => setConfirmPassword(e.target.value)}
                 />
               </div>
 
