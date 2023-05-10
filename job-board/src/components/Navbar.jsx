@@ -6,8 +6,8 @@ import { Auth } from '@supabase/auth-ui-react';
 
 
 const Navbar = () => {
-   
     const [user, setUser] = useState(null);
+    const [dropdown, setDropdown] = useState(false)
     const navigate = useNavigate();
 
     useEffect(() =>{
@@ -49,8 +49,45 @@ const Navbar = () => {
                     if (user) {
                          return (
                             <>
-                                <h2 className='mx-2'>Добре дошли отново, {user.email}</h2>
-                                <button onClick={() => signOutUser()}>Изход</button>
+                            <div className='flex flex-col'  onMouseEnter={() => setDropdown(true)}>
+                                <div class="flex-row gap-4 flex justify-center items-center">
+                                    <div class="flex-shrink-0">
+                                        <a href="#" class="relative block">
+                                            <img alt="profil" src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png" class="mx-auto object-cover rounded-full h-10 w-10 "/>
+                                        </a>
+                                    </div>
+                                    <div class=" flex flex-col">
+                                        <span class="text-lg font-medium">
+                                            {user.user_metadata.company_name}
+                                        </span>
+                                        <span class="text-xs text-gray-700">
+                                            {user.email}
+                                        </span>
+                                    </div>
+                                </div>
+
+                                {/* Dropdown */}
+                                {dropdown && (
+                                <div onMouseLeave={() => setDropdown(false)} id="dropdown" class="z-10 absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-46">
+                                    <div class="px-4 py-3 text-sm text-gray-900 ">
+                                        <div>{user.user_metadata.company_name}</div>
+                                        <div class="font-medium truncate">{user.email}</div>
+                                    </div>
+                                    <ul class="py-2 text-sm text-gray-700 " aria-labelledby="dropdownInformationButton">
+                                        <li>
+                                            <Link to={"/company/" + user.id} class="block px-4 py-2 hover:bg-gray-100">Профил</Link>
+                                        </li>
+                                        <li>
+                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Нещо №1</a>
+                                        </li>
+                                    </ul>
+                                    <div class="py-2">
+                                        <a  onClick={() => signOutUser()} class=" cursor-pointer block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Изход</a>
+                                    </div>
+                                </div>
+                                )}
+
+                               </div>
                             </>
                          );
                      } else {

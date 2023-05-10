@@ -1,4 +1,5 @@
 import React from 'react'
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 
 import { Auth } from '@supabase/auth-ui-react';
@@ -8,20 +9,20 @@ import supabase from '../config/supabaseClient'
 const Login = () => {
   const navigate = useNavigate();
 
-  async function signInUser(){
-    await supabase.auth.signIn();
-    navigate("/offers")
-}
+  const [email,setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-  // supabase.auth.onAuthStateChange( async (event) => {
-  //     if (event == "SIGNED_IN"){
-  //       navigate("/offers");
-  //     } else {
-  //       navigate("/login")
-  //     }
-  // })
+  async function signInWithEmail() {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    })
+    navigate('/company/:slug');
+    setUser()
+  }
 
   return (
+    <>
     <div id="Login">
       <section className='max-w-4xl m-auto'>
           <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
@@ -36,6 +37,7 @@ const Login = () => {
                         placeholder="Имейл"
                         type="email"
                         id="email"
+                        value={email} onInput={e => setEmail(e.target.value)}
                       />
                     </div>
 
@@ -46,12 +48,13 @@ const Login = () => {
                         placeholder="*********"
                         type="password"
                         id="password"
+                        value={password} onInput={e => setPassword(e.target.value)}
                       />
                     </div>
                   </div>
 
                   <div className="mt-4 flex flex-row">
-                      <button className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full bg-gray-800 hover:bg-white text-white hover:text-gray-800 border-2 border-gray-900 focus:outline-none">          
+                      <button type='button' onClick={signInWithEmail} className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full bg-gray-800 hover:bg-white text-white hover:text-gray-800 border-2 border-gray-900 focus:outline-none">          
                          Вход
                       </button>
                       <div className='m-2 flex flex-row justify-center items-center'>
@@ -65,6 +68,7 @@ const Login = () => {
           </div>
         </section>
     </div>
+    </>
   )
 }
 

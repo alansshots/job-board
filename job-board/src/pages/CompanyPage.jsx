@@ -1,6 +1,5 @@
 import React from 'react'
 // import { Calendar } from 'react-feather'
-// import { Users } from 'react-feather'
 
 import OffersCard from '../components/OffersCard'
 
@@ -12,7 +11,7 @@ const CompanyPage = () => {
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" class="w-full h-full rounded-tl-lg rounded-tr-lg" />
             </div>
             <div class="flex flex-col items-center -mt-20">
-                <img src="" class="w-40 border-4 border-white rounded-full" />
+                <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png" class="w-40 border-4 border-white rounded-full" />
                 <div class="flex items-center space-x-2 mt-2">
                     <p class="text-2xl">Colorblock Web Development</p>
                     <span class="bg-blue-500 rounded-full p-1" title="Verified">
