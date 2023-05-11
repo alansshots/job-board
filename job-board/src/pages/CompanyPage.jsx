@@ -1,9 +1,28 @@
 import React from 'react'
-// import { Calendar } from 'react-feather'
+import { useEffect, useState } from 'react';
+import supabase from '../config/supabaseClient';
+const { pathname } = window.location;
 
+import { Calendar } from 'react-feather'
 import OffersCard from '../components/OffersCard'
 
 const CompanyPage = () => {
+    const paths = pathname.split("/").filter(entry => entry !== "");
+    const lastPath = paths[paths.length - 1];
+
+    const [user, setUser] = useState(null)
+
+    useEffect(() => {
+      const fetchUsers = async () => {
+        const { data, error } = await supabase.auth.admin.getUserById('0cf01a2f-5c5c-4056-a6ca-f9a5676d1c74')
+
+        console.log(data);
+      }
+  
+      fetchUsers();
+    }, [])
+
+
   return (
     <div id="CompanyPage" class="m-auto mt-10 max-w-6xl">
         <div class="bg-white rounded-lg shadow-xl pb-8">
