@@ -14,10 +14,26 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  async function addUserDataToDB(){
+    const {error} = await supabase
+    .from('Users')
+    .insert({
+      company_name: companyName,
+      location: '',
+      industry: '',
+      phone: phone,
+      email: email,
+    })
+
+      // if(error){
+      //   console.log("Ahh shit here we go again...  " + error);
+      // }
+  }
+
   async function submitUserData() {
 
     if(password == confirmPassword) {
-    const { data, error } = await supabase.auth.signUp(
+    const {error } = await supabase.auth.signUp(
       {
         email: email,
         password: password,
@@ -34,6 +50,7 @@ const Register = () => {
       setNewRegistration(false);
     } else {
       setNewRegistration(true); 
+      addUserDataToDB()
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }

@@ -14,7 +14,7 @@ const CompanyPage = () => {
 
     useEffect(() => {
       const fetchUsers = async () => {
-        const { data, error } = await supabase.auth.admin.getUserById('0cf01a2f-5c5c-4056-a6ca-f9a5676d1c74')
+        const { data, error } = await supabase.auth.users.getUserById('0cf01a2f-5c5c-4056-a6ca-f9a5676d1c74')
 
         console.log(data);
       }
