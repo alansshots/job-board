@@ -6,8 +6,8 @@ import { Auth } from '@supabase/auth-ui-react';
 import Login from '../pages/Login';
 
 
-const Navbar = ( props ) => {
-    const [user, setUser] = useState(props.userData);
+const Navbar = (  ) => {
+    const [user, setUser] = useState();
     const [dropdown, setDropdown] = useState(false)
     const navigate = useNavigate();
 

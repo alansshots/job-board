@@ -17,7 +17,7 @@ const CompanyPage = () => {
 
       let { data: users, error } = await supabase
       .from('users')
-      .select()
+      .select(w)
       .eq('id', lastPath)
 
       console.log(users[0]);

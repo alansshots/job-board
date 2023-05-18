@@ -9,7 +9,7 @@ const OffersCard = () => {
   useEffect(() => {
     const fetchOffers = async () => {
       const { data, error } = await supabase
-        .from('Offers')
+        .from('offers')
         .select()
       
       if (error) {

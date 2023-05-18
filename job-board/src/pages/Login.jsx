@@ -18,7 +18,7 @@ const Login = () => {
         if(value.data?.user) {
             setUser(value.data.user);
             console.log(value.data.user);
-            <Navbar userData={user}/>
+            <Navbar/>
         }
     })
   }

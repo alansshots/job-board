@@ -17,7 +17,7 @@ const OfferPage = () => {
   // Function to fetch offer info
     const fetchOffers = async () => {
       const { data, error } = await supabase
-        .from('Offers')
+        .from('offers')
         .select()
         .eq('slug', lastPath)
       
