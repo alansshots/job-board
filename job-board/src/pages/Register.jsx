@@ -14,21 +14,17 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  async function addUserDataToDB(){
-    const {error} = await supabase
-    .from('Users')
-    .insert({
-      company_name: companyName,
-      location: '',
-      industry: '',
-      phone: phone,
-      email: email,
-    })
-
-      // if(error){
-      //   console.log("Ahh shit here we go again...  " + error);
-      // }
-  }
+  // async function addUserDataToDB(){
+  //   const {error} = await supabase
+  //   .from('Users')
+  //   .insert({
+  //     company_name: companyName,
+  //     location: '',
+  //     industry: '',
+  //     phone: phone,
+  //     email: email,
+  //   })
+  // }
 
   async function submitUserData() {
 
@@ -50,7 +46,7 @@ const Register = () => {
       setNewRegistration(false);
     } else {
       setNewRegistration(true); 
-      addUserDataToDB()
+      // addUserDataToDB()
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }
@@ -210,7 +206,7 @@ const Register = () => {
                 </button>
 
                 <p class="mt-4 text-sm text-gray-500 sm:mt-0">
-                  Вече имате акаунт?
+                  Вече имате профил?
                   <Link to="/login" class="text-gray-700 underline mx-0.5">Вход</Link>.
                 </p>
 

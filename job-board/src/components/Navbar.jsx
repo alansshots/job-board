@@ -3,10 +3,11 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import supabase from '../config/supabaseClient';
 import { Auth } from '@supabase/auth-ui-react';
+import Login from '../pages/Login';
 
 
-const Navbar = () => {
-    const [user, setUser] = useState(null);
+const Navbar = ( props ) => {
+    const [user, setUser] = useState(props.userData);
     const [dropdown, setDropdown] = useState(false)
     const navigate = useNavigate();
 
@@ -15,7 +16,7 @@ const Navbar = () => {
             await supabase.auth.getUser().then((value) => {
                 if(value.data?.user) {
                     setUser(value.data.user);
-                    // console.log(value.data.user);
+                    console.log(value.data.user);
                 }
             })
         }

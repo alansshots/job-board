@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
+import Navbar from '../components/Navbar';
 
 import { Auth } from '@supabase/auth-ui-react';
 import { ThemeSupa } from '@supabase/auth-ui-shared';
@@ -8,65 +9,112 @@ import supabase from '../config/supabaseClient'
 
 const Login = () => {
   const navigate = useNavigate();
-
+  const [user, setUser] = useState('');
   const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+  async function getUserData() {
+    await supabase.auth.getUser().then((value) => {
+        if(value.data?.user) {
+            setUser(value.data.user);
+            console.log(value.data.user);
+            <Navbar userData={user}/>
+        }
+    })
+  }
 
   async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     })
-    navigate('/company/:slug');
-    setUser()
+
+    if(error){
+      console.log('Sheisse!')
+    } else {
+      navigate('/offers');
+      getUserData();
+    }
   }
 
   return (
     <>
     <div id="Login">
-      <section className='max-w-4xl m-auto'>
-          <div className="mx-auto px-4 py-16 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 gap-x-16 gap-y-8 lg:grid-cols-5">
-              <div className="rounded-lg border-gray-800 border-2 bg-white p-8 shadow-xl lg:col-span-6 lg:p-12">
-                <form action="" className="space-y-4">
-                  <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                    <div>
-                      <label className="" for="email">Имейл</label>
-                      <input
-                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                        placeholder="Имейл"
-                        type="email"
-                        id="email"
-                        value={email} onInput={e => setEmail(e.target.value)}
-                      />
-                    </div>
+    <section className="bg-gray-100 m-auto  max-w-5xl rounded-[30px] border-2 border-black mt-10">
+      <div className="lg:grid lg:grid-cols-12">
+        <section className="relative flex h-32 items-start lg:col-span-5 lg:h-full xl:col-span-6">
 
-                    <div>
-                      <label className="" for="password">Парола</label>
-                      <input
-                        className="w-full rounded-lg border-gray-800 border-2 p-3 text-sm"
-                        placeholder="*********"
-                        type="password"
-                        id="password"
-                        value={password} onInput={e => setPassword(e.target.value)}
-                      />
-                    </div>
-                  </div>
+          <div className="hidden lg:relative lg:block lg:p-12">
+            <h2 className="mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
+              Вход LOGO 
+            </h2>
 
-                  <div className="mt-4 flex flex-row">
-                      <button type='button' onClick={signInWithEmail} className="flex items-center px-4 py-1  transition ease-in duration-200 uppercase text-sm rounded-full bg-gray-800 hover:bg-white text-white hover:text-gray-800 border-2 border-gray-900 focus:outline-none">          
-                         Вход
-                      </button>
-                      <div className='m-2 flex flex-row justify-center items-center'>
-                          <p className='text-sm'>Нямате Профил?</p> 
-                          <Link to='/register' className='ml-0.5 underline text-sm cursor-pointer'>Регистрация</Link>
-                      </div>
-                  </div>
-                </form>
-              </div>
-            </div>
+            <p className="mt-4 leading-relaxed ">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
+              dolorum aliquam, quibusdam aperiam voluptatum.
+            </p>
           </div>
         </section>
+
+        <div className="flex items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6">
+          <div className="max-w-xl lg:max-w-3xl">
+            <div className="relative -mt-16 block lg:hidden">
+
+              <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl" >
+                Вход LOGO
+              </h1>
+
+              <p className="mt-4 leading-relaxed text-gray-500">
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
+                nam dolorum aliquam, quibusdam aperiam voluptatum.
+              </p>
+            </div>
+
+            <form action="" className="mt-8 grid grid-cols-6 gap-6">
+              <div className="col-span-6">
+                <label for="Email" className="block text-sm font-medium text-gray-700">
+                  E-mail
+                </label>
+
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={email} onInput={e => setEmail(e.target.value)}
+                />
+              </div>
+              
+              <div className="col-span-6">
+                <label for="Password" className="block text-sm font-medium text-gray-700">
+                  Парола
+                </label>
+
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={password} onInput={e => setPassword(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
+                <button onClick={signInWithEmail} type='button' className="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
+                  Вход 
+                </button>
+
+                <p className="mt-4 text-sm text-gray-500 sm:mt-0">
+                  Нямате профил?
+                  <Link to="/register" className="text-gray-700 underline mx-0.5">Регистрация</Link>.
+                </p>
+
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
     </div>
     </>
   )
