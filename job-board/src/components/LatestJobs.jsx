@@ -32,7 +32,7 @@ const LatestJobs = () => {
 
             <div className='ml-10 flex flex-row items-center justify-between'>
 
-                <div className='bg-[#0852bf] mx-10 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer transition duration-200 hover:scale-105 hover:shadow-xl shadow-md'>
+                {/* <div className='bg-[#0852bf] mx-10 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer transition duration-200 hover:scale-105 hover:shadow-xl shadow-md'>
                     <h2 className='text-2xl text-white font-semibold'>Product Designer</h2>
                     
                     <div className='mt-2'>
@@ -60,7 +60,7 @@ const LatestJobs = () => {
                         </div>
 
                     </div>
-                </div>
+                </div> */}
 
                 <div className='bg-white mx-6 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer transition duration-200 hover:scale-105 hover:shadow-xl shadow-md'>
                     <h2 className='text-2xl text-black font-semibold'>Product Designer</h2>

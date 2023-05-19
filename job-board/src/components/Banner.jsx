@@ -17,7 +17,7 @@ const Banner = () => {
             <div className='flex flex-row justify-around items-center bg-white rounded-3xl w-full mt-4 mb-10 shadow-md transition duration-200 hover:shadow-xl'>
               <Search className='text-black ml-2'/>
               <input type="text" placeholder='Професия или ключова дума' className='mx-5 text-black w-8/12 border-transparent outline-none focus:border-transparent focus:ring-0'/>
-              <NavLink className='bg-[#b3fd49] py-4 w-3/12 rounded-r-2xl flex justify-center'>
+              <NavLink className='bg-gray-200 py-4 w-3/12 rounded-r-2xl flex justify-center'>
                 <ArrowRight className='text-[#0146b1] trasition duration-100 hover:scale-110'/>
               </NavLink>
             </div>
