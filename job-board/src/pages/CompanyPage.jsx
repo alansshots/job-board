@@ -10,22 +10,22 @@ const CompanyPage = () => {
     const paths = pathname.split("/").filter(entry => entry !== "");
     const lastPath = paths[paths.length - 1];
 
-    const [user, setUser] = useState(null)
+    // const [user, setUser] = useState(null)
 
-    useEffect(() => {
-      const fetchUsers = async () => {
+    // useEffect(() => {
+    //   const fetchUser = async () => {
 
-      let { data: users, error } = await supabase
-      .from('users')
-      .select(w)
-      .eq('id', lastPath)
+    //   let { data: users, error } = await supabase
+    //   .from('users')
+    //   .select()
+    //   .eq('id', lastPath)
 
-      console.log(users[0]);
-      setUser(users[0])
-      }
+    //   console.log(users[0]);
+    //   setUser(users[0])
+    //   }
   
-      fetchUsers();
-    }, [])
+    //   fetchUser();
+    // }, [])
 
 
   return (

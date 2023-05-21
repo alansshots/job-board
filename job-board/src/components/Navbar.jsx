@@ -6,29 +6,37 @@ import { Auth } from '@supabase/auth-ui-react';
 import Login from '../pages/Login';
 
 
-const Navbar = (  ) => {
+const Navbar = ( ) => {
     const [user, setUser] = useState();
     const [dropdown, setDropdown] = useState(false)
     const navigate = useNavigate();
+    // const [accessToken, setAccessToken] = useState('');
+    
+    let jwt = localStorage.getItem('accessToken')
+    console.log(jwt);
 
-    useEffect(() =>{
+    // useEffect(() => {
         async function getUserData() {
-            await supabase.auth.getUser().then((value) => {
+            console.log()
+        const {data, error } = await supabase.auth.getUser(jwt).then((value) => {
                 if(value.data?.user) {
                     setUser(value.data.user);
                     console.log(value.data.user);
                 }
             })
+            console.log(error);
         }
 
-        getUserData();
-    }, [])
+        // getUserData(); 
+    // }, [])
 
     async function signOutUser(){
         await supabase.auth.signOut();
         setUser(null)
+        localStorage.setItem('accessToken', null);
         navigate("/")
     }
+
 
   return (
  <>
@@ -47,6 +55,8 @@ const Navbar = (  ) => {
                 <NavLink to="blog" className={({ isActive }) => isActive ? 'm-4 mr-10 border-b-2 border-[#0146b1] font-semibold mx-4' : 'mx-4 mr-10 font-semibold duration-100 hover:scale-105'}>Блог</NavLink>
 
                 {(function() {
+                    if(jwt) {
+                        getUserData(); 
                     if (user) {
                          return (
                             <>
@@ -91,7 +101,8 @@ const Navbar = (  ) => {
                                </div>
                             </>
                          );
-                     } else {
+                     } 
+                     else {
                          return (
                             <>
                             <NavLink to="/register" className='mx-1'>
@@ -107,7 +118,8 @@ const Navbar = (  ) => {
                             </>
                          );
                     }
-                })()}
+                }
+                }) ()}
 
             </div>
         </div>

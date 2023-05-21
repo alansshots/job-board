@@ -15,7 +15,7 @@ const OfferPage = () => {
 
   useEffect(() => {
   // Function to fetch offer info
-    const fetchOffers = async () => {
+    const fetchOffer = async () => {
       const { data, error } = await supabase
         .from('offers')
         .select()
@@ -51,7 +51,7 @@ const OfferPage = () => {
   //   }
   // } 
 
-    fetchOffers()
+    fetchOffer()
   }, [])
 
   return (

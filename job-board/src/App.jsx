@@ -1,4 +1,5 @@
 import * as React from "react";
+import { useState } from "react";
 import {Route, Routes} from 'react-router-dom';
 
 
@@ -18,7 +19,7 @@ import Register from "./pages/Register";
 import './App.css'
 
 function App() {
-  
+
   return (
     <div className="App bg-gray-100">
      <Navbar/>

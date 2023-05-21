@@ -1,6 +1,7 @@
 import React from 'react'
 import supabase from '../config/supabaseClient'
 import { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const OffersCard = () => {
   const [fetchError, setFetchError] = useState(null)
@@ -77,9 +78,9 @@ const OffersCard = () => {
             </div>
             
             <div className="flex justify-end">
-              <a href={"offers/" + offer.slug} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
+              <Link to={"offers/" + offer.slug} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
                 Свържи се
-              </a>
+              </Link>
             </div>
           </article>
             ))}

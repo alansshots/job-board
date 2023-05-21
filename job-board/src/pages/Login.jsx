@@ -1,27 +1,25 @@
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Navbar from '../components/Navbar';
 
-import { Auth } from '@supabase/auth-ui-react';
-import { ThemeSupa } from '@supabase/auth-ui-shared';
+// import { Auth } from '@supabase/auth-ui-react';
+// import { ThemeSupa } from '@supabase/auth-ui-shared';
 import supabase from '../config/supabaseClient'
 
 const Login = () => {
   const navigate = useNavigate();
-  const [user, setUser] = useState('');
   const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  async function getUserData() {
-    await supabase.auth.getUser().then((value) => {
-        if(value.data?.user) {
-            setUser(value.data.user);
-            console.log(value.data.user);
-            <Navbar/>
-        }
-    })
-  }
+  // async function getUserData() {
+  //   await supabase.auth.getUser().then((value) => {
+  //       if(value.data?.user) {
+  //           setUser(value.data.user);
+  //           console.log(value.data.user);
+  //       }
+  //   })
+  // }
 
   async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -30,10 +28,12 @@ const Login = () => {
     })
 
     if(error){
-      console.log('Sheisse!')
+      console.log(error);
     } else {
-      navigate('/offers');
-      getUserData();
+      console.log(data.session.access_token);
+      localStorage.setItem('accessToken', data.session.access_token);
+      // window.location.reload();
+      navigate('/');
     }
   }
 

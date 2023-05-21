@@ -14,22 +14,10 @@ const Register = () => {
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  // async function addUserDataToDB(){
-  //   const {error} = await supabase
-  //   .from('Users')
-  //   .insert({
-  //     company_name: companyName,
-  //     location: '',
-  //     industry: '',
-  //     phone: phone,
-  //     email: email,
-  //   })
-  // }
-
   async function submitUserData() {
 
     if(password == confirmPassword) {
-    const {error } = await supabase.auth.signUp(
+    const { error } = await supabase.auth.signUp(
       {
         email: email,
         password: password,
