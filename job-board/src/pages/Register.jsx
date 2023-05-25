@@ -34,7 +34,6 @@ const Register = () => {
       setNewRegistration(false);
     } else {
       setNewRegistration(true); 
-      // addUserDataToDB()
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }
@@ -61,7 +60,7 @@ const Register = () => {
       }
     })()}
 
-    <div id="Register">
+  <div id="Register">
     <section class="bg-gray-100 m-auto  max-w-5xl rounded-[30px] border-2 border-black mt-10">
       <div class="lg:grid lg:grid-cols-12">
         <section class="relative flex h-32 items-start lg:col-span-5 lg:h-full xl:col-span-6">
@@ -189,7 +188,9 @@ const Register = () => {
               </div>
 
               <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
-                <button onClick={submitUserData} type='button' class="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
+                <button 
+                // onClick={submitUserData} 
+                type='button' class="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
                   Създаване на профил
                 </button>
 

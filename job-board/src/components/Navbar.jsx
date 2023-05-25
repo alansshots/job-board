@@ -89,7 +89,7 @@ const Navbar = ( ) => {
                                             <Link to={"/company/" + user.id} class="block px-4 py-2 hover:bg-gray-100">Профил</Link>
                                         </li>
                                         <li>
-                                            <a href="#" class="block px-4 py-2 hover:bg-gray-100">Нещо №1</a>
+                                            <Link to={"company/" + user.id + "/addOffer"} class="block px-4 py-2 hover:bg-gray-100">Създай Обява</Link>
                                         </li>
                                     </ul>
                                     <div class="py-2">

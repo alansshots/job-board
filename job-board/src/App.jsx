@@ -11,7 +11,9 @@ import Offers from "./pages/Offers";
 import OfferPage from "./pages/OfferPage";
 import Blog from "./pages/Blog";
 import BlogPost from "./pages/BlogPost";
+
 import CompanyPage from "./pages/CompanyPage";
+import AddOffer from "./pages/AddOffer";
 
 import Login from "./pages/Login"
 import Register from "./pages/Register";
@@ -33,6 +35,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/company/:slug' element={<CompanyPage/>}/>
           <Route path='/company/offers/:slug' element={<OfferPage/>} />
+          <Route path='/company/:slug/addOffer' element={<AddOffer/>} />
 
       </Routes>
       <Footer/>
