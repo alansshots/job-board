@@ -36,9 +36,9 @@ const OffersCard = () => {
 
               <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
               <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
-                <a href="#" className="block shrink-0"> 
+                <Link to={offer.slug} className="block shrink-0"> 
                   <img src="" className="h-14 w-14 rounded-lg object-cover"/>
-                </a>
+                </Link>
       
                   <div>
                     <h3 className="font-medium sm:text-lg">
@@ -78,7 +78,7 @@ const OffersCard = () => {
             </div>
             
             <div className="flex justify-end">
-              <Link to={"offers/" + offer.slug} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
+              <Link to={offer.slug} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
                 Свържи се
               </Link>
             </div>

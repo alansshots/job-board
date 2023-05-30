@@ -40,24 +40,24 @@ const BlogPost = () => {
   return (
     <div className='m-auto max-w-3xl'>
       <div>
-        <section class="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-1">
-          <img src={data.post.coverPhoto.url} class="max-h-60 w-full object-cover"/>
+        <section className="overflow-hidden bg-gray-50 sm:grid sm:grid-cols-1">
+          <img src={data.post.coverPhoto.url} className="max-h-60 w-full object-cover"/>
         </section>
 
             <h1 className='text-3xl font-semibold my-5'>{data.post.title}</h1>
             <div className='flex flex-row items-center justify-left'>
 
-              <div class="flex-row gap-4 flex justify-center items-center">
-                <div class="flex-shrink-0">
-                    <a href="#" class="relative block">
-                        <img alt="profil" src={data.post.publishedBy.picture} class="mx-auto object-cover rounded-full h-12 w-12 "/>
+              <div className="flex-row gap-4 flex justify-center items-center">
+                <div className="flex-shrink-0">
+                    <a href="#" className="relative block">
+                        <img alt="profil" src={data.post.publishedBy.picture} className="mx-auto object-cover rounded-full h-12 w-12 "/>
                     </a>
                 </div>
-                <div class=" flex flex-col">
-                    <span class="text-sm font-medium text-gray-600">
+                <div className=" flex flex-col">
+                    <span className="text-sm font-medium text-gray-600">
                         {data.post.publishedBy.name}
                     </span>
-                    <span class="text-xs text-gray-400">
+                    <span className="text-xs text-gray-400">
                         {data.post.date}
                     </span>
                 </div>

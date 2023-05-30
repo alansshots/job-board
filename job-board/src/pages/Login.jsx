@@ -1,25 +1,12 @@
 import React from 'react'
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom'
-import Navbar from '../components/Navbar';
-
-// import { Auth } from '@supabase/auth-ui-react';
-// import { ThemeSupa } from '@supabase/auth-ui-shared';
 import supabase from '../config/supabaseClient'
 
 const Login = () => {
   const navigate = useNavigate();
   const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  // async function getUserData() {
-  //   await supabase.auth.getUser().then((value) => {
-  //       if(value.data?.user) {
-  //           setUser(value.data.user);
-  //           console.log(value.data.user);
-  //       }
-  //   })
-  // }
 
   async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -30,9 +17,7 @@ const Login = () => {
     if(error){
       console.log(error);
     } else {
-      console.log(data.session.access_token);
       localStorage.setItem('accessToken', data.session.access_token);
-      // window.location.reload();
       navigate('/');
     }
   }
@@ -72,7 +57,7 @@ const Login = () => {
 
             <form action="" className="mt-8 grid grid-cols-6 gap-6">
               <div className="col-span-6">
-                <label for="Email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
                   E-mail
                 </label>
 
@@ -86,7 +71,7 @@ const Login = () => {
               </div>
               
               <div className="col-span-6">
-                <label for="Password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
                   Парола
                 </label>
 

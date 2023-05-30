@@ -44,7 +44,7 @@ const LatestJobs = () => {
                     
                     <div className='flex flex-row justify-between items-center mt-16 border-t boreder-gray-100 pt-2'>
                         
-                        <div class="flex flex-row justify-center items-center">
+                        <div className="flex flex-row justify-center items-center">
                           <a href="">
                                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
                           </a>
@@ -74,7 +74,7 @@ const LatestJobs = () => {
                     
                     <div className='flex flex-row justify-between items-center mt-16 border-t boreder-gray-100 pt-2'>
                         
-                        <div class="flex flex-row justify-center items-center">
+                        <div className="flex flex-row justify-center items-center">
                           <a href="">
                                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
                           </a>
@@ -104,7 +104,7 @@ const LatestJobs = () => {
                     
                     <div className='flex flex-row justify-between items-center mt-16 border-t boreder-gray-100 pt-2'>
                         
-                        <div class="flex flex-row justify-center items-center">
+                        <div className="flex flex-row justify-center items-center">
                           <a href="">
                                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
                           </a>

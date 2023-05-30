@@ -28,7 +28,7 @@ const CompanyPage = () => {
 
 
   return (
-    <div id="CompanyPage" class="m-auto mt-10 max-w-6xl">
+    <div id="CompanyPage" className="m-auto mt-10 max-w-6xl">
         <div className="bg-white rounded-lg shadow-xl pb-8">
             <div className="w-full h-[250px]">
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />

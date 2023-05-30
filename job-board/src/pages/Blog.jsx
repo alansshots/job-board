@@ -47,25 +47,25 @@ const Blog = () => {
         <div className='mx-auto flex max-w-6xl items-center p-4'>
         <div className='m-auto w-full mt-10 flex flex-row items-center justify-center flex-wrap'>
               {data.posts.map((post) => (
-                <article key={post.coverPhoto.id} class="w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
+                <article key={post.coverPhoto.id} className="w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
                     <img src={post.coverPhoto.url} className="rounded-t-[10px] bg-white sm:p-0.5"/>
-                    <div class="rounded-b-[10px] bg-white p-4 !pt-5 sm:p-6">
-                        <time datetime="2022-10-10" class="block text-xs text-gray-500">
+                    <div className="rounded-b-[10px] bg-white p-4 !pt-5 sm:p-6">
+                        <time dateime="2022-10-10" className="block text-xs text-gray-500">
                           {post.date}
                         </time>
 
                         <a href={"/blog/" + post.slug} className='hover:underline'>
-                        <h3 class="mt-0.5 text-lg font-medium text-gray-900">
+                        <h3 className="mt-0.5 text-lg font-medium text-gray-900">
                           {post.title}
                         </h3>
                         </a>
 
-                        <div class="mt-4 flex flex-wrap gap-1">
-                        <span class="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
+                        <div className="mt-4 flex flex-wrap gap-1">
+                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
                             хаштаг
                         </span>
 
-                        <span class="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
+                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
                             хаштаг
                         </span>
                         </div>
