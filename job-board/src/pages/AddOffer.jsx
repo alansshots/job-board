@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import supabase from '../config/supabaseClient';
 import RegistrationSuccess from './RegistrationSuccess';
 import RegistrationFailure from './RegistrationFailure';
@@ -9,8 +9,6 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 const AddOffer = () => {
   const navigate = useNavigate();
-  // const [newRegistration, setNewRegistration] = useState(null);
-  
   const [title, setTitle] = useState("");
   const [salary, setSalary] = useState("");
   const [experience, setExperience] = useState("");
@@ -18,17 +16,34 @@ const AddOffer = () => {
   const [location, setLocation] = useState("");
   const [content, setContent] = useState("");
 
+  const [currentUser, setCurrentUser] = useState("");
+  const jwt = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    async function getUserData() {
+      const { data, error } = await supabase.auth.getUser(jwt);
+      if (data && data.user) {
+        setCurrentUser(data.user);
+        console.log(data.user);
+      }
+    }
+
+    getUserData();
+  }, []);
+
   async function submitNewOffer() {
+    // getUserData()
+    const date = new Date().toLocaleDateString();
     const { data, error } = await supabase
     .from('offers')
     .insert([
       {  
-        title: '',
-        created_at: '05-30-2023',
-        author: '',
-        summary: '',
-        phone: 1212212,
-        email: "awdwd@dawd.com",
+        title: title,
+        created_at: date,
+        author: currentUser.user_metadata.company_name,
+        summary: currentUser.id,
+        phone: 34245230,
+        email: currentUser.email,
         salary: salary,
         experience: experience,
         industry: industry,
@@ -43,13 +58,14 @@ const AddOffer = () => {
     } else {
       console.log('New offer inserted successfully:', data);
       // Handle success state
+      navigate('/offers');
     }
   }
 
   return (
     <div>
       <div className='m-auto max-w-6xl mt-12'>
-          <h1 className='text-5xl font-semibold'><span className='text-[#0146b1]'>Последни</span> Обяви</h1>
+          <h1 className='text-5xl font-semibold'><span className='text-[#0146b1]'>Създай</span> Обява</h1>
       </div>
     
     <div className='m-auto max-w-4xl'>
@@ -75,7 +91,7 @@ const AddOffer = () => {
         </div>
       </div>
 
-      <div className='mt-10'>
+      <div className='mt-4'>
         <div>
           <h3 className='mb-2 font-semibold'>Заплата</h3>
           <div>
@@ -95,7 +111,7 @@ const AddOffer = () => {
           </div>
         </div>
 
-        <div className='mt-2'>
+        <div className='mt-4'>
 
         <h3 className='mb-2 text-md font-semibold'>Опит</h3>
 
@@ -197,7 +213,7 @@ const AddOffer = () => {
         </div>
       </div> */}
 
-      <div className='mt-5'>
+      <div className='mt-4'>
         <h3 className='mb-2 font-semibold'>Бранш</h3>
 
         <select
@@ -216,7 +232,7 @@ const AddOffer = () => {
 
       </div>
 
-      <div className='mt-5'>
+      <div className='mt-4'>
         <div>
           <h3 className='mb-2 font-semibold'>Локация</h3>
           <div>
@@ -256,6 +272,7 @@ const AddOffer = () => {
           // }}
           onChange={ ( event, editor ) => {
               const data = editor.getData();
+              setContent(data);
               // console.log( { event, editor, data } );
           } }
           // onBlur={ ( event, editor ) => {

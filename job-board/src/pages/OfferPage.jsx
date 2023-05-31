@@ -44,7 +44,7 @@ const OfferPage = () => {
                 </span>
       
                 <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md">
-                  {offer.experience} години
+                  {offer.experience}
                 </span>
               </div>      
             </div>

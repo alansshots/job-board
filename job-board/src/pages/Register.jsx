@@ -21,10 +21,10 @@ const Register = () => {
       {
         email: email,
         password: password,
+        phone: phone,
         options: {
           data: {
             company_name: companyName,
-            phone: phone,
           }
         }
       }

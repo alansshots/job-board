@@ -58,7 +58,7 @@ const OffersCard = () => {
                       </span>
       
                       <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
-                      {offer.experience} години
+                      {offer.experience} 
                       </span>
       
                       {/* <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >

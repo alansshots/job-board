@@ -12,19 +12,19 @@ const CompanyPage = () => {
     const [user, setUser] = useState('')
 
     useEffect(() => {
-      const fetchUser = async () => {
-
-      let { data: users, error } = await supabase
-      .from('users')
-      .select()
-      .eq('id', lastPath)
-
-      console.log(users[0]);
-      setUser(users[0])
-      }
-  
-      fetchUser();
-    }, [])
+        const fetchUser = async () => {
+          const { data: users, error } = await supabase
+            .from('users')
+            .select()
+            .eq('id', lastPath);
+    
+          if (users && users.length > 0) {
+            setUser(users[0]);
+          }
+        };
+    
+        fetchUser();
+      }, [lastPath]);
 
 
   return (
