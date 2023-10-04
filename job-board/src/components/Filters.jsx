@@ -1,11 +1,84 @@
 import React from 'react'
+import supabase from '../config/supabaseClient'
+import { useState, useEffect } from 'react';
 import { ChevronDown, MapPin, Briefcase, DollarSign, XCircle, CheckCircle } from 'react-feather';
 
 
-const Filters = () => {
+const Filters = ({ onFilterChange }) => {
+  const [fetchError, setFetchError] = useState(null)
+  const [locations, setLocations] = useState(null)
+  const [offers, setOffers] = useState(null)
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set());
+  
+
+  const handleCheckboxClick = (event, location) => {
+    const isChecked = event.target.checked;
+  
+    // Update the selected checkboxes state
+    setSelectedCheckboxes(prevSelected => {
+      const newSelected = new Set(prevSelected);
+
+      if (isChecked) {
+        newSelected.add(location);
+      } else {
+        newSelected.delete(location);
+      }
+  
+      // Call a function to filter your results based on selected checkboxes
+      // filterResults(newSelected);
+      filterResults(Array.from(newSelected));
+      return newSelected;
+    });
+  };
+
+  // Function to filter results based on selected checkboxes
+  const filterResults = (selected) => {
+    const fetchOffers = async () => {
+      const { data, error } = await supabase
+      .from('offers')
+      .select()
+      .in('location', Array.from(selected))
+    
+    if (error) {
+      setFetchError('Could not fetch the offers')
+      setOffers(null)
+    }
+    if (data) {
+      // localStorage.setItem('offers', JSON.stringify(data));
+      console.log(data)
+      setOffers(data);
+      setFetchError(null)
+    }
+  }
+    fetchOffers();
+};
+
+
+  useEffect(() => {
+    const fetchLocations = async () => {
+        const { data, error } = await supabase
+        .from('offers')
+        .select('location')
+      
+      if (error) {
+        setFetchError('Could not fetch locations')
+        setLocations(null)
+      }
+      if (data) {
+        let locationsArray = data.map(town => town.location)
+        let uniqueTownNames = Array.from(new Set(locationsArray));
+        setLocations(uniqueTownNames)
+        setFetchError(null)
+      }
+    }
+
+    fetchLocations()
+  }, [])
+
+
   return (
-    <div id="Filters">
-     <div className="flex flex-col justify-between bg-white rounded-xl mt-4">
+  <div id="Filters">
+  <div className="flex flex-col justify-between bg-white rounded-xl mt-4">
   <div className="">
     <nav aria-label="Main Nav" className=" flex flex-col space-y-1">
 
@@ -22,48 +95,28 @@ const Filters = () => {
 
         <nav aria-label="Location" className="mt-2 flex flex-col px-4 trasition duration-100">
           <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownSearchButton">
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Бургас</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Поморие</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Сл. Бряг</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Лозенец</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Созопол</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Варна</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Несебър</label>
-              </div>
-            </li>
+
+          {locations && (
+            <nav aria-label="Location" className="mt-2 flex flex-col px-4 transition duration-100">
+              <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownSearchButton">
+                {locations.map(uniqueTownNames => (
+                  <li key={uniqueTownNames}>
+                    <div className="flex items-center p-2 rounded hover:bg-gray-100">
+                      <input
+                        id={`checkbox-${uniqueTownNames}`}
+                        type="checkbox"
+                        value=""
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                        onChange={(event) => handleCheckboxClick(event, uniqueTownNames)}
+                      />
+                      <label htmlFor={`checkbox-${uniqueTownNames}`} className="w-full ml-2 text-sm font-medium text-gray-900 rounded">{uniqueTownNames}</label>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+            )}
+
           </ul>
         </nav>
       </details>
@@ -85,42 +138,6 @@ const Filters = () => {
               <div className="flex items-center p-2 rounded hover:bg-gray-100">
                 <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
                 <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Хотел</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Ресторант</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Магазин</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Спасител</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Аниматор</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Нещо</label>
-              </div>
-            </li>
-            <li>
-              <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Нещо #2</label>
               </div>
             </li>
           </ul>
@@ -157,5 +174,5 @@ const Filters = () => {
   )
 }
 
-export default Filters
+export default Filters 
 

@@ -7,11 +7,11 @@ const OffersCard = () => {
   const [fetchError, setFetchError] = useState(null)
   const [offers, setOffers] = useState(null)
 
-  useEffect(() => {
-    const fetchOffers = async () => {
-      const { data, error } = await supabase
-        .from('offers')
-        .select()
+useEffect(() => {
+const fetchOffers = async () => {
+const { data, error } = await supabase
+.from('offers')
+.select()
       
       if (error) {
         setFetchError('Could not fetch the offers')

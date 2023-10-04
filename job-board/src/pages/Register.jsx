@@ -21,10 +21,10 @@ const Register = () => {
       {
         email: email,
         password: password,
-        phone: phone,
         options: {
           data: {
             company_name: companyName,
+            phone: phone
           }
         }
       }
@@ -189,7 +189,7 @@ const Register = () => {
 
               <div className="col-span-6 sm:flex sm:items-center sm:gap-4">
                 <button 
-                // onClick={submitUserData} 
+                onClick={submitUserData} 
                 type='button' className="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
                   Създаване на профил
                 </button>
