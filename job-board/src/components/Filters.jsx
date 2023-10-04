@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { ChevronDown, MapPin, Briefcase, DollarSign, XCircle, CheckCircle } from 'react-feather';
 
 
-const Filters = ({ onFilterChange }) => {
+const Filters = ({onFilterChange }) => {
   const [fetchError, setFetchError] = useState(null)
   const [locations, setLocations] = useState(null)
   const [offers, setOffers] = useState(null)
@@ -44,7 +44,7 @@ const Filters = ({ onFilterChange }) => {
       setOffers(null)
     }
     if (data) {
-      // localStorage.setItem('offers', JSON.stringify(data));
+      onFilterChange(data)
       console.log(data)
       setOffers(data);
       setFetchError(null)

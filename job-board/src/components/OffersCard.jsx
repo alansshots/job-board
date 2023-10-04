@@ -3,28 +3,54 @@ import supabase from '../config/supabaseClient'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const OffersCard = () => {
+const OffersCard = ({ selectedFilters }) => {
   const [fetchError, setFetchError] = useState(null)
   const [offers, setOffers] = useState(null)
+  const [allOffers, setAllOffers] = useState(null);
 
 useEffect(() => {
-const fetchOffers = async () => {
-const { data, error } = await supabase
-.from('offers')
-.select()
+  const fetchOffers = async () => {
+    const { data, error } = await supabase
+      .from('offers')
+      .select()
       
       if (error) {
         setFetchError('Could not fetch the offers')
         setOffers(null)
       }
       if (data) {
-        setOffers(data)
+        setAllOffers(data);
+        setOffers(data);
         setFetchError(null)
       }
     }
 
     fetchOffers()
   }, [])
+
+  useEffect(() => {
+    // Apply filtering when selectedFilters change
+    if (allOffers && selectedFilters.length > 0) {
+      console.log('All offers:', allOffers); // Check if allOffers is not null
+      console.log('Selected filters:', selectedFilters); // Check if selectedFilters have the expected values
+      
+      const filteredOffers = allOffers.filter((offer) => {
+        const offerLocation = offer.location.toLowerCase(); // Convert to lowercase
+        const filters = selectedFilters.map(filter => filter.location.toLowerCase()); // Access location property and convert to lowercase
+        const isMatch = filters.includes(offerLocation);
+        console.log('Offer:', offer.title, 'Location:', offerLocation, 'Match:', isMatch);
+        return isMatch;
+      });      
+
+      console.log('Filtered offers:', filteredOffers);
+      setOffers(filteredOffers);
+    } else {
+      // If no filters selected, show all offers
+      console.log('No filters selected, showing all offers');
+      setOffers(allOffers);
+    }
+  }, [selectedFilters, allOffers]);
+
 
   return (   
     <>
