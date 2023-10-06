@@ -5,19 +5,21 @@ import { ChevronDown, MapPin, Briefcase, DollarSign, XCircle, CheckCircle } from
 
 
 const Filters = ({onFilterChange }) => {
-  const [fetchError, setFetchError] = useState(null)
-  const [locations, setLocations] = useState(null)
-  const [offers, setOffers] = useState(null)
+  const [fetchError, setFetchError] = useState(null);
+  const [locations, setLocations] = useState(null);
+  const [industries, setIndustries] = useState(null);
+  const [offers, setOffers] = useState(null);
+  const [selectedLocations, setSelectedLocations] = useState([]);
+  const [selectedIndustries, setSelectedIndustries] = useState([]);
   const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set());
-  
 
-  const handleCheckboxClick = (event, location) => {
+  const handleLocationCheckbox = (event, location) => {
     const isChecked = event.target.checked;
   
     // Update the selected checkboxes state
-    setSelectedCheckboxes(prevSelected => {
+    setSelectedLocations(prevSelected => {
       const newSelected = new Set(prevSelected);
-
+  
       if (isChecked) {
         newSelected.add(location);
       } else {
@@ -25,19 +27,65 @@ const Filters = ({onFilterChange }) => {
       }
   
       // Call a function to filter your results based on selected checkboxes
-      // filterResults(newSelected);
-      filterResults(Array.from(newSelected));
+      filterResults({ locations: Array.from(newSelected), industries: Array.from(selectedIndustries) });
       return newSelected;
     });
   };
+  
+  const handleIndustryCheckbox = (event, industry) => {
+    const isChecked = event.target.checked;
+  
+    // Update the selected checkboxes state
+    setSelectedIndustries(prevSelected => {
+      const newSelected = new Set(prevSelected);
+  
+      if (isChecked) {
+        newSelected.add(industry);
+      } else {
+        newSelected.delete(industry);
+      }
+  
+      // Call a function to filter your results based on selected checkboxes
+      filterResults({ locations: Array.from(selectedLocations), industries: Array.from(newSelected) });
+      return newSelected;
+    });
+  };
+
 
   // Function to filter results based on selected checkboxes
   const filterResults = (selected) => {
     const fetchOffers = async () => {
       const { data, error } = await supabase
       .from('offers')
-      .select()
-      .in('location', Array.from(selected))
+      .select('*')
+      .in('location', Array.from(selected.locations))
+      .in('industry', Array.from(selected.industries))
+      // .in(`${Array.from(selected.locations) || []}`)
+      // .in(`${Array.from(selected.industries) || []}`)
+      .or(`location.is.null()`)
+      .or(`industry.is.null()`)
+    
+      console.log(selected.locations);
+      console.log(selected.industries);
+
+      // const fetchOffers = async () => {
+      //   let query = supabase.from('offers').select('*');
+    
+      //   if (selected.locations.length > 0) {
+      //     query = query.in('location', Array.from(selected.locations));
+      //   } else {
+      //     // If location is not selected, include a condition that is always true
+      //     query = query.or('1.eq.1');
+      //   }
+    
+      //   if (selected.industries.length > 0) {
+      //     query = query.in('industry', Array.from(selected.industries));
+      //   } else {
+      //     // If industry is not selected, include a condition that is always true
+      //     query = query.or('1.eq.1');
+      //   }
+    
+      //   const { data, error } = await query;
     
     if (error) {
       setFetchError('Could not fetch the offers')
@@ -76,6 +124,27 @@ const Filters = ({onFilterChange }) => {
   }, [])
 
 
+useEffect(() => {
+    const fetchIndustries = async () => {
+        const { data, error } = await supabase
+        .from('offers')
+        .select('industry')
+      
+      if (error) {
+        setFetchError('Could not fetch locations')
+        setLocations(null)
+      }
+      if (data) {
+        let IndustriesArray = data.map(industry => industry.industry)
+        let uniqueIndustryNames = Array.from(new Set(IndustriesArray));
+        setIndustries(uniqueIndustryNames)
+        setFetchError(null)
+      }
+    }
+
+    fetchIndustries()
+  }, [])
+
   return (
   <div id="Filters">
   <div className="flex flex-col justify-between bg-white rounded-xl mt-4">
@@ -107,7 +176,7 @@ const Filters = ({onFilterChange }) => {
                         type="checkbox"
                         value=""
                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
-                        onChange={(event) => handleCheckboxClick(event, uniqueTownNames)}
+                        onChange={(event) => handleLocationCheckbox(event, uniqueTownNames)}
                       />
                       <label htmlFor={`checkbox-${uniqueTownNames}`} className="w-full ml-2 text-sm font-medium text-gray-900 rounded">{uniqueTownNames}</label>
                     </div>
@@ -132,16 +201,26 @@ const Filters = ({onFilterChange }) => {
           </span>
         </summary>
 
-        <nav aria-label="Location" className="mt-2 flex flex-col px-4 trasition duration-100">
+      {industries && (
+        <nav aria-label="Industry" className="mt-2 flex flex-col px-4 trasition duration-100">
           <ul className="h-48 px-3 pb-3 overflow-y-auto text-sm text-gray-700" aria-labelledby="dropdownSearchButton">
-            <li>
+          {industries.map(uniqueIndustryNames => (
+            <li key={uniqueIndustryNames}>
               <div className="flex items-center p-2 rounded hover:bg-gray-100">
-                <input id="checkbox-item-1" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded " />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">Хотел</label>
+                <input
+                id={`checkbox-${uniqueIndustryNames}`}
+                type="checkbox"
+                value=""
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
+                onChange={(event) => handleIndustryCheckbox(event, uniqueIndustryNames)}
+                />
+                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">{uniqueIndustryNames}</label>
               </div>
             </li>
+            ))}
           </ul>
         </nav>
+        )}
       </details>
 
       <details className="group duration-100">
