@@ -68,9 +68,9 @@ useEffect(() => {
       
                   <div>
                     <h3 className="font-medium sm:text-lg">
-                      <a href="#" className="hover:underline">
+                      <Link to={offer.slug} href="#" className="hover:underline">
                        {offer.title}
-                      </a>
+                      </Link>
                     </h3>
       
                     <p className="line-clamp-2 text-sm text-gray-700">
@@ -79,10 +79,13 @@ useEffect(() => {
       
                     <div className="mt-2 sm:flex sm:items-center sm:gap-2">
 
+                      {offer.salary && (
                       <span className="whitespace-nowrap font-semibold rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                         {offer.salary} лв
                       </span>
-      
+                      )
+                      }
+
                       <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                       {offer.experience} 
                       </span>

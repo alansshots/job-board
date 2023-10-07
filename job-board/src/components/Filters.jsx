@@ -11,7 +11,11 @@ const Filters = ({onFilterChange }) => {
   const [offers, setOffers] = useState(null);
   const [selectedLocations, setSelectedLocations] = useState([]);
   const [selectedIndustries, setSelectedIndustries] = useState([]);
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState(new Set());
+  const [includeSalary, setIncludeSalary] = useState(false);
+
+  const handleCheckboxChange = (event) => {
+    setIncludeSalary(event.target.checked);
+  };
 
   const handleLocationCheckbox = (event, location) => {
     const isChecked = event.target.checked;
@@ -54,39 +58,41 @@ const Filters = ({onFilterChange }) => {
 
   // Function to filter results based on selected checkboxes
   const filterResults = (selected) => {
+    const { locations, industries } = selected;
+
+    let filter = '';
+
+  if (locations.length > 0) {
+    const locationFilter = `location.in.(${locations.join(',')})`;
+    filter += filter ? `,${locationFilter}` : locationFilter;
+  }
+
+  if (industries.length > 0) {
+    const industryFilter = `industry.in.(${industries.join(',')})`;
+    filter += filter ? `,${industryFilter}` : industryFilter;
+  }
+
+  if (includeSalary) {
+    const salaryFilter = 'salary.is.not.null()';
+    filter += filter ? `,${salaryFilter}` : salaryFilter;
+  }
+
+  // Check if nothing is selected
+  if (!filter) {
+    console.log('No filters selected. Fetching all data.');
+    // Fetch all offers without applying any filters
+    fetchAllOffers();
+    return;
+  }
     const fetchOffers = async () => {
       const { data, error } = await supabase
       .from('offers')
       .select('*')
-      .in('location', Array.from(selected.locations))
-      .in('industry', Array.from(selected.industries))
-      // .in(`${Array.from(selected.locations) || []}`)
-      // .in(`${Array.from(selected.industries) || []}`)
-      .or(`location.is.null()`)
-      .or(`industry.is.null()`)
+      .or(filter)
     
       console.log(selected.locations);
       console.log(selected.industries);
 
-      // const fetchOffers = async () => {
-      //   let query = supabase.from('offers').select('*');
-    
-      //   if (selected.locations.length > 0) {
-      //     query = query.in('location', Array.from(selected.locations));
-      //   } else {
-      //     // If location is not selected, include a condition that is always true
-      //     query = query.or('1.eq.1');
-      //   }
-    
-      //   if (selected.industries.length > 0) {
-      //     query = query.in('industry', Array.from(selected.industries));
-      //   } else {
-      //     // If industry is not selected, include a condition that is always true
-      //     query = query.or('1.eq.1');
-      //   }
-    
-      //   const { data, error } = await query;
-    
     if (error) {
       setFetchError('Could not fetch the offers')
       setOffers(null)
@@ -144,6 +150,29 @@ useEffect(() => {
 
     fetchIndustries()
   }, [])
+
+  const fetchAllOffers = async () => {
+    const { data, error } = await supabase
+      .from('offers')
+      .select('*');
+  
+    if (error) {
+      setFetchError('Could not fetch the offers');
+      setOffers(null);
+    }
+  
+    if (data) {
+      onFilterChange(data);
+      console.log('All data:', data);
+  
+      if (data.length === 0) {
+        console.log('No matches found.');
+      }
+  
+      setOffers(data);
+      setFetchError(null);
+    }
+  };
 
   return (
   <div id="Filters">
@@ -214,7 +243,7 @@ useEffect(() => {
                 className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded"
                 onChange={(event) => handleIndustryCheckbox(event, uniqueIndustryNames)}
                 />
-                <label htmlFor="checkbox-item-1" className="w-full ml-2 text-sm font-medium text-gray-900 rounded">{uniqueIndustryNames}</label>
+                <label htmlFor={`checkbox-${uniqueIndustryNames}`} className="w-full ml-2 text-sm font-medium text-gray-900 rounded">{uniqueIndustryNames}</label>
               </div>
             </li>
             ))}
@@ -222,20 +251,19 @@ useEffect(() => {
         </nav>
         )}
       </details>
-
-      <details className="group duration-100">
+{/* DO LATER NOT IMPORTANT */}
+      {/* <details className="group duration-100">
         <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">
           <div className="flex items-center gap-2">
             <DollarSign className='w-6 h-6'/>
             <span className="text-md font-semibold"> Само обяви със заплати </span>
           </div>
-          <label htmlFor="AcceptConditions" className="relative h-6 w-14 cursor-pointer">
+          <label htmlFor="Salary" className="relative h-6 w-14 cursor-pointer">
             <input
               type="checkbox"
-              id="AcceptConditions"
+              id="Salary"
               className="peer sr-only [&:checked_+_span_svg[data-checked-icon]]:block [&:checked_+_span_svg[data-unchecked-icon]]:hidden"
             />
-
             <span className="absolute inset-y-0 start-0 z-10 m-1 inline-flex h-4 w-4 items-center justify-center rounded-full bg-white text-gray-400 transition-all peer-checked:start-6 peer-checked:text-green-600">
               <XCircle data-unchecked-icon/>
               <CheckCircle data-checked-icon className="hidden h-4 w-4"/>
@@ -243,8 +271,8 @@ useEffect(() => {
             
             <span className="absolute inset-0 rounded-full bg-gray-300 transition peer-checked:bg-green-500"></span>
           </label>
-        </summary>
-      </details>
+          </summary>
+      </details> */}
 
     </nav>
   </div>
