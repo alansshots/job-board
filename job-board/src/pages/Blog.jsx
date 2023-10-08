@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { useQuery, gql } from "@apollo/client";
 
 const BLOGS_QUERY = gql`
@@ -47,7 +48,7 @@ const Blog = () => {
         <div className='mx-auto flex max-w-6xl items-center p-4'>
         <div className='m-auto w-full mt-10 flex flex-row items-center justify-center flex-wrap'>
               {data.posts.map((post) => (
-                <article key={post.coverPhoto.id} className="w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
+                <Link to={"/blog/" + post.slug} key={post.id} className="w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
                     <img src={post.coverPhoto.url} className="rounded-t-[10px] bg-white sm:p-0.5"/>
                     <div className="rounded-b-[10px] bg-white p-4 !pt-5 sm:p-6">
                         <time dateime="2022-10-10" className="block text-xs text-gray-500">
@@ -61,16 +62,14 @@ const Blog = () => {
                         </a>
 
                         <div className="mt-4 flex flex-wrap gap-1">
-                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
-                            хаштаг
+                        {post.tags.map((post) => (
+                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                          {post}
                         </span>
-
-                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-[#b3fd49]" >
-                            хаштаг
-                        </span>
+                        ))}
                         </div>
                     </div>
-                </article>
+                </Link>
               ))}
 
             </div>

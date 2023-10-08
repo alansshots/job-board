@@ -31,14 +31,13 @@ useEffect(() => {
   useEffect(() => {
     // Apply filtering when selectedFilters change
     if (allOffers && selectedFilters.length > 0) {
-      console.log('All offers:', allOffers); // Check if allOffers is not null
-      console.log('Selected filters:', selectedFilters); // Check if selectedFilters have the expected values
+      // console.log('All offers:', allOffers); // Check if allOffers is not null
+      // console.log('Selected filters:', selectedFilters); // Check if selectedFilters have the expected values
       
       const filteredOffers = allOffers.filter((offer) => {
         const offerLocation = offer.location.toLowerCase(); // Convert to lowercase
         const filters = selectedFilters.map(filter => filter.location.toLowerCase()); // Access location property and convert to lowercase
         const isMatch = filters.includes(offerLocation);
-        console.log('Offer:', offer.title, 'Location:', offerLocation, 'Match:', isMatch);
         return isMatch;
       });      
 
