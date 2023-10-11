@@ -3,7 +3,7 @@ import supabase from '../config/supabaseClient'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 
-const OffersCard = ({ selectedFilters }) => {
+const OffersCard = ({ selectedFilters, searchedData }) => {
   const [fetchError, setFetchError] = useState(null)
   const [offers, setOffers] = useState(null)
   const [allOffers, setAllOffers] = useState(null);
@@ -29,11 +29,14 @@ useEffect(() => {
   }, [])
 
   useEffect(() => {
+
+    if(searchedData){
+      // filteredOffers = filteredOffers.filter(offer => offer.title.toLowerCase().includes(searchedData.toLowerCase()));
+      console.log(searchedData);
+      setOffers(searchedData);
+    }
     // Apply filtering when selectedFilters change
-    if (allOffers && selectedFilters.length > 0) {
-      // console.log('All offers:', allOffers); // Check if allOffers is not null
-      // console.log('Selected filters:', selectedFilters); // Check if selectedFilters have the expected values
-      
+    else if (allOffers && selectedFilters.length > 0) {
       const filteredOffers = allOffers.filter((offer) => {
         const offerLocation = offer.location.toLowerCase(); // Convert to lowercase
         const filters = selectedFilters.map(filter => filter.location.toLowerCase()); // Access location property and convert to lowercase
@@ -48,7 +51,8 @@ useEffect(() => {
       console.log('No filters selected, showing all offers');
       setOffers(allOffers);
     }
-  }, [selectedFilters, allOffers]);
+
+  }, [selectedFilters, allOffers, searchedData]);
 
 
   return (   

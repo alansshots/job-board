@@ -8,21 +8,25 @@ import SearchBar from '../components/SearchBar'
 
 const Offers = () => {
   const [selectedFilters, setSelectedFilters] = useState([]);
+  const [searchedData, setSearchedData] = useState(null);
 
   const handleFilterChange = (selected) => {
     setSelectedFilters(selected);
   };
 
+  const handleSearch = (data) => {
+    setSearchedData(data);
+  }; 
 
   return (
     <div id="Offers">
-      <SearchBar/>
+      <SearchBar onSearch={handleSearch} />
       <div className='flex flex-row justify-center items-start m-auto max-w-4xl'>
           <div className='filters mx-2 rounded-xl w-1/2'>
             <Filters onFilterChange={handleFilterChange} />
           </div>
           <div className='mx-2 rounded-xl w-full'>
-              <OffersCard selectedFilters={selectedFilters} />
+              <OffersCard selectedFilters={selectedFilters} searchedData={searchedData} />
           </div>
       </div>
     </div>
