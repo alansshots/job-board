@@ -14,13 +14,14 @@ const Banner = () => {
             <h1 className="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">Намери си работа за лятото лесно, бързо и удобно.</h1>
             <p className="mb-8 leading-relaxed">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quae blanditiis tenetur iusto totam fugiat voluptates eaque enim? Ipsam, rem incidunt.</p>
 
-            <div className='flex flex-row justify-around items-center bg-white rounded-3xl w-full mt-4 mb-10 shadow-md transition duration-200 hover:shadow-xl'>
+            {/* Add in first revision  */}
+            {/* <div className='flex flex-row justify-around items-center bg-white rounded-3xl w-full mt-4 mb-10 shadow-md transition duration-200 hover:shadow-xl'>
               <Search className='text-black ml-2'/>
               <input type="text" placeholder='Професия или ключова дума' className='mx-5 text-black w-8/12 border-transparent outline-none focus:border-transparent focus:ring-0'/>
               <NavLink className='bg-gray-200 py-4 w-3/12 rounded-r-2xl flex justify-center'>
                 <ArrowRight className='text-[#0146b1] trasition duration-100 hover:scale-110'/>
               </NavLink>
-            </div>
+            </div> */}
           
             <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Изтеглете мобилното приложение.</p>
             <div className="flex lg:flex-row md:flex-col">
