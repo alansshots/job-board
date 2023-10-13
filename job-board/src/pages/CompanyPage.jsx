@@ -1,18 +1,24 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Edit } from 'react-feather';
 import supabase from '../config/supabaseClient';
 const { pathname } = window.location;
 
 const CompanyPage = () => {
-  const paths = pathname.split("/").filter(entry => entry !== "");
-  const lastPath = paths[paths.length - 1];
-
+  const [lastPath, setLastPath] = useState('defaultPath');
   const [user, setUser] = useState('');
   const [offers, setOffers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
 
   useEffect(() => {
+    const paths = window.location.pathname.split("/").filter(entry => entry !== "");
+    const lastPath = paths[paths.length - 1];
+      // Update lastPath once it's properly determined
+      setLastPath(lastPath);
+    
+      console.log('Fetching offers for user:', user);
+
     const fetchUser = async () => {
       const { data: users, error } = await supabase
         .from('users')
@@ -66,9 +72,14 @@ const CompanyPage = () => {
             </div>
         </div>
 
-        <div className='flex flex-row mt-5'>
+        <div className="flex flex-row mt-5">
           <div className="bg-white rounded-lg shadow-xl p-8 mr-4">
-             <h4 className="text-xl text-gray-900 font-bold">Кратнка информация</h4>
+            <div className="flex flex-row justify-between items-center">
+              <h4 className="text-xl text-gray-900 font-bold">Кратнка информация</h4>
+              <button type="button" class="scale-90 w-1/6 p-2 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
+                  <Edit></Edit>
+              </button>
+            </div>
                 <ul className="mt-2 text-gray-700">
                     <li className="flex border-y py-2">
                         <span className="font-bold w-24">Компания:</span>
@@ -98,7 +109,12 @@ const CompanyPage = () => {
             </div>
 
             <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
+              <div className="flex flex-row justify-between items-center">
                 <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
+                <button type="button" class="scale-90 w-1/6 p-2 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
+                    <Edit></Edit>
+                </button>
+              </div>
                 <p className="mt-2 text-gray-700">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, minus.
                 </p>

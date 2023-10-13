@@ -31,9 +31,8 @@ const BlogSection = () => {
 
   const { data, loading, error} = useQuery(BLOGS_QUERY);
   if (loading) return (
-    <div className="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-      <div className="border-t-transparent border-solid animate-spin  rounded-full border-[#0146b1] border-8 h-64 w-64"></div>
-    </div>
+    <>
+    </>
   );
   return (
     <div id='BlogSection'>
@@ -45,7 +44,7 @@ const BlogSection = () => {
             <div className='m-auto max-w-6xl mt-10 flex flex-row'>
 
                 {data.posts.map((post) => (
-                <Link to={"/blog/" + post.slug} className="mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
+                <Link to={"/blog/" + post.slug} key={post.id} className="mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
                     <div className="rounded-[10px] bg-white p-4 !pt-20 sm:p-6">
                         <time dateTime="2022-10-10" className="block text-xs text-gray-500">
                         {post.date}
