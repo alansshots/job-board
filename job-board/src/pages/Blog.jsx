@@ -63,7 +63,7 @@ const Blog = () => {
 
                         <div className="mt-4 flex flex-wrap gap-1">
                         {post.tags.map((post) => (
-                        <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                        <span key={post.id} className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                           {post}
                         </span>
                         ))}

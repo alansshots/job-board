@@ -1,7 +1,9 @@
 import React from 'react'
-
+import { useState, useEffect } from 'react';
 import { useQuery, gql } from "@apollo/client";
-import { defaultFieldResolver } from 'graphql';
+
+const BlogPost = () => {
+
 const { pathname } = window.location;
 const paths = pathname.split("/").filter(entry => entry !== "");
 const lastPath = paths[paths.length - 1];
@@ -29,14 +31,29 @@ const BLOG_QUERY = gql`
 }
 `;
 
-const BlogPost = () => {
-  const { data, loading, error} = useQuery(BLOG_QUERY);
-  if (loading) return (
-    <div className="absolute right-1/2 bottom-1/2  transform translate-x-1/2 translate-y-1/2 ">
-      <div className="border-t-transparent border-solid animate-spin  rounded-full border-blue-400 border-8 h-64 w-64"></div>
-    </div>
-  );
-  if (error) return <pre>{error.message}</pre>
+  const { data, loading, error } = useQuery(BLOG_QUERY);
+
+  if (loading) {
+    return (
+      <div className="loading-spinner">
+        {/* You can use a loading spinner here */}
+      </div>
+    );
+  }
+
+  if (error ) {
+    console.error("Error fetching data:", error);
+    return <pre>{error.message}</pre>;
+  }
+
+  const postData = data?.post || null;
+
+  if (!postData) {
+    // Data is still loading or not available
+    <h1>DATA IS STILL LOADING OR NOT AVAILABLE.</h1>
+    return null;
+  }
+
   return (
     <div className='m-auto max-w-3xl'>
       <div>
