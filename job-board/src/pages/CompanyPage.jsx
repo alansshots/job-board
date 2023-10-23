@@ -1,7 +1,9 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Edit } from 'react-feather';
+import { Edit, CheckSquare } from 'react-feather';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import supabase from '../config/supabaseClient';
 const { pathname } = window.location;
 
@@ -10,6 +12,37 @@ const CompanyPage = () => {
   const [user, setUser] = useState('');
   const [offers, setOffers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [editedText, setEditedText] = useState(user.info);
+
+  const handleEditClick = () => {
+    setIsEditing(!isEditing);
+    setEditedText(editedText);
+  };
+
+  const handleSaveClick = async () => {
+    // Implement code to save editedText to the Supabase database
+    // Here, we are assuming a "posts" table in your database
+    
+    const { data, error } = await supabase
+      .from('users')
+      .update({ info: editedText })
+      .eq("id", lastPath)
+      .select()
+
+
+    if (error) {
+      console.error('Error saving text:', error);
+    } else {
+      setIsEditing(false);
+    }
+  };
+
+  useEffect(() => {
+    if (user.info) {
+      setEditedText(user.info);
+    }
+  }, [user.info]);
 
   useEffect(() => {
     const paths = window.location.pathname.split("/").filter(entry => entry !== "");
@@ -109,16 +142,39 @@ const CompanyPage = () => {
             </div>
 
             <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
-              <div className="flex flex-row justify-between items-center">
-                <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
-                <button type="button" class="scale-90 w-1/6 p-2 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
-                    <Edit></Edit>
-                </button>
-              </div>
-                <p className="mt-2 text-gray-700">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, minus.
-                </p>
-            </div>
+      <div className="flex flex-row justify-between items-center">
+        <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
+        {isEditing ? (
+          <button
+            onClick={handleSaveClick}
+            className="scale-90 w-[35px] p-2 flex justify-center items-center bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          >
+            <CheckSquare/>
+          </button>
+        ) : (
+          <button
+            onClick={handleEditClick}
+            className="scale-90 w-[35px] p-2 flex justify-center items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+          >
+            <Edit/>
+          </button>
+        )}
+      </div>
+      {isEditing ? (
+        <CKEditor
+          editor={ClassicEditor}
+          data={editedText}
+          onChange={(event, editor) => {
+            const data = editor.getData();
+            setEditedText(data);
+          }}
+        />
+      ) : editedText ? (
+        <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: editedText }}></p>
+      ) : (
+        <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: user.info }}></p>
+      )}
+    </div>
 
         </div>
 

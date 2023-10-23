@@ -18,6 +18,7 @@ useEffect(() => {
         setFetchError('Could not fetch the offers')
         setOffers(null)
       }
+      
       if (data) {
         setAllOffers(data);
         setOffers(data);
