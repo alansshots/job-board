@@ -13,11 +13,53 @@ const CompanyPage = () => {
   const [offers, setOffers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-  const [editedText, setEditedText] = useState(user.info);
+  const [editedText, setEditedText] = useState(user.info); 
+  const [isInfoEditing, setIsInfoEditing] = useState(false);
+  const [editedInfo, setEditedInfo] = useState({
+    company: user.company_name,
+    location: user.location,
+    industry: user.industry,
+    created_at: user.created_at,
+    phone: user.phone,
+    email: user.email
+  });
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
     setEditedText(editedText);
+  };
+
+  const handleInfoEditClick = () => {
+    setIsInfoEditing(!isInfoEditing);
+    setEditedInfo({
+      company: user.company_name,
+      location: user.location,
+      industry: user.industry,
+      created_at: user.created_at,
+      phone: user.phone,
+      email: user.email
+    });
+  }
+
+  const handleInfoSaveClick = async () => {
+    const { data, error } = await supabase
+      .from('users')
+      .update({
+        company_name: editedInfo.company,
+        location: editedInfo.location,
+        industry: editedInfo.industry,
+        created_at: editedInfo.created_at,
+        phone: editedInfo.phone,
+        email: user.email
+      })
+      .eq("id", lastPath)
+      .select();
+  
+    if (error) {
+      console.error('Error saving info:', error);
+    } else {
+      setIsInfoEditing(false);
+    }
   };
 
   const handleSaveClick = async () => {
@@ -26,10 +68,11 @@ const CompanyPage = () => {
     
     const { data, error } = await supabase
       .from('users')
-      .update({ info: editedText })
+      .update({
+        info: editedText
+      })
       .eq("id", lastPath)
       .select()
-
 
     if (error) {
       console.error('Error saving text:', error);
@@ -100,8 +143,8 @@ const CompanyPage = () => {
                         </svg>
                     </span>
                 </div>
-                <p className="text-gray-700">Софтуерно инженерство</p>
-                <p className="text-sm text-gray-500">Бургас, България</p>
+                <p className="text-gray-700">{user.industry}</p>
+                <p className="text-sm text-gray-500">{user.location}</p>
             </div>
         </div>
 
@@ -109,73 +152,140 @@ const CompanyPage = () => {
           <div className="bg-white rounded-lg shadow-xl p-8 mr-4">
             <div className="flex flex-row justify-between items-center">
               <h4 className="text-xl text-gray-900 font-bold">Кратнка информация</h4>
-              <button type="button" class="scale-90 w-1/6 p-2 flex justify-center items-center  bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg ">
-                  <Edit></Edit>
+              <button
+                type="button"
+                onClick={isInfoEditing ? handleInfoSaveClick : handleInfoEditClick}
+                className="scale-90 w-1/6 p-2 flex justify-center items-center shadow-md hover:scale-100 transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg "
+              >
+                {isInfoEditing ? <CheckSquare className='text-black'/> : <Edit className='text-black' />}
               </button>
             </div>
+               {isInfoEditing ? (
+                <div>
                 <ul className="mt-2 text-gray-700">
-                    <li className="flex border-y py-2">
+                  <li className="flex border-y py-2">
+                    <span className="font-bold w-24">Компания:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.company}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, company: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Локация:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.location}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, location: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Бранш:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.industry}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, industry: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Дата на основаване:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.created_at}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, created_at: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Телефон:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.phone}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, phone: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Email:</span>
+                    <input
+                      type="text"
+                      value={editedInfo.email}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, email: e.target.value })}
+                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
+                    />
+                  </li>
+                </ul>
+                </div>
+                ) : (
+                  <div>
+                    <ul className="mt-2 text-gray-700">
+                      <li className="flex border-y py-2">
                         <span className="font-bold w-24">Компания:</span>
-                        <span className="text-gray-700">Amanda S. Ross</span>
-                    </li>
-                    <li className="flex border-b py-2">
+                        <span className="text-gray-700">{user.company_name}</span>
+                      </li>
+                      <li className="flex border-b py-2">
                         <span className="font-bold w-24">Локация:</span>
-                        <span className="text-gray-700">New York, US</span>
-                    </li>
-                    <li className="flex border-b py-2">
+                        <span className="text-gray-700">{user.location}</span>
+                      </li>
+                      <li className="flex border-b py-2">
                         <span className="font-bold w-24">Бранш:</span>
-                        <span className="text-gray-700">Разработка на софтуер</span>
-                    </li>
-                    <li className="flex border-b py-2">
+                        <span className="text-gray-700">{user.industry}</span>
+                      </li>
+                      <li className="flex border-b py-2">
                         <span className="font-bold w-24">Дата на основаване:</span>
-                        <span className="text-gray-700">24 Jul, 1991</span>
-                    </li>
-                    <li className="flex border-b py-2">
+                        <span className="text-gray-700">{user.created_at}</span>
+                      </li>
+                      <li className="flex border-b py-2">
                         <span className="font-bold w-24">Телефон:</span>
-                        <span className="text-gray-700">(123) 123-1234</span>
-                    </li>
-                    <li className="flex border-b py-2">
+                        <span className="text-gray-700">+359 {user.phone}</span>
+                      </li>
+                      <li className="flex border-b py-2">
                         <span className="font-bold w-24">Email:</span>
                         <span className="text-gray-700">{user.email}</span>
-                    </li>
-                </ul>
+                      </li>
+                    </ul>
+                  </div>
+                )}
             </div>
 
-            <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
-      <div className="flex flex-row justify-between items-center">
-        <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
-        {isEditing ? (
-          <button
-            onClick={handleSaveClick}
-            className="scale-90 w-[35px] p-2 flex justify-center items-center bg-green-600 hover:bg-green-700 focus:ring-green-500 focus:ring-offset-green-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-          >
-            <CheckSquare/>
-          </button>
-        ) : (
-          <button
-            onClick={handleEditClick}
-            className="scale-90 w-[35px] p-2 flex justify-center items-center bg-blue-600 hover:bg-blue-700 focus:ring-blue-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
-          >
-            <Edit/>
-          </button>
-        )}
-      </div>
-      {isEditing ? (
-        <CKEditor
-          editor={ClassicEditor}
-          data={editedText}
-          onChange={(event, editor) => {
-            const data = editor.getData();
-            setEditedText(data);
-          }}
-        />
-      ) : editedText ? (
-        <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: editedText }}></p>
-      ) : (
-        <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: user.info }}></p>
-      )}
-    </div>
-
+        <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
+          <div className="flex flex-row justify-between items-center">
+            <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
+            {isEditing ? (
+              <button
+                onClick={handleSaveClick}
+                class="scale-90 w-[35px] p-2 flex justify-center items-center shadow-md hover:scale-100 transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"
+                >
+                <CheckSquare/>
+              </button>
+            ) : (
+              <button
+                onClick={handleEditClick}
+                className="scale-90 w-[35px] p-2 flex justify-center items-center shadow-md hover:scale-100 transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"
+                >
+                <Edit/>
+              </button>
+            )}
+          </div>
+          {isEditing ? (
+            <CKEditor
+              editor={ClassicEditor}
+              data={editedText}
+              onChange={(event, editor) => {
+                const data = editor.getData();
+                setEditedText(data);
+              }}
+            />
+          ) : editedText ? (
+            <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: editedText }}></p>
+          ) : (
+            <p className="mt-2 text-gray-700" dangerouslySetInnerHTML={{ __html: user.info }}></p>
+          )}
+        </div>
+        
         </div>
 
         <div className="bg-white rounded-lg shadow-xl mt-4 p-8">
