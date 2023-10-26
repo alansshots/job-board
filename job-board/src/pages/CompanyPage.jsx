@@ -59,6 +59,9 @@ const CompanyPage = () => {
       console.error('Error saving info:', error);
     } else {
       setIsInfoEditing(false);
+      console.log("---------INFO AFTER EDIT-------------")
+      console.log(editedInfo);
+      console.log("--------------------------------------")
     }
   };
 
@@ -85,6 +88,7 @@ const CompanyPage = () => {
     if (user.info) {
       setEditedText(user.info);
     }
+
   }, [user.info]);
 
   useEffect(() => {
