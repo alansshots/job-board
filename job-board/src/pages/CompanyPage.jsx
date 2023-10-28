@@ -9,6 +9,8 @@ const { pathname } = window.location;
 
 const CompanyPage = () => {
   const [lastPath, setLastPath] = useState('defaultPath');
+  const [loggedInUser, setLoggedInUser] = useState(null);
+  const jwt = localStorage.getItem('accessToken');
   const [user, setUser] = useState('');
   const [offers, setOffers] = useState(null);
   const [fetchError, setFetchError] = useState(null);
@@ -91,6 +93,36 @@ const CompanyPage = () => {
 
   }, [user.info]);
 
+  // useEffect(() => {
+  //   async function getLoggedInUser() {
+  //     const { data, error } = await supabase.auth.getUser(jwt);
+  //       if (data?.user) {
+  //         setLoggedInUser(data.user);
+  //       }
+  //     }
+  
+  //     if (jwt) {
+  //       getLoggedInUser();
+  //       console.log(loggedInUser);
+  //     }
+  // }, [jwt]);
+
+  useEffect(() => {
+    async function getLoggedInUser() {
+      if (jwt) {
+        const { data, error } = await supabase.auth.getUser(jwt);
+        if (data?.user) {
+          setLoggedInUser(data.user);
+        }
+      }
+    }
+    
+    if (jwt) {
+    getLoggedInUser(); // Call the async function
+    }
+    
+  }, [jwt]);
+
   useEffect(() => {
     const paths = window.location.pathname.split("/").filter(entry => entry !== "");
     const lastPath = paths[paths.length - 1];
@@ -156,6 +188,7 @@ const CompanyPage = () => {
           <div className="bg-white rounded-lg shadow-xl p-8 mr-4">
             <div className="flex flex-row justify-between items-center">
               <h4 className="text-xl text-gray-900 font-bold">Кратнка информация</h4>
+              {loggedInUser.id === user.id && (
               <button
                 type="button"
                 onClick={isInfoEditing ? handleInfoSaveClick : handleInfoEditClick}
@@ -163,6 +196,7 @@ const CompanyPage = () => {
               >
                 {isInfoEditing ? <CheckSquare className='text-black'/> : <Edit className='text-black' />}
               </button>
+              )}
             </div>
                {isInfoEditing ? (
                 <div>
@@ -258,7 +292,9 @@ const CompanyPage = () => {
         <div className="flex-1 bg-white rounded-lg shadow-xl p-8">
           <div className="flex flex-row justify-between items-center">
             <h4 className="text-xl text-gray-900 font-bold">Информация</h4>
-            {isEditing ? (
+            <div>
+            {loggedInUser.id === user.id ? (
+               isEditing ? (
               <button
                 onClick={handleSaveClick}
                 class="scale-90 w-[35px] p-2 flex justify-center items-center shadow-md hover:scale-100 transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg"
@@ -272,7 +308,9 @@ const CompanyPage = () => {
                 >
                 <Edit/>
               </button>
-            )}
+              )
+            ) : null}
+            </div>
           </div>
           {isEditing ? (
             <CKEditor
