@@ -9,7 +9,7 @@ const { pathname } = window.location;
 
 const CompanyPage = () => {
   const [lastPath, setLastPath] = useState('defaultPath');
-  const [loggedInUser, setLoggedInUser] = useState(null);
+  const [loggedInUser, setLoggedInUser] = useState('');
   const jwt = localStorage.getItem('accessToken');
   const [user, setUser] = useState('');
   const [offers, setOffers] = useState(null);
@@ -113,12 +113,14 @@ const CompanyPage = () => {
         const { data, error } = await supabase.auth.getUser(jwt);
         if (data?.user) {
           setLoggedInUser(data.user);
+          console.log(loggedInUser);
         }
       }
     }
     
     if (jwt) {
     getLoggedInUser(); // Call the async function
+    console.log(loggedInUser);
     }
     
   }, [jwt]);
@@ -187,7 +189,7 @@ const CompanyPage = () => {
         <div className="flex flex-row mt-5">
           <div className="bg-white rounded-lg shadow-xl p-8 mr-4">
             <div className="flex flex-row justify-between items-center">
-              <h4 className="text-xl text-gray-900 font-bold">Кратнка информация</h4>
+              <h4 className="text-xl text-gray-900 font-bold">Кратка информация</h4>
               {loggedInUser.id === user.id && (
               <button
                 type="button"

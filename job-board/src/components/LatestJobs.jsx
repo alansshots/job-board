@@ -32,15 +32,15 @@ const LatestJobs = () => {
   return (
     <div className='bg-gray-100 pb-16'>
         <div className='m-auto max-w-6xl pt-12 bg-gray-100'>
-            <h1 className='text-5xl font-semibold'><span className='text-[#0146b1]'>Последни</span> Обяви</h1>
+            <h1 className='ml-5 sm:ml-0.5 text-5xl font-semibold'><span className='text-[#0146b1]'>Последни</span> Обяви</h1>
         </div>
         
         <div className='m-auto max-w-6xl mt-16 flex flex-row items-center'>
         {fetchError && (<p>{fetchError}</p>)}
             {offers && (
-            <div className='flex flex-row items-center justify-between w-full'>
+            <div className='flex flex-col md:flex-row items-center justify-between w-full'>
                 {offers.map(offer => (
-                <div key={offer.id} className='bg-white w-5/12 mx-6 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer transition duration-200 hover:scale-105 hover:shadow-xl shadow-md'>
+                <div key={offer.id} className='bg-white m-5 w-5/6 md:w-5/12 mx-6 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer transition duration-200 hover:scale-105 hover:shadow-xl shadow-md'>
                     <h2 className='text-2xl text-black font-semibold'>{offer.title}</h2>
                     
                     <div className='mt-2'>
@@ -66,7 +66,7 @@ const LatestJobs = () => {
                         </div>
 
                         <div>
-                            <Link to={"offers/" + offer.slug} className='bg-[#0146b1] w-20 text-white transition duration-200 hover:scale-105 text-sm px-1 py-0.5 rounded-xl flex flex-row item-center justify-between'>
+                            <Link to={"offers/" + offer.slug} className='bg-[#0146b1] w-24 md:w-20 text-white transition duration-200 hover:scale-105 text-sm px-1 py-0.5 rounded-xl flex flex-row item-center justify-center'>
                                 Свържи се
                             </Link>
                         </div>

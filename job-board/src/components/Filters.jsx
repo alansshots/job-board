@@ -178,7 +178,7 @@ useEffect(() => {
   <div id="Filters">
   <div className="flex flex-col justify-between bg-white rounded-xl mt-4">
   <div className="">
-    <nav aria-label="Main Nav" className=" flex flex-col space-y-1">
+    <nav aria-label="Main Nav" className="flex flex-col space-y-1">
 
       <details className="group duration-100">
         <summary className="flex cursor-pointer items-center justify-between rounded-lg px-4 py-2 text-gray-500 hover:bg-gray-100 hover:text-gray-700">

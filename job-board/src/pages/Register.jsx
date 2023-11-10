@@ -61,12 +61,12 @@ const Register = () => {
     })()}
 
   <div id="Register">
-    <section className="bg-gray-100 m-auto  max-w-5xl rounded-[30px] border-2 border-black mt-10">
+    <section className="bg-gray-100 m-auto max-w-5xl rounded-[30px] md:border-2 md:border-black md:mt-10">
       <div className="lg:grid lg:grid-cols-12">
-        <section className="relative flex h-32 items-start lg:col-span-5 lg:h-full xl:col-span-6">
+        <section className="relative flex h-16 md:h-32 items-start lg:col-span-5 lg:h-full xl:col-span-6">
 
           <div className="hidden lg:relative lg:block lg:p-12">
-            <h2 className="mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
+            <h2 className="md:mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
               Добре дошли LOGO 
             </h2>
 

@@ -43,7 +43,7 @@ const Navbar = () => {
         <div>
           <div className='flex flex-row justify-around items-center'>
             <NavLink to='/offers' className={({ isActive }) => isActive ? 'mx-4 border-b-2 border-[#0146b1] font-semibold mx-4' : 'mx-4 font-semibold duration-100 hover:scale-105'}>Обяви</NavLink>
-            <NavLink to='blog' className={({ isActive }) => isActive ? 'mx-4 mr-10 border-b-2 border-[#0146b1] font-semibold mx-4' : 'mx-4 mr-10 font-semibold duration-100 hover:scale-105'}>Блог</NavLink>
+            <NavLink to='blog' className={({ isActive }) => isActive ? 'mx-4 mr-10 border-b-2 border-[#0146b1] font-semibold mx-4' : 'hidden md:block mx-4 mr-10 font-semibold duration-100 hover:scale-105'}>Блог</NavLink>
 
             {jwt && user && (
               <div className='flex flex-col' onMouseEnter={() => setDropdown(true)}>
