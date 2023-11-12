@@ -52,7 +52,7 @@ const CompanyPage = () => {
         industry: editedInfo.industry,
         created_at: editedInfo.created_at,
         phone: editedInfo.phone,
-        email: user.email
+        email: editedInfo.email
       })
       .eq("id", lastPath)
       .select();
@@ -61,9 +61,6 @@ const CompanyPage = () => {
       console.error('Error saving info:', error);
     } else {
       setIsInfoEditing(false);
-      console.log("---------INFO AFTER EDIT-------------")
-      console.log(editedInfo);
-      console.log("--------------------------------------")
     }
   };
 
@@ -93,20 +90,6 @@ const CompanyPage = () => {
 
   }, [user.info]);
 
-  // useEffect(() => {
-  //   async function getLoggedInUser() {
-  //     const { data, error } = await supabase.auth.getUser(jwt);
-  //       if (data?.user) {
-  //         setLoggedInUser(data.user);
-  //       }
-  //     }
-  
-  //     if (jwt) {
-  //       getLoggedInUser();
-  //       console.log(loggedInUser);
-  //     }
-  // }, [jwt]);
-
   useEffect(() => {
     async function getLoggedInUser() {
       if (jwt) {
@@ -120,7 +103,7 @@ const CompanyPage = () => {
     
     if (jwt) {
     getLoggedInUser(); // Call the async function
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
     }
     
   }, [jwt]);
@@ -130,8 +113,6 @@ const CompanyPage = () => {
     const lastPath = paths[paths.length - 1];
       // Update lastPath once it's properly determined
       setLastPath(lastPath);
-    
-      console.log('Fetching offers for user:', user);
 
     const fetchUser = async () => {
       const { data: users, error } = await supabase
@@ -146,7 +127,7 @@ const CompanyPage = () => {
     };
 
     fetchUser();
-  }, [lastPath]);
+  }, [lastPath, user]);
   
   const fetchAllOffers = async (user) => {
     const { data, error } = await supabase
