@@ -25,6 +25,39 @@ const CompanyPage = () => {
     phone: user.phone,
     email: user.email
   });
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [isHovered, setIsHovered] = useState(false);
+
+  const handleImageChange = async (event) => {
+    const image = event.target.files[0];
+    setSelectedImage(URL.createObjectURL(image));
+    // if (image) {
+    //   const { data: uploadData, error: uploadError } = await supabase.storage
+    //     .from('profile_pictures')
+    //     .upload(`user_images/${image.name}`, image);
+
+    //   if (uploadError) {
+    //     console.error('Error uploading image:', uploadError);
+    //   } else if (uploadData) {
+    //     console.log('Image was uploaded')
+    //     const imageUrl = uploadData.Key;
+  
+    //     const { data: updateData, error: updateError } = await supabase
+    //       .from('users')
+    //       .update({ profile_image_url: imageUrl })
+    //       .eq('id', loggedInUser.id); // Adjust with the user's ID
+  
+    //     if (updateError) {
+    //       console.error('Error updating user record:', updateError);
+    //     } else {
+    //       console.log('User record updated successfully:', updateData);
+    //       setSelectedImage(imageUrl);
+    //     }
+    //   }
+    // }
+  };
+  
+
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -96,14 +129,12 @@ const CompanyPage = () => {
         const { data, error } = await supabase.auth.getUser(jwt);
         if (data?.user) {
           setLoggedInUser(data.user);
-          console.log(loggedInUser);
         }
       }
     }
     
     if (jwt) {
-    getLoggedInUser(); // Call the async function
-    // console.log(loggedInUser);
+      getLoggedInUser(); // Call the async function
     }
     
   }, [jwt]);
@@ -127,7 +158,9 @@ const CompanyPage = () => {
     };
 
     fetchUser();
-  }, [lastPath, user]);
+  }, [lastPath
+  // , user // this fixes the info section edit but make like 100 requests every seconds  
+  ]);
   
   const fetchAllOffers = async (user) => {
     const { data, error } = await supabase
@@ -153,7 +186,49 @@ const CompanyPage = () => {
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
             </div>
             <div className="flex flex-col items-center -mt-20">
-                <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png" className="w-40 border-4 border-white rounded-full" />
+                {/* <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png" className="w-40 border-4 border-white rounded-full" /> */}
+                <label htmlFor="profile-pic-upload">
+                <div
+                  className="w-40 h-40 border-4 border-white rounded-full overflow-hidden"
+                  style={{ position: 'relative' }}
+                  onMouseEnter={() => setIsHovered(true)}
+                  onMouseLeave={() => setIsHovered(false)}
+                >
+                  <img
+                    src={selectedImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    alt="Profile"
+                    style={{
+                      cursor:"pointer",
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      objectPosition: 'center',
+                      filter: isHovered ? 'blur(2px)' : 'none',
+                      transition: 'filter 0.3s ease',
+                    }}
+                  />
+                  {isHovered && (
+                    <div
+                      style={{
+                        cursor:"pointer",
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: 'translate(-50%, -50%)',
+                      }}
+                    >
+                      <Edit size={30} color="white" />
+                    </div>
+                  )}
+                </div>
+              </label>
+                <input
+                  id="profile-pic-upload"
+                  type="file"
+                  accept="image/jpeg, image/png, image/gif, image/svg+xml"
+                  onChange={handleImageChange}
+                  style={{ display: 'none' }}
+                />
                 <div className="flex items-center space-x-2 mt-2">
                     <p className="text-2xl font-semibold">{user.company_name}</p>
                     <span className="bg-blue-500 rounded-full p-1" title="Verified">
