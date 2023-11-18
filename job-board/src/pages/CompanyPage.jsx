@@ -27,37 +27,51 @@ const CompanyPage = () => {
   });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
-
+  
   const handleImageChange = async (event) => {
     const image = event.target.files[0];
-    setSelectedImage(URL.createObjectURL(image));
-    // if (image) {
-    //   const { data: uploadData, error: uploadError } = await supabase.storage
-    //     .from('profile_pictures')
-    //     .upload(`user_images/${image.name}`, image);
-
-    //   if (uploadError) {
-    //     console.error('Error uploading image:', uploadError);
-    //   } else if (uploadData) {
-    //     console.log('Image was uploaded')
-    //     const imageUrl = uploadData.Key;
   
-    //     const { data: updateData, error: updateError } = await supabase
-    //       .from('users')
-    //       .update({ profile_image_url: imageUrl })
-    //       .eq('id', loggedInUser.id); // Adjust with the user's ID
+    if (image) {
+      try {
+        // Upload the image to Supabase Storage
+        const { data: uploadData, error: uploadError } = await supabase.storage
+          .from('profile_pictures')
+          .upload(`${loggedInUser.id}/${image.name}`, image);
   
-    //     if (updateError) {
-    //       console.error('Error updating user record:', updateError);
-    //     } else {
-    //       console.log('User record updated successfully:', updateData);
-    //       setSelectedImage(imageUrl);
-    //     }
-    //   }
-    // }
+        if (uploadError) {
+          throw new Error(`Error uploading image: ${uploadError.message}`);
+        }
+  
+        // Log the structure of the uploadData object
+        console.log('Upload Data:', uploadData);
+  
+        // Get the URL of the uploaded image
+        const imageUrl = await supabase.storage
+          .from('profile_pictures')
+          .getPublicUrl(`${loggedInUser.id}/${image.name}`);
+  
+        if (!imageUrl) {
+          throw new Error('Image URL is null or undefined');
+        }
+  
+        // Update the user's record in the database with the new image URL
+        const { data: updateData, error: updateError } = await supabase
+          .from('users')
+          .update({ profile_image_url: imageUrl.data.publicUrl })
+          .eq('id', loggedInUser.id);
+  
+        if (updateError) {
+          throw new Error(`Error updating user record: ${updateError.message}`);
+        }
+  
+        console.log('User record updated successfully:', updateData);
+        setSelectedImage(imageUrl.data.publicUrl);
+      } catch (error) {
+        console.error(error.message);
+      }
+    }
   };
   
-
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -195,7 +209,7 @@ const CompanyPage = () => {
                   onMouseLeave={() => setIsHovered(false)}
                 >
                   <img
-                    src={selectedImage || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    src={user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     alt="Profile"
                     style={{
                       cursor:"pointer",
