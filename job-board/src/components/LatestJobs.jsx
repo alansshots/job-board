@@ -29,6 +29,7 @@ const LatestJobs = () => {
       fetchOffers()
     }, [])
 
+    console.log(offers);
   return (
     <div className='bg-gray-100 pb-16'>
         <div className='m-auto max-w-6xl pt-12 bg-gray-100'>
@@ -52,14 +53,14 @@ const LatestJobs = () => {
                     
                     </div>
                     
-                    <h2 className='mt-5 text-xl font-semibold text-[#0146b1]'>{offer.experience}</h2>
+                    <h2 className='mt-5 text-md font-semibold text-[#0146b1]'>Опит: {offer.experience}</h2>
                     
                     <div className='flex flex-col justify-center items-left mt-16 border-t boreder-gray-100 pt-2'>
                         
                         <div className=" mb-2 flex flex-row justify-left items-center">
-                          <a href="">
+                          {/* <a href="">
                                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
-                          </a>
+                          </a> */}
                           <div>
                             <a href="" className='text-[#0146b1] text-sm ml-0.5'>{offer.author}</a>
                           </div>

@@ -66,10 +66,10 @@ useEffect(() => {
 
               <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
               <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
-                <Link to={offer.slug} className="block shrink-0"> 
+                {/* <Link to={offer.slug} className="block shrink-0"> 
                   <img src="https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png" className="h-14 w-14 rounded-lg object-cover"/>
-                </Link>
-      
+                </Link>*/}
+                
                   <div>
                     <h3 className="font-medium sm:text-lg">
                       <Link to={offer.slug} href="#" className="hover:underline">
@@ -77,8 +77,8 @@ useEffect(() => {
                       </Link>
                     </h3>
       
-                    <p className="line-clamp-2 text-sm text-gray-700">
-                      {offer.summary}
+                    <p className="line-clamp-2 text-sm text-gray-700" 
+                      dangerouslySetInnerHTML={{ __html: offer.summary }}>
                     </p>
       
                     <div className="mt-2 sm:flex sm:items-center sm:gap-2">

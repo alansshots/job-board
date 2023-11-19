@@ -5,23 +5,43 @@ import { Auth } from '@supabase/auth-ui-react';
 import Login from '../pages/Login';
 
 const Navbar = () => {
+  const [userId, setUserId] = useState(null);
   const [user, setUser] = useState(null);
   const [dropdown, setDropdown] = useState(false);
   const navigate = useNavigate();
   const jwt = localStorage.getItem('accessToken');
 
   useEffect(() => {
-    async function getUserData() {
-      const { data, error } = await supabase.auth.getUser(jwt);
-      if (data?.user) {
-        setUser(data.user);
+  async function getUserData() {
+    const { data, error } = await supabase.auth.getUser(jwt);
+    if (data?.user) {
+      setUserId(data.user.id);
+    }
+  }
+
+  const fetchUser = async () => {
+    // Wait for userId to be set
+    if (userId) {
+      const { data: user, error } = await supabase
+        .from('users')
+        .select()
+        .eq('id', userId);
+
+      if (user) {
+        setUser(user[0]);
       }
     }
+  };
 
-    if (jwt) {
-      getUserData();
-    }
-  }, [jwt]);
+  if (jwt) {
+    // First, get user data from auth
+    getUserData();
+    
+    // Then, fetch user data from the database
+    fetchUser();
+  }
+}, [jwt, userId]);  // Added userId as a dependency
+
 
   async function signOutUser() {
     await supabase.auth.signOut();
@@ -50,11 +70,13 @@ const Navbar = () => {
                 <div className='flex-row gap-4 flex justify-center items-center'>
                   <div className='flex-shrink-0'>
                     <a href='#' className='relative block'>
-                      <img alt='profil' src='https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png' className='mx-auto object-cover rounded-full h-10 w-10' />
+                      <img alt='profil'
+                       src={user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                       className='mx-auto object-cover rounded-full h-10 w-10' />
                     </a>
                   </div>
                   <div className='flex flex-col'>
-                    <span className='text-lg font-medium'>{user.user_metadata.company_name}</span>
+                    <span className='text-lg font-medium'>{user.company_name}</span>
                     <span className='text-xs  text-gray-700'>{user.email}</span>
                   </div>
                 </div>
@@ -63,7 +85,7 @@ const Navbar = () => {
                 {dropdown && (
                   <div onMouseLeave={() => setDropdown(false)} id='dropdown' className='z-10 absolute mt-12 bg-white divide-y divide-gray-100 rounded-lg shadow w-46'>
                     <div className='px-4 py-3 text-sm text-gray-900'>
-                      <div>{user.user_metadata.company_name}</div>
+                      <div>{user.company_name}</div>
                       <div className='font-medium truncate'>{user.email}</div>
                     </div>
                     <ul className='py-2 text-sm text-gray-700' aria-labelledby='dropdownInformationButton'>

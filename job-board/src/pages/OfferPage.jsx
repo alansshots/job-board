@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import supabase from '../config/supabaseClient';
 import { Calendar } from 'react-feather';
+import { Link } from 'react-router-dom';
 
 const OfferPage = () => {
   const [fetchError, setFetchError] = useState(null);
@@ -24,10 +25,11 @@ const OfferPage = () => {
 
     if (data) {
       setOffer(data[0]);
-      // console.log(data[0]);
+      console.log(data[0].author_id);
       setFetchError(null);
     }
   }
+
     fetchOffer();
   }, [lastPath]);
 
@@ -57,7 +59,7 @@ const OfferPage = () => {
               <h2 className='my-2 font-bold'>{offer.title}</h2>
 
               <div className='content'>
-                {offer.content}
+                <div dangerouslySetInnerHTML={{ __html: offer.content }}></div>
               </div>
 
               <div className='mt-2'>
@@ -77,10 +79,10 @@ const OfferPage = () => {
           </div>
       
           <div className='mt-6 rounded-xl w-1/2'>
-            <div className='bg-white mx-5 flex-col justify-center items-center p-6 rounded-2xl cursor-pointer shadow-md'>
+            <div className='bg-white mx-5 flex-col justify-center items-center p-6 rounded-2xl shadow-md'>
               <div className='mb-2 flex flex-row items-center justify-left'>
                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
-                <h2 className='ml-2 text-xl font-semibold'>Company Name</h2>
+                <Link className='ml-2 text-xl font-semibold hover:border-b-2 hover:border-black transition-500 cursor-pointer'>{offer.author}</Link>
               </div>
               
               <div className='flex flex-col justify-between items-left mt-1 border-t border-gray-100 pt-2'>
@@ -89,11 +91,11 @@ const OfferPage = () => {
                 <ul className='mt-1'>
                   <li className='font-semibold'>
                     <h3>Email за връзка:</h3>
-                    <h3>colorblock@mail.com</h3>
+                    <h3>{offer.email}</h3>
                   </li>
                   <li className='font-semibold'>
                     <h3>Телефон за връзка:</h3>
-                    <h3>+359 889 647 761</h3>
+                    <h3>+359 {offer.phone}</h3>
                   </li>
                 </ul>
               </div>

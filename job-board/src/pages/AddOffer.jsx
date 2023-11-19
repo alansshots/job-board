@@ -16,20 +16,41 @@ const AddOffer = () => {
   const [location, setLocation] = useState("");
   const [content, setContent] = useState("");
 
-  const [currentUser, setCurrentUser] = useState("");
+  // const [currentUser, setCurrentUser] = useState("");
+  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
   const jwt = localStorage.getItem('accessToken');
 
   useEffect(() => {
     async function getUserData() {
       const { data, error } = await supabase.auth.getUser(jwt);
-      if (data && data.user) {
-        setCurrentUser(data.user);
-        console.log(data.user);
+      if (data?.user) {
+        setUserId(data.user.id);
       }
     }
-
-    getUserData();
-  }, []);
+  
+    const fetchUser = async () => {
+      // Wait for userId to be set
+      if (userId) {
+        const { data: user, error } = await supabase
+          .from('users')
+          .select()
+          .eq('id', userId);
+  
+        if (user) {
+          setUser(user[0]);
+        }
+      }
+    };
+  
+    if (jwt) {
+      // First, get user data from auth
+      getUserData();
+      
+      // Then, fetch user data from the database
+      fetchUser();
+    }
+  }, [jwt, userId]);  // Added userId as a dependency
 
   async function submitNewOffer() {
     // getUserData()
@@ -40,15 +61,16 @@ const AddOffer = () => {
       {  
         title: title,
         created_at: date,
-        author: currentUser.user_metadata.company_name,
-        summary: currentUser.id,
-        phone: 34245230,
-        email: currentUser.email,
+        author: user.company_name,
+        summary: content,
+        phone: user.phone,
+        email: user.email,
         salary: salary,
         experience: experience,
         industry: industry,
         location: location,
-        content: content
+        content: content,
+        author_id: user.id
       },
     ])
 
