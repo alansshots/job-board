@@ -414,9 +414,9 @@ const CompanyPage = () => {
 
                     <article key={offer.id} className="my-4 mx-6 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
                     <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
-                      <Link to={offer.slug} className="block shrink-0"> 
+                      {/* <Link to={offer.slug} className="block shrink-0"> 
                         <img src="" className="h-14 w-14 rounded-lg object-cover"/>
-                      </Link>
+                      </Link> */}
             
                         <div>
                           <h3 className="font-medium sm:text-lg">

@@ -8,6 +8,8 @@ const OffersCard = ({ selectedFilters, searchedData }) => {
   const [offers, setOffers] = useState(null)
   const [allOffers, setAllOffers] = useState(null);
 
+  console.log(offers);
+
 useEffect(() => {
   const fetchOffers = async () => {
     const { data, error } = await supabase
@@ -102,9 +104,9 @@ useEffect(() => {
       
                     <p className="hidden sm:block sm:text-xs sm:text-gray-500">
                         Публикувано от 
-                      <a href="#" className="ml-1 font-medium underline hover:text-gray-700">
-                        {offer.author}
-                      </a>
+                        <Link to={`/company/${offer.author_id}`} className="ml-1 font-medium underline hover:text-gray-700">
+                              {offer.author}
+                        </Link>
                     </p>            
                 </div>
               </div>
