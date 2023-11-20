@@ -71,7 +71,6 @@ const CompanyPage = () => {
       }
     }
   };
-  
 
   const handleEditClick = () => {
     setIsEditing(!isEditing);
@@ -108,9 +107,22 @@ const CompanyPage = () => {
       console.error('Error saving info:', error);
     } else {
       setIsInfoEditing(false);
+      // Fetch user data again after saving
+      fetchUserData(lastPath);
     }
   };
 
+  const fetchUserData = async (path) => {
+    const { data: users, error } = await supabase
+      .from('users')
+      .select()
+      .eq('id', path);
+
+    if (users && users.length > 0) {
+      setUser(users[0]);
+    }
+  };
+  
   const handleSaveClick = async () => {
     // Implement code to save editedText to the Supabase database
     // Here, we are assuming a "posts" table in your database
@@ -156,8 +168,7 @@ const CompanyPage = () => {
   useEffect(() => {
     const paths = window.location.pathname.split("/").filter(entry => entry !== "");
     const lastPath = paths[paths.length - 1];
-      // Update lastPath once it's properly determined
-      setLastPath(lastPath);
+    setLastPath(lastPath);
 
     const fetchUser = async () => {
       const { data: users, error } = await supabase
@@ -172,9 +183,7 @@ const CompanyPage = () => {
     };
 
     fetchUser();
-  }, [lastPath
-  // , user // this fixes the info section edit but make like 100 requests every seconds  
-  ]);
+  }, [lastPath]);
   
   const fetchAllOffers = async (user) => {
     const { data, error } = await supabase
@@ -425,9 +434,10 @@ const CompanyPage = () => {
                             </Link>
                           </h3>
             
-                          <p className="line-clamp-2 text-sm text-gray-700">
-                            {offer.summary}
+                          <p className="line-clamp-2 text-sm text-gray-700" 
+                            dangerouslySetInnerHTML={{ __html: offer.summary }}>
                           </p>
+
             
                           <div className="mt-2 sm:flex sm:items-center sm:gap-2">
 
@@ -459,7 +469,7 @@ const CompanyPage = () => {
                   </div>
                   
                   <div className="flex justify-end">
-                    <Link to={offer.slug} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
+                    <Link to={`/offers/${offer.slug}`} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
                       Свържи се
                     </Link>
                   </div>
