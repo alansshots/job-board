@@ -30,7 +30,8 @@ const CompanyPage = () => {
   
   const handleImageChange = async (event) => {
     const image = event.target.files[0];
-  
+    setSelectedImage(image);
+    
     if (image) {
       try {
         // Upload the image to Supabase Storage
@@ -221,30 +222,31 @@ const CompanyPage = () => {
                     src={user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     alt="Profile"
                     style={{
-                      cursor:"pointer",
+                      cursor: loggedInUser.id === user.id ? "pointer" : "default",
                       width: '100%',
                       height: '100%',
                       objectFit: 'cover',
                       objectPosition: 'center',
-                      filter: isHovered ? 'blur(2px)' : 'none',
+                      filter: isHovered && loggedInUser.id === user.id ? 'blur(2px)' : 'none',
                       transition: 'filter 0.3s ease',
                     }}
                   />
-                  {isHovered && (
+                  {isHovered && loggedInUser.id === user.id ? (
                     <div
                       style={{
-                        cursor:"pointer",
-                        position: 'absolute',
-                        top: '50%',
-                        left: '50%',
-                        transform: 'translate(-50%, -50%)',
+                        cursor: "pointer",
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
                       }}
                     >
                       <Edit size={30} color="white" />
                     </div>
-                  )}
+                  ) : null}
                 </div>
               </label>
+              { loggedInUser.id === user.id && (
                 <input
                   id="profile-pic-upload"
                   type="file"
@@ -252,6 +254,7 @@ const CompanyPage = () => {
                   onChange={handleImageChange}
                   style={{ display: 'none' }}
                 />
+              )}
                 <div className="flex items-center space-x-2 mt-2">
                     <p className="text-2xl font-semibold">{user.company_name}</p>
                     <span className="bg-blue-500 rounded-full p-1" title="Verified">

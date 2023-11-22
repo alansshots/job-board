@@ -62,7 +62,7 @@ const LatestJobs = () => {
                                 <img className='rounded-full w-10 h-10' src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png" alt="" />
                           </a> */}
                           <div>
-                            <a href="" className='text-[#0146b1] text-sm ml-0.5'>{offer.author}</a>
+                            <Link to={`/company/${offer.author_id}`} className='text-[#0146b1] text-sm ml-0.5'>{offer.author}</Link>
                           </div>
                         </div>
 
