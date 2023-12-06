@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ck.ck-dropdown .ck-dropdown__arrow {
+    pointer-events: none;
+    z-index: auto !important;
+  }

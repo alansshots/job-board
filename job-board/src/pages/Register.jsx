@@ -15,6 +15,18 @@ const Register = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
 
   async function submitUserData() {
+    const handleEmailChange = (e) => {
+      const inputEmail = e.target.value;
+      setEmail(inputEmail);
+    
+      // Basic email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const isValidEmail = emailRegex.test(inputEmail);
+    
+      // Set an error message based on email validity
+      setEmailError(isValidEmail ? '' : 'Invalid email address');
+    };
+
 
     if(password == confirmPassword) {
     const { error } = await supabase.auth.signUp(
@@ -117,6 +129,7 @@ const Register = () => {
                   name="email"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   value={email} onInput={e => setEmail(e.target.value)}
+                  onChange={submitUserData.handleEmailChange}
                 />
               </div>
               

@@ -6,6 +6,7 @@ import RegistrationSuccess from './RegistrationSuccess';
 import RegistrationFailure from './RegistrationFailure';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import Select from 'react-select';
 
 const AddOffer = () => {
   const navigate = useNavigate();
@@ -15,6 +16,79 @@ const AddOffer = () => {
   const [industry, setIndustry] = useState("");
   const [location, setLocation] = useState("");
   const [content, setContent] = useState("");
+
+  const bulgarianCities = [
+    'София-Град',
+    'София',
+    'Пловдив',
+    'Варна',
+    'Бургас',
+    'Русе',
+    'Стара Загора',
+    'Плевен',
+    'Сливен',
+    'Пазарджик',
+    'Перник',
+    'Добрич',
+    'Шумен',
+    'Велико Търново',
+    'Хасково',
+    'Благоевград',
+    'Ямбол',
+    'Враца',
+    'Кюстендил',
+    'Габрово',
+    'Търговище',
+    'Кърджали',
+    'Видин',
+    'Разград',
+    'Силистра',
+    'Ловеч',
+    'Монтана',
+    'Смолян'
+  ];
+
+  const industryOptionsList = [
+    'Хотелиерство', 
+    'Ресторантьорство', 
+    'Търговия', 
+    'Друг'
+  ];
+
+
+  const options = bulgarianCities.map((city) => ({ value: city, label: city }));
+  const industryOptions = industryOptionsList.map((industry) => ({ value: industry, label: industry }));
+
+  const handleCityChange = (selectedOption) => {
+    setLocation(selectedOption.value);
+  };
+
+  const handleIndustryChange = (selectedOption) => {
+    setIndustry(selectedOption.value); 
+  };
+
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      
+      border: '1px solid #e2e8f0', // border color
+      borderRadius: '0.375rem', // border radius
+      backgroundColor: 'white', // background color
+      padding: '0rem', // padding
+      boxShadow: state.isFocused ? '0 0 0 2px #2563eb' : null, // focus shadow
+      '&:hover': {
+        borderColor: state.isFocused ? '#2563eb' : '#a0aec0',
+      },
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isSelected ? '#4299e1' : 'white', // selected background color
+      color: state.isSelected ? 'white' : '#1a202c',
+      '&:hover': {
+        backgroundColor: '#ebf4ff', // Change this to the desired hover background color
+      },
+    }),
+  };
 
   // const [currentUser, setCurrentUser] = useState("");
   const [userId, setUserId] = useState(null);
@@ -236,39 +310,43 @@ const AddOffer = () => {
       </div> */}
 
       <div className='mt-4'>
-        <h3 className='mb-2 font-semibold'>Бранш</h3>
+        <div>
+          <h3 className='mb-2 font-semibold'>Бранш</h3>
 
-        <select
-          value={industry} onInput={e => setIndustry(e.target.value)}
-          name="HeadlineAct"
-          id="HeadlineAct"
-          placeholder='Mоля изберете бранш'
-          className="mt-1.5 w-full rounded-lg bg-white border-gray-100 text-gray-700 shadow-sm sm:text-sm"
-        >
-          <option value="">Моля изберете бранш</option>
-          <option value="Хотелиерство">Хотелиерство</option>
-          <option value="Ресторантьорство">Ресторантьорство</option>
-          <option value="Търговия">Търговия</option>
-          <option value="Друг">Друг</option>
-        </select>
+          <label
+            htmlFor="Industry"
+            // className="relative block overflow-hidden rounded-md border border-gray-100 bg-white px-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <Select
+                id="Industry"
+                value={industryOptions.find(option => option.value === industry)}
+                onChange={handleIndustryChange} 
+                options={industryOptions} 
+                placeholder="Избор..."
+                styles={customStyles}
+              />
+          </label>
 
+        </div>
       </div>
 
       <div className='mt-4'>
         <div>
           <h3 className='mb-2 font-semibold'>Локация</h3>
           <div>
+
             <label
-              htmlFor="Salary"
-              className="relative block overflow-hidden rounded-md border border-gray-100 bg-white px-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+              htmlFor="City"
+              // className="relative block overflow-hidden rounded-md border border-gray-100 bg-white px-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
             >
-              <input
-              value={location} onInput={e => setLocation(e.target.value)}
-                type="text"
-                id="Salary"
-                placeholder="Моля въведете населено място..."
-                className="peer h-8 w-full border-none bg-transparent p-0 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
-              />
+              <Select
+              id="City"
+              value={options.find(option => option.value === location)}
+              onChange={handleCityChange}
+              options={options}
+              placeholder="Избoр..."
+              styles={customStyles}
+            />
             </label>
 
           </div>
