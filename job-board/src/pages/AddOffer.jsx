@@ -17,6 +17,17 @@ const AddOffer = () => {
   const [location, setLocation] = useState("");
   const [content, setContent] = useState("");
 
+  const typesOfXPList= [
+    'Без опит',
+    '3 месеца',
+    '6 месеца',
+    '1 година',
+    '2 години',
+    'Над 2 години',
+    'Над 5 години',
+    'Над 10 години',
+  ]
+
   const bulgarianCities = [
     'София-Град',
     'София',
@@ -56,8 +67,11 @@ const AddOffer = () => {
   ];
 
 
-  const options = bulgarianCities.map((city) => ({ value: city, label: city }));
+  const optionsCities = bulgarianCities.map((city) => ({ value: city, label: city }));
   const industryOptions = industryOptionsList.map((industry) => ({ value: industry, label: industry }));
+  const XPOptions = typesOfXPList.map((xp) => ({ value: xp, label: xp }));
+
+  //console.log(optionsCities, industryOptions, XPOptions);
 
   const handleCityChange = (selectedOption) => {
     setLocation(selectedOption.value);
@@ -65,7 +79,14 @@ const AddOffer = () => {
 
   const handleIndustryChange = (selectedOption) => {
     setIndustry(selectedOption.value); 
+    console.log(industry);
   };
+
+  const handleXPChange = (selectedOption) => {
+    setExperience(selectedOption.value);
+    console.log(experience)
+  };
+  
 
   const customStyles = {
     control: (provided, state) => ({
@@ -124,9 +145,10 @@ const AddOffer = () => {
       // Then, fetch user data from the database
       fetchUser();
     }
-  }, [jwt, userId]);  // Added userId as a dependency
+  }, [jwt, userId, location, experience, industry]);  // Added userId as a dependency
 
   async function submitNewOffer() {
+    console.log(experience, industry, location)
     // getUserData()
     const date = new Date().toLocaleDateString();
     const { data, error } = await supabase
@@ -140,9 +162,9 @@ const AddOffer = () => {
         phone: user.phone,
         email: user.email,
         salary: salary,
-        experience: experience,
-        industry: industry,
-        location: location,
+        experience: experience, ///
+        industry: industry, ///
+        location: location, ///
         content: content,
         author_id: user.id
       },
@@ -211,25 +233,21 @@ const AddOffer = () => {
 
         <h3 className='mb-2 text-md font-semibold'>Опит</h3>
 
-        <select
-          value={experience} onInput={e => setExperience(e.target.value)}
-          name="HeadlineAct"
-          id="HeadlineAct"
-          placeholder='Mоля изберете период'
-          className="mt-1.5 w-full rounded-lg bg-white border-gray-100 text-gray-700 shadow-sm sm:text-sm"
-        >
-          <option value="">Моля изберете период</option>
-          <option value="Без опит">Без опит</option>
-          <option value="3 месеца">3 месеца</option>
-          <option value="6 месеца">6 месеца</option>
-          <option value="1 година">1 година</option>
-          <option value="2 години">2 години</option>
-          <option value="Над 2 години">Над 2 години</option>
-          <option value="Над 5 години">Над 5 години</option>
-          <option value="Над 10 години">Над 10 години</option>
-        </select>
+        <label
+            htmlFor="Experience"
+            // className="relative block overflow-hidden rounded-md border border-gray-100 bg-white px-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
+          >
+            <Select
+                id="Experience"
+                onInput={e => setExperience(e.target.value)}
+                value={console.log(XPOptions.value)}
+                onChange={handleXPChange} 
+                options={XPOptions} 
+                placeholder="Избор..."
+                styles={customStyles}
+            />
+          </label>
       </div>
-
       </div>
 
       {/* <div className='mt-5'>
@@ -324,7 +342,7 @@ const AddOffer = () => {
                 options={industryOptions} 
                 placeholder="Избор..."
                 styles={customStyles}
-              />
+            />
           </label>
 
         </div>
@@ -340,13 +358,13 @@ const AddOffer = () => {
               // className="relative block overflow-hidden rounded-md border border-gray-100 bg-white px-3 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600"
             >
               <Select
-              id="City"
-              value={options.find(option => option.value === location)}
-              onChange={handleCityChange}
-              options={options}
-              placeholder="Избoр..."
-              styles={customStyles}
-            />
+                  id="City"
+                  value={optionsCities.find(option => option.value === location)}
+                  onChange={handleCityChange}
+                  options={optionsCities}
+                  placeholder="Избoр..."
+                  styles={customStyles}
+              />
             </label>
 
           </div>
