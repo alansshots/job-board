@@ -315,7 +315,7 @@ const CompanyPage = () => {
                   <li className="flex border-b py-2">
                     <span className="font-bold w-24">Дата на основаване:</span>
                     <input
-                      type="text"
+                      type="date"
                       value={editedInfo.created_at}
                       onChange={(e) => setEditedInfo({ ...editedInfo, created_at: e.target.value })}
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
@@ -333,7 +333,7 @@ const CompanyPage = () => {
                   <li className="flex border-b py-2">
                     <span className="font-bold w-24">Email:</span>
                     <input
-                      type="text"
+                      type="email"
                       value={editedInfo.email}
                       onChange={(e) => setEditedInfo({ ...editedInfo, email: e.target.value })}
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"

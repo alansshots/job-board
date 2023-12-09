@@ -219,7 +219,7 @@ const AddOffer = () => {
             >
               <input
                 value={salary} onInput={e => setSalary(e.target.value)}
-                type="text"
+                type="number"
                 id="Salary"
                 placeholder="Моля въведете брутно или нетно възнаграждение..."
                 className="peer h-8 w-full border-none bg-transparent p-0 focus:border-transparent focus:outline-none focus:ring-0 sm:text-sm"
@@ -250,7 +250,7 @@ const AddOffer = () => {
       </div>
       </div>
 
-      {/* <div className='mt-5'>
+       {/* <div className='mt-5'>
         <div>
           <h3 className='mb-2 font-semibold'>Бранш</h3>
           <fieldset className="grid grid-cols-2 gap-4">
@@ -325,7 +325,7 @@ const AddOffer = () => {
           </div>
         </fieldset>
         </div>
-      </div> */}
+      </div>  */}
 
       <div className='mt-4'>
         <div>
