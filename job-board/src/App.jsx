@@ -18,6 +18,8 @@ import AddOffer from "./pages/AddOffer";
 import Login from "./pages/Login"
 import Register from "./pages/Register";
 
+import NotFound from "./pages/NotFound";
+
 import './App.css'
 
 function App() {
@@ -36,7 +38,7 @@ function App() {
           <Route path='/company/:slug' element={<CompanyPage/>}/>
           <Route path='/company/offers/:slug' element={<OfferPage/>} />
           <Route path='/company/:slug/addOffer' element={<AddOffer/>} />
-
+          <Route path='*' element={<NotFound />} />
       </Routes>
       <Footer/>
     </div>

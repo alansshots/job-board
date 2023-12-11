@@ -11,19 +11,19 @@ const Footer = () => {
                     <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
                     <li>
                         <a href="#" className="text-gray-500 transition hover:opacity-75">
-                        Условия за ползване
+                        {/* Условия за ползване */}
                         </a>
                     </li>
 
                     <li>
                         <a href="#" className="text-gray-500 transition hover:opacity-75">
-                        Политика за защита на личните данни
+                        {/* Политика за защита на личните данни */}
                         </a>
                     </li>
 
                     <li>
                         <a href="#" className="text-gray-500 transition hover:opacity-75">
-                         Други
+                         {/* Други */}
                         </a>
                     </li>
                     </ul>
