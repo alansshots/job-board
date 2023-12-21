@@ -8,7 +8,7 @@ const OffersCard = ({ selectedFilters, searchedData }) => {
   const [offers, setOffers] = useState(null)
   const [allOffers, setAllOffers] = useState(null);
 
-  console.log(offers);
+  // console.log(offers);
 
 useEffect(() => {
   const fetchOffers = async () => {
@@ -22,6 +22,8 @@ useEffect(() => {
       }
       
       if (data) {
+        console.log("****Data was fetched!****");
+        console.log(data);
         setAllOffers(data);
         setOffers(data);
         setFetchError(null)

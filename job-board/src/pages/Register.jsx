@@ -9,23 +9,26 @@ const Register = () => {
   const navigate = useNavigate();
   const [newRegistration, setNewRegistration] = useState(null);
   const [companyName, setCompanyName] = useState("");
+  const [companyNumber, setCompanyNumber] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  
+
   async function submitUserData() {
-    const handleEmailChange = (e) => {
-      const inputEmail = e.target.value;
-      setEmail(inputEmail);
+    // const handleEmailChange = (e) => {
+    //   const inputEmail = e.target.value;
+    //   setEmail(inputEmail);
     
-      // Basic email validation
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const isValidEmail = emailRegex.test(inputEmail);
+    //   // Basic email validation
+    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    //   const isValidEmail = emailRegex.test(inputEmail);
     
-      // Set an error message based on email validity
-      setEmailError(isValidEmail ? '' : 'Invalid email address');
-    };
+    //   // Set an error message based on email validity
+    //   setEmailError(isValidEmail ? '' : 'Invalid email address');
+    // };
 
 
     if(password == confirmPassword) {
@@ -36,7 +39,8 @@ const Register = () => {
         options: {
           data: {
             company_name: companyName,
-            phone: phone
+            phone: phone,
+            company_number: companyNumber
           }
         }
       }
@@ -44,6 +48,7 @@ const Register = () => {
 
     if(error){
       setNewRegistration(false);
+      console.log(error)
     } else {
       setNewRegistration(true); 
     }
@@ -115,6 +120,20 @@ const Register = () => {
                   name="company_name"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   value={companyName} onInput={e => setCompanyName(e.target.value)}
+                />
+              </div>
+
+              <div className="col-span-6">
+                <label htmlFor="companyNumber" className="block text-sm font-medium text-gray-700">
+                  ЕИК Нормер на Компания
+                </label>
+
+                <input
+                  type="number"
+                  id="companyNumber"
+                  name="company_number"
+                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  value={companyNumber} onInput={e => setCompanyNumber(e.target.value)}
                 />
               </div>
 
