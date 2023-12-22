@@ -45,5 +45,9 @@
     "react-error-overlay": "^6.0.9",
     "tailwindcss": "^3.3.1",
     "vite": "^4.2.0"
+  },
+  "engines": {
+    "node": "14.0" 
   }
+  
 }
