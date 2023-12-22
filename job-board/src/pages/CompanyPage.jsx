@@ -44,7 +44,7 @@ const CompanyPage = () => {
         }
   
         // Log the structure of the uploadData object
-        console.log('Upload Data:', uploadData);
+        // console.log('Upload Data:', uploadData);
   
         // Get the URL of the uploaded image
         const imageUrl = await supabase.storage
@@ -54,7 +54,7 @@ const CompanyPage = () => {
         if (!imageUrl) {
           throw new Error('Image URL is null or undefined');
         }
-  
+        
         // Update the user's record in the database with the new image URL
         const { data: updateData, error: updateError } = await supabase
           .from('users')
@@ -64,8 +64,7 @@ const CompanyPage = () => {
         if (updateError) {
           throw new Error(`Error updating user record: ${updateError.message}`);
         }
-  
-        console.log('User record updated successfully:', updateData);
+
         setSelectedImage(imageUrl.data.publicUrl);
       } catch (error) {
         console.error(error.message);
@@ -219,7 +218,7 @@ const CompanyPage = () => {
                   onMouseLeave={() => setIsHovered(false)}
                 >
                   <img
-                    src={user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
+                    src={selectedImage || user.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}
                     alt="Profile"
                     style={{
                       cursor: loggedInUser.id === user.id ? "pointer" : "default",
@@ -312,16 +311,7 @@ const CompanyPage = () => {
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
                     />
                   </li>
-                  <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Дата на основаване:</span>
-                    <input
-                      type="date"
-                      value={editedInfo.created_at}
-                      onChange={(e) => setEditedInfo({ ...editedInfo, created_at: e.target.value })}
-                      className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
-                    />
-                  </li>
-                  <li className="flex border-b py-2">
+                  {/* <li className="flex border-b py-2">
                     <span className="font-bold w-24">Телефон:</span>
                     <input
                       type="text"
@@ -329,7 +319,7 @@ const CompanyPage = () => {
                       onChange={(e) => setEditedInfo({ ...editedInfo, phone: e.target.value })}
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
                     />
-                  </li>
+                  </li> */}
                   <li className="flex border-b py-2">
                     <span className="font-bold w-24">Email:</span>
                     <input
@@ -356,10 +346,10 @@ const CompanyPage = () => {
                         <span className="font-bold w-24">Бранш:</span>
                         <span className="text-gray-700">{user.industry}</span>
                       </li>
-                      <li className="flex border-b py-2">
+                      {/* <li className="flex border-b py-2">
                         <span className="font-bold w-24">Дата на основаване:</span>
                         <span className="text-gray-700">{user.created_at}</span>
-                      </li>
+                      </li> */}
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Телефон:</span>
                         <span className="text-gray-700">+359 {user.phone}</span>

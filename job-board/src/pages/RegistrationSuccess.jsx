@@ -4,7 +4,7 @@ import { XCircle, CheckCircle } from 'react-feather';
 const RegistrationSuccess = () => {
   return (
     <>
-        <div role="alert" className="duration-200  rounded-xl border border-gray-100 bg-white p-4 shadow-xl max-w-xl absolute top-0">
+        <div role="alert" className="sticky z-10 duration-200 rounded-xl border border-gray-100 bg-white p-4 shadow-xl max-w-xl absolute top-0">
         <div className="flex items-start gap-4">
             <span className="text-green-600">
             <CheckCircle/>

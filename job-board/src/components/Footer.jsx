@@ -22,8 +22,8 @@ const Footer = () => {
                     </li>
 
                     <li>
-                        <a href="#" className="text-gray-500 transition hover:opacity-75">
-                         {/* Други */}
+                        <a className="text-gray-500 transition hover:opacity-75">
+                            Разработено от <a href="http://colorblockweb.com/" target='_blank' className='font-semibold'>Colorblock</a>
                         </a>
                     </li>
                     </ul>
