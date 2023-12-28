@@ -48,9 +48,15 @@ const Register = () => {
 
     if(error){
       setNewRegistration(false);
-      console.log(error)
+      // console.log(error)
+      setTimeout(() => {
+        setNewRegistration(null);
+      }, 5000);
     } else {
       setNewRegistration(true); 
+      setTimeout(() => {
+        setNewRegistration(null);
+      }, 5000);
     }
     // Make a succes route and page to inform user to confirm registration by clicking a link in his/her email 
   }

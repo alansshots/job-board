@@ -48,6 +48,7 @@ const Navbar = () => {
     setUser(null);
     localStorage.setItem('accessToken', null);
     navigate('/');
+    window.location.reload();
   }
 
   return (
@@ -114,7 +115,7 @@ const Navbar = () => {
               <>
                 <NavLink to='/register' className='mx-1'>
                   <button className='bg-[#0146b1] text-white py-2 px-4 rounded-2xl duration-100 hover:scale-105'>
-                    Регистрация
+                    Регистрация за Фирми
                   </button>
                 </NavLink>
                 <NavLink to='/login' className='mx-1'>

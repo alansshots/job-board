@@ -17,6 +17,7 @@ import AddOffer from "./pages/AddOffer";
 
 import Login from "./pages/Login"
 import Register from "./pages/Register";
+import RegisterConfirmation from "./pages/RegisterConfirmation";
 
 import NotFound from "./pages/NotFound";
 
@@ -34,6 +35,7 @@ function App() {
           <Route path='/blog' element={<Blog/>} />
           <Route path='/blog/:slug' element={<BlogPost/>} />
           <Route path='/register' element={<Register/>} />
+          <Route path='/register-confirmation' element={<RegisterConfirmation/>} />
           <Route path='/login' element={<Login/>} />
           <Route path='/company/:slug' element={<CompanyPage/>}/>
           <Route path='/company/offers/:slug' element={<OfferPage/>} />

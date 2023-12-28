@@ -183,10 +183,10 @@ const AddOffer = () => {
         summary: content,
         phone: user.phone,
         email: user.email,
-        salary: salary,
-        experience: experience, ///
-        industry: industry, ///
-        location: location, ///
+        salary: salary || null,
+        experience: experience, 
+        industry: industry, 
+        location: location, 
         content: content,
         author_id: user.id
       },
@@ -233,7 +233,7 @@ const AddOffer = () => {
 
       <div className='mt-4'>
         <div>
-          <h3 className='mb-2 font-semibold'>Заплата</h3>
+          <h3 className='mb-2 font-semibold'>Заплата <span className='text-xs'>(Полето може да бъде оставено празно)</span></h3>
           <div>
             <label
               htmlFor="Salary"
