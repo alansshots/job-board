@@ -54,8 +54,8 @@ const OfferPage = () => {
   return (
     <>
       {offer && (
-        <div id='OfferPage' className='m-auto max-w-6xl flex flex-row items-start justify-center'>
-          <div className='mt-6 rounded-xl w-9/12'>
+        <div id='OfferPage' className='m-auto max-w-6xl flex flex-col sm:flex-row items-start justify-center'>
+          <div className='mt-6 rounded-xl sm:w-9/12'>
             <div className='bg-white rounded-xl p-6'>
               <h2 className='text-2xl'>{offer.title}</h2>
               <div className="mt-2 sm:flex sm:items-center sm:gap-2">
@@ -96,8 +96,8 @@ const OfferPage = () => {
             </div>
           </div>
       
-          <div className='mt-6 rounded-xl w-1/2'>
-            <div className='bg-white mx-5 flex-col justify-center items-center p-6 rounded-2xl shadow-md'>
+          <div className='mt-6 rounded-xl w-full sm:w-1/2'>
+            <div className='bg-white sm:mx-5 flex-col justify-center items-center p-6 rounded-2xl shadow-md'>
               <div className='mb-2 flex flex-row items-center justify-left'>
                 <img className='rounded-full w-10 h-10'
                  src={offerAuthor.profile_image_url || 'https://cdn.pixabay.com/photo/2014/04/02/10/25/man-303792_1280.png'}

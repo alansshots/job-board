@@ -90,12 +90,12 @@ const Register = () => {
 
           <div className="hidden lg:relative lg:block lg:p-12">
             <h2 className="md:mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
-              Добре дошли LOGO 
+              Добре дошли
             </h2>
 
             <p className="mt-4 leading-relaxed ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
-              dolorum aliquam, quibusdam aperiam voluptatum.
+              Вие сте Компания, Фирма или организния която търси служители, ако това е вярно може да регистрирате
+              акаунт в нащата платформа и да намерите успешно вашия перфектен кандидат.
             </p>
           </div>
         </section>
@@ -105,12 +105,12 @@ const Register = () => {
             <div className="relative -mt-16 block lg:hidden">
 
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl" >
-                Добре дошли LOGO
+                Добре дошли
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-                nam dolorum aliquam, quibusdam aperiam voluptatum.
+              Вие сте Компания, Фирма или организния която търси служители, ако това е вярно може да регистрирате
+              акаунт в нащата платформа и да намерите успешно вашия перфектен кандидат.
               </p>
             </div>
 

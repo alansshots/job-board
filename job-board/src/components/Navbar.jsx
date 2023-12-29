@@ -115,7 +115,7 @@ const Navbar = () => {
               <>
                 <NavLink to='/register' className='mx-1'>
                   <button className='bg-[#0146b1] text-white py-2 px-4 rounded-2xl duration-100 hover:scale-105'>
-                    Регистрация за Фирми
+                    Регистрация
                   </button>
                 </NavLink>
                 <NavLink to='/login' className='mx-1'>

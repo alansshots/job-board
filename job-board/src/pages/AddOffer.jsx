@@ -16,6 +16,7 @@ const AddOffer = () => {
   const [industry, setIndustry] = useState("");
   const [location, setLocation] = useState("");
   const [content, setContent] = useState("");
+  const [errorVisible, setErrorVisible] = useState(false);
 
   const typesOfXPList= [
     'Без опит',
@@ -170,7 +171,15 @@ const AddOffer = () => {
   }, [jwt, userId, location, experience, industry]);  // Added userId as a dependency
 
   async function submitNewOffer() {
-    console.log(experience, industry, location)
+    if (!title || salary === null || !industry || !location) {
+      console.error('Error: Title, salary, industry, and location cannot be null.');
+      // Handle the error state, for example, show an error message to the user
+      setErrorVisible(true);
+      setTimeout(() => {
+        setErrorVisible(false);
+      }, 5000);
+      return;
+    }
     // getUserData()
     const date = new Date().toLocaleDateString();
     const { data, error } = await supabase
@@ -212,7 +221,7 @@ const AddOffer = () => {
 
     <div className='mt-10'>
         <div>
-          <h3 className='mb-2 font-semibold'>Заглавие</h3>
+          <h3 className='mb-2 font-semibold'>Заглавие <span className='text-red-500'>*</span></h3>
           <div>
             <label
               htmlFor="Title"
@@ -253,7 +262,7 @@ const AddOffer = () => {
 
         <div className='mt-4'>
 
-        <h3 className='mb-2 text-md font-semibold'>Опит</h3>
+        <h3 className='mb-2 text-md font-semibold'>Опит <span className='text-red-500'>*</span></h3>
 
         <label
             htmlFor="Experience"
@@ -272,86 +281,9 @@ const AddOffer = () => {
       </div>
       </div>
 
-       {/* <div className='mt-5'>
-        <div>
-          <h3 className='mb-2 font-semibold'>Бранш</h3>
-          <fieldset className="grid grid-cols-2 gap-4">
-
-          <div>
-            <input
-              type="radio"
-              name="DeliveryOption"
-              value="DeliveryStandard"
-              id="DeliveryStandard"
-              className="peer hidden [&:checked_+_label_svg]:block"
-              checked
-            />
-
-            <label
-              htmlhtmlFor="DeliveryStandard"
-              className="block cursor-pointer rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 peer-checked:border-blue-500 peer-checked:ring-1 peer-checked:ring-blue-500"
-            >
-              <div className="flex items-center justify-between">
-                <p className="font-bold text-[#0146b1]">Хотелиерство</p>
-
-                <svg
-                  className="hidden h-5 w-5 text-blue-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-
-              <p className="mt-1 text-gray-700">(Хотели, къщи за гости, къмпинги и други)</p>
-            </label>
-          </div>
-
-          <div>
-            <input
-              type="radio"
-              name="DeliveryOption"
-              value="DeliveryPriority"
-              id="DeliveryPriority"
-              className="peer hidden [&:checked_+_label_svg]:block"
-            />
-
-            <label
-              htmlhtmlFor="DeliveryPriority"
-              className="block cursor-pointer rounded-lg border border-gray-100 bg-white p-4 text-sm font-medium shadow-sm hover:border-gray-200 peer-checked:border-blue-500 peer-checked:ring-1 peer-checked:ring-blue-500"
-            >
-              <div className="flex items-center justify-between">
-                <p className="font-bold text-[#0146b1]">Ресторантьорство</p>
-
-                <svg
-                  className="hidden h-5 w-5 text-blue-600"
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 20 20"
-                  fill="currentColor"
-                >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </div>
-
-              <p className="mt-1 text-gray-700">(Продажба на храни и напитки за консумация)</p>
-            </label>
-          </div>
-        </fieldset>
-        </div>
-      </div>  */}
-
       <div className='mt-4'>
         <div>
-          <h3 className='mb-2 font-semibold'>Бранш</h3>
+          <h3 className='mb-2 font-semibold'>Бранш <span className='text-red-500'>*</span></h3>
 
           <label
             htmlFor="Industry"
@@ -372,7 +304,7 @@ const AddOffer = () => {
 
       <div className='mt-4'>
         <div>
-          <h3 className='mb-2 font-semibold'>Локация</h3>
+          <h3 className='mb-2 font-semibold'>Локация <span className='text-red-500'>*</span></h3>
           <div>
 
             <label
@@ -395,7 +327,7 @@ const AddOffer = () => {
 
 
       <div className='m-auto mt-10'>
-          <h2 className='text-2xl font-semibold'>Oсновно съдаржание</h2>
+          <h2 className='text-2xl font-semibold'>Oсновно съдаржание <span className='text-red-500'>*</span></h2>
       </div>
 
       <div className='m-auto max-w-5xl mt-5 p-4'>
@@ -429,7 +361,9 @@ const AddOffer = () => {
         Публикувай
       </button>
       </div>
-
+      {errorVisible && (
+      <h2 className='text-red-500 mt-2'>Моля попълнете всички задължителни полета отбелязани със * </h2>
+      )}
 
      </div>
     </div>

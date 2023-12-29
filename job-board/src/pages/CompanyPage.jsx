@@ -267,8 +267,8 @@ const CompanyPage = () => {
             </div>
         </div>
 
-        <div className="flex flex-row mt-5">
-          <div className="bg-white rounded-lg shadow-xl p-8 mr-4">
+        <div className="flex flex-col sm:flex-row mt-5">
+          <div className="bg-white rounded-lg shadow-xl p-8 sm:mr-4">
             <div className="flex flex-row justify-between items-center">
               <h4 className="text-xl text-gray-900 font-bold">Кратка информация</h4>
               {loggedInUser.id === user.id && (
@@ -352,7 +352,7 @@ const CompanyPage = () => {
                       </li> */}
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Телефон:</span>
-                        <span className="text-gray-700">+359 {user.phone}</span>
+                        <span className="text-gray-700">{user.phone}</span>
                       </li>
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Email:</span>
@@ -406,7 +406,7 @@ const CompanyPage = () => {
 
         <div className="bg-white rounded-lg shadow-xl mt-4 p-8">
           <h4 className="text-xl text-gray-900 font-bold">Публикувани Обяви</h4>
-          <div className="flex flex-row flex-wrap px-4">
+          <div className="">
               {/* <OffersCard/> */}
           {fetchError && (<p>{fetchError}</p>)}
             {offers && (
@@ -414,7 +414,7 @@ const CompanyPage = () => {
                 <div className="offers-grid">
                   {offers.map(offer => (
 
-                    <article key={offer.id} className="my-4 mx-6 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
+                    <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
                     <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
                       {/* <Link to={offer.slug} className="block shrink-0"> 
                         <img src="" className="h-14 w-14 rounded-lg object-cover"/>
