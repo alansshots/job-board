@@ -11,8 +11,8 @@ const Banner = () => {
       <section className="text-gray-600 body-font m-auto max-w-6xl">
         <div className="container mx-auto flex px-5 py-16 md:flex-row flex-col items-center">
           <div className="lg:flex-grow md:w-1/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
-            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">Намери си постоянна позиция или стаж лесно, бързо и удобно.</h1>
-            <p className="mb-8 leading-relaxed">Намери обяви за работа без регистрация и ненужни запитвания. Търси, филтрирай и разглеждай неограничен брой от обяви.</p>
+            <h1 className="title-font sm:text-4xl text-3xl mb-4 font-semibold text-gray-900">Намери си стажантска позиция лесно, бързо и удобно.</h1>
+            <p className="mb-8 leading-relaxed">Намери обяви за стаж без регистрация и ненужни запитвания. Търси, филтрирай и разглеждай неограничен брой от обяви.</p>
 
             {/* Add in first revision  */}
             {/* <div className='flex flex-row justify-around items-center bg-white rounded-3xl w-full mt-4 mb-10 shadow-md transition duration-200 hover:shadow-xl'>

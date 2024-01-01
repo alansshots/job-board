@@ -7,6 +7,7 @@ const Login = () => {
   const navigate = useNavigate();
   const [email,setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [isValid, setIsValid] = useState(null);
 
   async function signInWithEmail() {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -14,8 +15,12 @@ const Login = () => {
       password: password,
     })
 
-    if(error){
-      console.log(error);
+    if(error){      
+      setIsValid(false)
+      
+      setTimeout(() => {
+        setIsValid(null);
+      }, 10000);
     } else {
       localStorage.setItem('accessToken', data.session.access_token);
       navigate('/');
@@ -31,7 +36,7 @@ const Login = () => {
 
           <div className="hidden lg:relative lg:block lg:p-12">
             <h2 className="md:mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
-              Вход LOGO 
+              Вход 
             </h2>
 
             <p className="mt-4 leading-relaxed ">
@@ -46,7 +51,7 @@ const Login = () => {
             <div className="relative -mt-16 block lg:hidden">
 
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl" >
-                Вход LOGO
+                Вход 
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
@@ -57,7 +62,11 @@ const Login = () => {
 
             <form action="" className="mt-8 grid grid-cols-6 gap-6">
               <div className="col-span-6">
-                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+                {isValid === false && (
+                  <p className="text-red-500 text-sm mt-1">Грешен Email или/и Парола. Моля опитайте отново.</p>
+                )}
+
+                <label htmlFor="Email" className="block text-sm font-semibold text-gray-700">
                   E-mail
                 </label>
 
@@ -71,7 +80,7 @@ const Login = () => {
               </div>
               
               <div className="col-span-6">
-                <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="Password" className="block text-sm font-semibold text-gray-700">
                   Парола
                 </label>
 
@@ -92,8 +101,9 @@ const Login = () => {
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Нямате профил?
                   <Link to="/register" className="text-gray-700 underline mx-0.5">Регистрация</Link>.
+                  {/* Забравена парола? */}
                 </p>
-
+  
               </div>
             </form>
           </div>

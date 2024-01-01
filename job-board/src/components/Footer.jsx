@@ -10,22 +10,22 @@ const Footer = () => {
                 <nav aria-label="Footer Navigation - Support">
                     <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
                     <li>
-                        <a href="#" className="text-gray-500 transition hover:opacity-75">
-                        {/* Условия за ползване */}
+                        <a href="https://policies.google.com/terms" target='_blank' className="text-gray-500 transition hover:opacity-75">
+                        Условия за ползване
                         </a>
                     </li>
 
                     <li>
-                        <a href="#" className="text-gray-500 transition hover:opacity-75">
-                        {/* Политика за защита на личните данни */}
+                        <a href="https://policies.google.com/privacy" target='_blank' className="text-gray-500 transition hover:opacity-75">
+                        Политика за поверителност
                         </a>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <a className="text-gray-500 transition hover:opacity-75">
                             Разработено от <a href="http://colorblockweb.com/" target='_blank' className='font-semibold'>Colorblock</a>
                         </a>
-                    </li>
+                    </li> */}
                     </ul>
                 </nav>
 

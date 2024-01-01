@@ -10,28 +10,35 @@ const Register = () => {
   const [newRegistration, setNewRegistration] = useState(null);
   const [companyName, setCompanyName] = useState("");
   const [companyNumber, setCompanyNumber] = useState("");
+  const [vatIsValid, setVatIsValid] = useState(null);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneIsValid, setPhoneIsValid] = useState(null);
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  
+  const checkVatNumberFormat = () => {
+    const vatNumberRegex = /^(BG)?\d{9,10}$/;
+
+    if (vatNumberRegex.test(companyNumber)) {
+      setVatIsValid(true);
+    } else {
+      setVatIsValid(false);
+    }
+  };
+
+  const checkPhoneNumber = () => {
+    const phoneNumberRegex = /^(?:\+359|0|359)?(?:8[789]\d{1}|\d{9})$/;
+
+    if (phoneNumberRegex.test(phone)) {
+      setPhoneIsValid(true);
+    } else {
+      setPhoneIsValid(false);
+    }
+  }
 
   async function submitUserData() {
-    // const handleEmailChange = (e) => {
-    //   const inputEmail = e.target.value;
-    //   setEmail(inputEmail);
-    
-    //   // Basic email validation
-    //   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    //   const isValidEmail = emailRegex.test(inputEmail);
-    
-    //   // Set an error message based on email validity
-    //   setEmailError(isValidEmail ? '' : 'Invalid email address');
-    // };
-
-
-    if(password == confirmPassword) {
+    if(password == confirmPassword && vatIsValid == true) {
     const { error } = await supabase.auth.signUp(
       {
         email: email,
@@ -80,6 +87,7 @@ const Register = () => {
                   <RegistrationFailure/>
               </>
            );
+
       }
     })()}
 
@@ -90,12 +98,11 @@ const Register = () => {
 
           <div className="hidden lg:relative lg:block lg:p-12">
             <h2 className="md:mt-6 text-2xl font-bold text-[#0146b1] sm:text-3xl md:text-4xl">
-              Добре дошли
+              Добре дошли!
             </h2>
 
             <p className="mt-4 leading-relaxed ">
-              Вие сте Компания, Фирма или организния която търси служители, ако това е вярно може да регистрирате
-              акаунт в нащата платформа и да намерите успешно вашия перфектен кандидат.
+              Ако сте компания, фирма или организация, търсеща служители, можете да създадете акаунт в нашата платформа и успешно да намерите перфектния кандидат за вашия екип.
             </p>
           </div>
         </section>
@@ -105,18 +112,17 @@ const Register = () => {
             <div className="relative -mt-16 block lg:hidden">
 
               <h1 className="mt-2 text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl" >
-                Добре дошли
+                Добре дошли!
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-              Вие сте Компания, Фирма или организния която търси служители, ако това е вярно може да регистрирате
-              акаунт в нащата платформа и да намерите успешно вашия перфектен кандидат.
+                Ако сте компания, фирма или организация, търсеща служители, можете да създадете акаунт в нашата платформа и успешно да намерите перфектния кандидат за вашия екип.
               </p>
             </div>
 
             <form action="" className="mt-8 grid grid-cols-6 gap-6">
             <div className="col-span-6">
-                <label htmlFor="companyName" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="companyName" className="block text-sm font-semibold text-gray-700">
                   Име на Компания
                 </label>
 
@@ -130,21 +136,30 @@ const Register = () => {
               </div>
 
               <div className="col-span-6">
-                <label htmlFor="companyNumber" className="block text-sm font-medium text-gray-700">
-                  ЕИК Нормер на Компания
+                <label htmlFor="companyNumber" className="block text-sm font-semibold text-gray-700">
+                ЕИК/БУЛСТАТ Нормер на Компания
                 </label>
 
                 <input
                   type="number"
                   id="companyNumber"
                   name="company_number"
-                  className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+                  // className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   value={companyNumber} onInput={e => setCompanyNumber(e.target.value)}
+                  className={`mt-1 w-full rounded-md border ${vatIsValid === false ? 'border-red-500' : 'border-gray-200'} bg-white text-sm text-gray-700 shadow-sm`}
+                  onBlur={checkVatNumberFormat}
                 />
+
+                {vatIsValid === false && (
+                  <p className="text-red-500 text-sm mt-1">Невалиден ЕИК/БУЛСТАТ номер</p>
+                )}
+                {vatIsValid === true && (
+                  <p className="text-green-500 text-sm mt-1">Валиден ЕИК/БУЛСТАТ номер</p>
+                )}
               </div>
 
               <div className="col-span-6">
-                <label htmlFor="Email" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="Email" className="block text-sm font-semibold  text-gray-700">
                   E-mail
                 </label>
 
@@ -159,7 +174,7 @@ const Register = () => {
               </div>
               
               <div className="col-span-6">
-                <label htmlFor="Phone" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="Phone" className="block text-sm font-semibold text-gray-700">
                   Тел. Номер
                 </label>
 
@@ -169,12 +184,19 @@ const Register = () => {
                   name="phone"
                   className="mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
                   value={phone} onInput={e => setPhone(e.target.value)}
+                  lassName={`mt-1 w-full rounded-md border ${phoneIsValid === false ? 'border-red-500' : 'border-gray-200'} bg-white text-sm text-gray-700 shadow-sm`}
+                  onBlur={checkPhoneNumber}
                 />
+
+                {phoneIsValid == false && (
+                  <p className="text-red-500 text-sm mt-1">Невалиден тел. номер</p>
+                )}
+
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="Password" className="block text-sm font-medium text-gray-700">
-                  Парола
+                <label htmlFor="Password" className="block text-sm font-semibold text-gray-700">
+                  Парола <span className='text-xs font-medium'>(поне 6 символа)</span>
                 </label>
 
                 <input
@@ -187,7 +209,7 @@ const Register = () => {
               </div>
 
               <div className="col-span-6 sm:col-span-3">
-                <label htmlFor="passwordConfirmation" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="passwordConfirmation" className="block text-sm font-semibold text-gray-700">
                   Потвърди парола
                 </label>
 
@@ -218,10 +240,11 @@ const Register = () => {
 
               <div className="col-span-6">
                 <p className="text-sm text-gray-500">
-                Със създаването на акаунт се съгласявате с нашите
-                  <a href="#" className="text-gray-700 underline mx-0.5">общи условия</a>
+                Със създаването на акаунт се съгласявате с
+                  <a href="https://policies.google.com/privacy" className="text-gray-700 underline mx-0.5"> Политиката за поверителност </a>
                   и
-                  <a href="#" className="text-gray-700 underline  mx-0.5">политика за поверителност</a>.
+                  <a href="https://policies.google.com/terms" className="text-gray-700 underline  mx-0.5"> Общите условия </a>
+                  на Google. 
                 </p>
               </div>
 
