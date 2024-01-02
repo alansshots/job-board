@@ -94,7 +94,7 @@ useEffect(() => {
                       )
                       }
 
-                      <span className= "ml-0.5  whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                      <span className= "ml-0.5 whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                       {offer.experience} 
                       </span>
       

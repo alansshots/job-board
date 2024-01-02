@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <div>
         <footer aria-label="Site Footer" className="bg-gray-100">
-            <div className="max-w-4xl px-4 pt-16 pb-8 mx-auto sm:px-6 lg:px-8 lg:pt-4">
+            <div className="max-w-4xl px-4 pt-10 pb-8 mx-auto sm:px-6 lg:px-8 lg:pt-4">
                 <div className="pt-8 border-t border-gray-300 sm:flex sm:items-center sm:justify-between lg:mt-16">
                 <nav aria-label="Footer Navigation - Support">
                     <ul className="flex flex-wrap justify-center gap-4 text-xs lg:justify-end">
@@ -21,11 +21,11 @@ const Footer = () => {
                         </a>
                     </li>
 
-                    {/* <li>
+                    <li>
                         <a className="text-gray-500 transition hover:opacity-75">
-                            Разработено от <a href="http://colorblockweb.com/" target='_blank' className='font-semibold'>Colorblock</a>
+                           
                         </a>
-                    </li> */}
+                    </li>
                     </ul>
                 </nav>
 

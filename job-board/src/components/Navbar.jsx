@@ -51,7 +51,7 @@ const Navbar = () => {
   }
 
   return (
-    <div className='bg-white shadow-xl'>
+    <div className='bg-white shadow-xl py-1'>
       <div id='Navbar' className='bg-white m-auto max-w-6xl flex sm:flex-row items-center justify-between flex-row-reverse'>
         {/* Logo */}
         <div className=''>

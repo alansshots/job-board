@@ -40,8 +40,7 @@ const Login = () => {
             </h2>
 
             <p className="mt-4 leading-relaxed ">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi nam
-              dolorum aliquam, quibusdam aperiam voluptatum.
+            Радваме се да ви видим отново! Влезте в акаунта си сега!
             </p>
           </div>
         </section>
@@ -55,8 +54,7 @@ const Login = () => {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eligendi
-                nam dolorum aliquam, quibusdam aperiam voluptatum.
+                Радваме се да ви видим отново! Влезте в акаунта си сега!
               </p>
             </div>
 

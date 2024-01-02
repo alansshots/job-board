@@ -1,4 +1,5 @@
 import React from 'react'
+import ScrollToTop from '../components/ScrollToTop';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Edit, CheckSquare } from 'react-feather';
@@ -204,6 +205,7 @@ const CompanyPage = () => {
 
   return (
     <div id="CompanyPage" className="m-auto mt-10 max-w-6xl">
+      <ScrollToTop/>
         <div className="bg-white rounded-lg shadow-xl pb-8">
             <div className="w-full h-[250px]">
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
@@ -422,7 +424,7 @@ const CompanyPage = () => {
             
                         <div>
                           <h3 className="font-medium sm:text-lg">
-                            <Link to={offer.slug} href="#" className="hover:underline">
+                            <Link to={`/offers/${offer.slug}`}  className="hover:underline">
                             {offer.title}
                             </Link>
                           </h3>
@@ -441,7 +443,7 @@ const CompanyPage = () => {
                             )
                             }
 
-                            <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
+                            <span className="ml-0.5 whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-xs text-white" >
                             {offer.experience} 
                             </span>
             
