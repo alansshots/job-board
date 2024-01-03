@@ -55,8 +55,9 @@ const Navbar = () => {
       <div id='Navbar' className='bg-white m-auto max-w-6xl flex sm:flex-row items-center justify-between flex-row-reverse'>
         {/* Logo */}
         <div className=''>
-          <Link to='/'>
-            <img src="./src/assets/logo.png" className='w-60 my-0.5' alt="logo" />
+          <Link to='/' className='bg-[#0146b1] text-white text-sm sm:text-lg mr-0.5 py-2 px-2 sm:px-4 font-bold rounded-tl-2xl rounded-br-2xl rounded-tr-sm rounded-bl-sm'>
+            {/* <img src="./src/assets/logo.png" className='w-60 my-0.5' alt="logo" /> */}
+            Stazhant.com
           </Link>
         </div>
 
@@ -113,12 +114,12 @@ const Navbar = () => {
             {!jwt || !user ? (
               <>
                 <NavLink to='/register' className='mx-1'>
-                  <button className='bg-[#0146b1] text-white py-2 px-4 rounded-2xl duration-100 hover:scale-105'>
+                  <button className='bg-[#0146b1] text-white py-1 sm:py-2 px-2 sm:px-4 rounded-2xl duration-100 hover:scale-105'>
                     Регистрация
                   </button>
                 </NavLink>
                 <NavLink to='/login' className='mx-1'>
-                  <button className='bg-[#0146b1] text-white py-2 px-4 rounded-2xl duration-100 hover:scale-105'>
+                  <button className='bg-[#0146b1] text-white py-1 sm:py-2 px-2 sm:px-4 rounded-2xl duration-100 hover:scale-105'>
                     Вход
                   </button>
                 </NavLink>
