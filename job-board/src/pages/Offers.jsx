@@ -25,10 +25,10 @@ const Offers = () => {
       <ScrollToTop/>
       <SearchBar onSearch={handleSearch} />
       <div className='flex flex-col md:flex-row justify-center items-start m-auto max-w-4xl'>
-          <div className='filters mx-2 rounded-xl w-full md:w-1/2'>
+          <div className='filters sm:mx-2 rounded-xl w-full md:w-1/2'>
             <Filters onFilterChange={handleFilterChange} />
           </div>
-          <div className='mx-2 rounded-xl w-full'>
+          <div className='sm:mx-2 rounded-xl w-full'>
               <OffersCard selectedFilters={selectedFilters} searchedData={searchedData} />
           </div>
       </div>
