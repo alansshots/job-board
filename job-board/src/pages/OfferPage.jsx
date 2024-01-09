@@ -106,9 +106,9 @@ const OfferPage = () => {
               </div>
               
               <div className='flex flex-col justify-between items-left mt-1 border-t border-gray-100 pt-2'>
-                <h3 className='font-semibold mb-1'>Информация</h3>
-                <p dangerouslySetInnerHTML={{ __html: offerAuthor.info }}>
-                </p>
+                {/* <h3 className='font-semibold mb-1'>Информация</h3> */}
+                {/* <p dangerouslySetInnerHTML={{ __html: offerAuthor.info }}>
+                </p> */}
                 <ul className='mt-1'>
                   <li className='font-semibold'>
                     <h3>Email за връзка:</h3>

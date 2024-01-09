@@ -217,7 +217,7 @@ const AddOffer = () => {
           <h1 className='text-5xl font-semibold'><span className='text-[#0146b1]'>Създай</span> Обява</h1>
       </div>
     
-    <div className='m-auto max-w-4xl'>
+    <div className='m-auto max-w-4xl bg-gray-100'>
 
     <div className='mt-10'>
         <div>
@@ -326,12 +326,12 @@ const AddOffer = () => {
       </div>
 
 
-      <div className='m-auto mt-10'>
+      <div className='m-auto mt-10 bg-gray-100'>
           <h2 className='text-2xl font-semibold'>Oсновно съдаржание <span className='text-red-500'>*</span></h2>
       </div>
 
-      <div className='m-auto max-w-5xl mt-5 p-4'>
-      <CKEditor 
+      <div className='m-auto max-w-5xl mt-5 p-4 bg-gray-100'>
+      <CKEditor
           editor={ ClassicEditor }
           data="<p>Описание, на Вашата обява.</p>"
           // onReady={ editor => {
@@ -357,7 +357,7 @@ const AddOffer = () => {
       </div>
 
       <div className='flex flex-row justify-center items-center w-[150px]'>
-      <button onClick={submitNewOffer} type="button" className=" py-2 px-4 bg-[#0146b1] hover:scale-105 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg ">
+      <button onClick={submitNewOffer} type="button" className=" py-2 px-4 bg-[#0146b1] hover:scale-105 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
         Публикувай
       </button>
       </div>

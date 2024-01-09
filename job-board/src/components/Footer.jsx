@@ -4,7 +4,7 @@ import { Instagram, Facebook } from 'react-feather'
 const Footer = () => {
   return (
     <div>
-        <footer aria-label="Site Footer" className="bg-gray-100">
+        <footer aria-label="Site Footer" className="bg-gray-100 md:mt-10">
             <div className="max-w-4xl px-4 pt-10 pb-8 mx-auto sm:px-6 lg:px-8 lg:pt-4">
                 <div className="pt-8 border-t border-gray-300 sm:flex sm:items-center sm:justify-between lg:mt-16">
                 <nav aria-label="Footer Navigation - Support">

@@ -204,7 +204,7 @@ const CompanyPage = () => {
   };
 
   return (
-    <div id="CompanyPage" className="m-auto mt-10 max-w-6xl">
+    <div id="CompanyPage" className="m-auto mt-10 max-w-6xl bg-gray-100">
       <ScrollToTop/>
         <div className="bg-white rounded-lg shadow-xl pb-8">
             <div className="w-full h-[250px]">
@@ -269,8 +269,8 @@ const CompanyPage = () => {
             </div>
         </div>
 
-        <div className="flex flex-col sm:flex-row mt-5">
-          <div className="bg-white rounded-lg shadow-xl p-8 sm:mr-4">
+        <div className="flex flex-col sm:flex-row mt-5 bg-gray-100">
+          <div className="bg-white rounded-lg shadow-xl p-8 sm:mr-4 max-h-80 sm:top-5 sm:sticky">
             <div className="flex flex-row justify-between items-center">
               <h4 className="text-xl text-gray-900 font-bold">Кратка информация</h4>
               {loggedInUser.id === user.id && (
