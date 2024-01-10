@@ -2,7 +2,7 @@ import React from 'react'
 import ScrollToTop from '../components/ScrollToTop';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Edit, CheckSquare } from 'react-feather';
+import { Edit, CheckSquare, Trash, CheckCircle } from 'react-feather';
 import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import supabase from '../config/supabaseClient';
@@ -28,6 +28,7 @@ const CompanyPage = () => {
   });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
+  const [offerSlug, setOfferSlug] = useState('');
   
   const handleImageChange = async (event) => {
     const image = event.target.files[0];
@@ -125,9 +126,7 @@ const CompanyPage = () => {
   };
   
   const handleSaveClick = async () => {
-    // Implement code to save editedText to the Supabase database
-    // Here, we are assuming a "posts" table in your database
-    
+
     const { data, error } = await supabase
       .from('users')
       .update({
@@ -203,9 +202,45 @@ const CompanyPage = () => {
     }
   };
 
+  // Delete Offer
+  const deleteOffer = async (offerSlug) => {
+    console.log('Deleting offer with slug:', offerSlug);
+    try {
+      const { data, error } = await supabase
+        .from('offers')
+        .delete()
+        .eq('slug', offerSlug);
+  
+      if (error) {
+        console.error('Error deleting offer:', error);
+      } else {
+        console.log('Offer deleted successfully:', data);
+        fetchAllOffers(user);
+      }
+    } catch (error) {
+      console.error('Unexpected error during offer deletion:', error);
+    }
+  };
+
   return (
     <div id="CompanyPage" className="m-auto mt-10 max-w-6xl bg-gray-100">
       <ScrollToTop/>
+      {/* PopUp */}
+      {/* <div className='h-screen flex flex-row justify-center items-center absolute bg-gray-400 opacity-50'>
+      <div role="alert" className="duration-200 rounded-xl border border-gray-100 bg-white p-4 shadow-xl opacity-100">
+                   <div className="flex items-start gap-4">
+          
+                    <div className="flex-1">
+                    <strong className="block font-medium text-gray-900">Сигурни ли сте че искате да изтриете обявата?</strong>
+
+                    <div>
+                      <button className='mx-1 text-white bg-[#0852bf] px-2 py-1 rounded-md transition ease-in duration-200'>Не</button>
+                      <button className='mx-1 bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 hover:scale-105 transition ease-in duration-200 cursor-pointer'>Да, премахване на обява</button>
+                    </div>
+                    </div>
+                </div>
+          </div>
+          </div> */}
         <div className="bg-white rounded-lg shadow-xl pb-8">
             <div className="w-full h-[250px]">
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
@@ -417,11 +452,7 @@ const CompanyPage = () => {
                   {offers.map(offer => (
 
                     <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
-                    <div className="flex items-start gap-4 p-4 sm:p-6 lg:p-8">
-                      {/* <Link to={offer.slug} className="block shrink-0"> 
-                        <img src="" className="h-14 w-14 rounded-lg object-cover"/>
-                      </Link> */}
-            
+                    <div className="flex flex-row justify-between items-start gap-4 p-4 sm:p-6 lg:p-8">
                         <div>
                           <h3 className="font-medium sm:text-lg">
                             <Link to={`/offers/${offer.slug}`}  className="hover:underline">
@@ -461,10 +492,18 @@ const CompanyPage = () => {
                           </p>            
                       </div>
                     </div>
+                    <div>
+                    {loggedInUser.id === user.id && (
+                    <Trash
+                      className='bg-red-500 text-white rounded-md p-1 w-8 h-8 hover:bg-red-600 hover:scale-105 transition ease-in duration-200 cursor-pointer'
+                      onClick={() => deleteOffer(offer.slug)}>
+                    </Trash>
+                    )}
+                    </div>
                   </div>
                   
                   <div className="flex justify-end">
-                    <Link to={`/offers/${offer.slug}`} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 hover: px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
+                    <Link to={`/offers/${offer.slug}`} className="items-center text-white bg-[#0852bf] transition ease-in duration-200 px-2 py-2 text-sm cursor-pointer mb-5 mr-5 rounded-xl font-semibold hover:shadow-xl">
                       Свържи се
                     </Link>
                   </div>
@@ -475,7 +514,6 @@ const CompanyPage = () => {
             )}
           </div>
         </div>
-
     </div>
   )
 }
