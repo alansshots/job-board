@@ -116,7 +116,7 @@ const OfferPage = () => {
                   </li>
                   <li className='font-semibold'>
                     <h3>Телефон за връзка:</h3>
-                    <h3>+359 {offerAuthor.phone}</h3>
+                    <h3>{offerAuthor.phone}</h3>
                   </li>
                 </ul>
               </div>

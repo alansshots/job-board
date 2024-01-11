@@ -99,7 +99,7 @@ const Login = () => {
                 <p className="mt-4 text-sm text-gray-500 sm:mt-0">
                   Нямате профил?
                   <Link to="/register" className="text-gray-700 underline mx-0.5">Регистрация</Link>.
-                  Забравена парола?
+                  {/* Забравена парола? */}
                 </p>
               </div>
             </form>
