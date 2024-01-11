@@ -387,10 +387,10 @@ const CompanyPage = () => {
                         <span className="font-bold w-24">Дата на основаване:</span>
                         <span className="text-gray-700">{user.created_at}</span>
                       </li> */}
-                      <li className="flex border-b py-2">
+                      {/* <li className="flex border-b py-2">
                         <span className="font-bold w-24">Телефон:</span>
                         <span className="text-gray-700">{user.phone}</span>
-                      </li>
+                      </li> */}
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Email:</span>
                         <span className="text-gray-700">{user.email}</span>

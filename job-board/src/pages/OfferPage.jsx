@@ -86,10 +86,10 @@ const OfferPage = () => {
                     <h3>Email за връзка:</h3>
                     <h3>{offer.email}</h3>
                   </li>
-                  <li className='font-semibold'>
+                  {/* <li className='font-semibold'>
                     <h3>Телефон за връзка:</h3>
                     <h3>{offer.phone}</h3>
-                  </li>
+                  </li> */}
                   </ul>
               </div>
 
@@ -114,10 +114,10 @@ const OfferPage = () => {
                     <h3>Email за връзка:</h3>
                     <h3>{offerAuthor.email}</h3>
                   </li>
-                  <li className='font-semibold'>
+                  {/* <li className='font-semibold'>
                     <h3>Телефон за връзка:</h3>
                     <h3>{offerAuthor.phone}</h3>
-                  </li>
+                  </li> */}
                 </ul>
               </div>
             </div>
