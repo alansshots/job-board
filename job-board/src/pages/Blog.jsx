@@ -55,7 +55,7 @@ const Blog = () => {
                     </div>
                 </>
               ):(data.posts.map((post) => (
-                <Link to={"/blog/" + post.slug} key={post.id} className="w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
+                <Link to={"/blog/" + post.slug} key={post.id} className="sm:w-1/4 mx-5 animate-background rounded-xl bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-[length:400%_400%] p-0.5 shadow-md transition [animation-duration:_6s] hover:shadow-xl hover:scale-105">
                     <img src={post.coverPhoto.url} className="rounded-t-[10px] bg-white sm:p-0.5"/>
                     <div className="rounded-b-[10px] bg-white p-4 !pt-5 sm:p-6">
                         <time dateime="2022-10-10" className="block text-xs text-gray-500">

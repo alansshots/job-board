@@ -61,10 +61,10 @@ const BLOG_QUERY = gql`
           <img src={data.post.coverPhoto.url} className="max-h-60 w-full object-cover"/>
         </section>
 
-            <h1 className='text-3xl font-semibold my-5'>{data.post.title}</h1>
-            <div className='flex flex-row items-center justify-left'>
+            <h1 className='text-3xl font-semibold my-5 mx-2'>{data.post.title}</h1>
+            <div className='flex flex-row items-center justify-left mx-2'>
 
-              <div className="flex-row gap-4 flex justify-center items-center">
+              <div className="flex-row gap-4 flex justify-center items-center ">
                 <div className="flex-shrink-0">
                     <a href="#" className="relative block">
                         <img alt="profil" src={data.post.publishedBy.picture} className="mx-auto object-cover rounded-full h-12 w-12 "/>
@@ -82,7 +82,7 @@ const BLOG_QUERY = gql`
             </div>
             
         </div>
-        <div className='mt-5' dangerouslySetInnerHTML={{__html: data.post.content.html}}>
+        <div className='mt-5 mx-2' dangerouslySetInnerHTML={{__html: data.post.content.html}}>
         </div>
     </div>
   )
