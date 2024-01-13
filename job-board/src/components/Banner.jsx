@@ -23,7 +23,7 @@ const Banner = () => {
               </NavLink>
             </div> */}
           
-            <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Изтеглете мобилното приложение.</p>
+            {/* <p className="text-sm mt-2 text-gray-500 mb-8 w-full">Изтеглете мобилното приложение.</p>
             <div className="flex lg:flex-row md:flex-col">
               <button className="bg-[#0146b1] text-white transition duration-200 hover:scale-105 hover-shadow-xl inline-flex py-3 px-5 rounded-lg items-center focus:outline-none">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" className="w-6 h-6" viewBox="0 0 512 512">
@@ -44,7 +44,7 @@ const Banner = () => {
                   <span className="title-font font-medium">App Store</span>
                 </span>
               </button>
-            </div>
+            </div> */}
           </div>
           <div className="lg:max-w-lg lg:w-full md:w-1/2 w-5/6">
             {/* <img className="hidden md:block object-cover object-center rounded-xl" alt="hero" src={BannerImage}/> */}
