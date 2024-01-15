@@ -460,7 +460,7 @@ const CompanyPage = () => {
                             </Link>
                           </h3>
             
-                          <p className="line-clamp-2 text-sm text-gray-700" 
+                          <p className="hidden sm:block line-clamp-2 text-sm text-gray-700" 
                             dangerouslySetInnerHTML={{ __html: offer.summary }}>
                           </p>
 
