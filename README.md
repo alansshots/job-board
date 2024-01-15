@@ -4,13 +4,13 @@
 </p>
 
 <p>
-The project can be seen here -> https://stazhant.com/
-Hosted using etlify -> https://www.netlify.com/
-
-Frontend Framework -> React.js (https://react.dev/)
-CSS Framework -> TailwindCSS (https://tailwindcss.com/)
-Backend -> Supabase (https://supabase.com/)
- 
-Illustrations -> unDraw (https://undraw.co/)
+  <ul>
+     <li>The project can be seen here -> https://stazhant.com/</li>
+     <li>Hosted using etlify -> https://www.netlify.com/</li>
+     <li>Frontend Framework -> React.js (https://react.dev/)</li>
+     <li>CSS Framework -> TailwindCSS (https://tailwindcss.com/)</li>
+     <li>Backend -> Supabase (https://supabase.com/)</li> 
+     <li>Illustrations -> unDraw (https://undraw.co/)</li>  
+  </ul>
 </p>
 
