@@ -6,7 +6,7 @@
 <p>
   <ul>
      <li>The project can be seen here -> https://stazhant.com/</li>
-     <li>Hosted using etlify -> https://www.netlify.com/</li>
+     <li>Hosted using Netlify -> https://www.netlify.com/</li>
      <li>Frontend Framework -> React.js (https://react.dev/)</li>
      <li>CSS Framework -> TailwindCSS (https://tailwindcss.com/)</li>
      <li>Backend -> Supabase (https://supabase.com/)</li> 
