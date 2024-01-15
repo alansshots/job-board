@@ -80,10 +80,12 @@ useEffect(() => {
                        {offer.title}
                       </Link>
                     </h3>
-      
-                    <p className="hidden sm:block line-clamp-2 text-sm text-gray-700" 
-                      dangerouslySetInnerHTML={{ __html: offer.summary }}>
-                    </p>
+
+                    <div className="hidden sm:block">
+                      <div className="line-clamp-2 text-sm text-gray-700">
+                        <p dangerouslySetInnerHTML={{ __html: offer.summary }}></p>
+                      </div>
+                    </div>
       
                     <div className="mt-2 sm:flex sm:items-center sm:gap-2">
 
