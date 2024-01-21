@@ -23,12 +23,14 @@ const CompanyPage = () => {
     location: user.location,
     industry: user.industry,
     created_at: user.created_at,
-    phone: user.phone,
+    website: user.website,
     email: user.email
   });
   const [selectedImage, setSelectedImage] = useState(null);
   const [isHovered, setIsHovered] = useState(false);
   const [offerSlug, setOfferSlug] = useState('');
+  const [showDeletePopup, setShowDeletePopup] = useState(false);
+  const [offerToDelete, setOfferToDelete] = useState(null);
   
   const handleImageChange = async (event) => {
     const image = event.target.files[0];
@@ -86,7 +88,7 @@ const CompanyPage = () => {
       location: user.location,
       industry: user.industry,
       created_at: user.created_at,
-      phone: user.phone,
+      website: user.website,
       email: user.email
     });
   }
@@ -99,7 +101,7 @@ const CompanyPage = () => {
         location: editedInfo.location,
         industry: editedInfo.industry,
         created_at: editedInfo.created_at,
-        phone: editedInfo.phone,
+        website: editedInfo.website,
         email: editedInfo.email
       })
       .eq("id", lastPath)
@@ -222,25 +224,21 @@ const CompanyPage = () => {
     }
   };
 
+  const handleDeleteClick = (offerSlug) => {
+    setOfferToDelete(offerSlug);
+    setShowDeletePopup(true);
+  };
+
+  const handleConfirmDelete = () => {
+    // Call your deleteOffer function with the offerToDelete
+    deleteOffer(offerToDelete);
+    // Close the popup
+    setShowDeletePopup(false);
+  };
+
   return (
     <div id="CompanyPage" className="m-auto mt-10 max-w-6xl bg-gray-100">
       <ScrollToTop/>
-      {/* PopUp */}
-      {/* <div className='h-screen flex flex-row justify-center items-center absolute bg-gray-400 opacity-50'>
-      <div role="alert" className="duration-200 rounded-xl border border-gray-100 bg-white p-4 shadow-xl opacity-100">
-                   <div className="flex items-start gap-4">
-          
-                    <div className="flex-1">
-                    <strong className="block font-medium text-gray-900">Сигурни ли сте че искате да изтриете обявата?</strong>
-
-                    <div>
-                      <button className='mx-1 text-white bg-[#0852bf] px-2 py-1 rounded-md transition ease-in duration-200'>Не</button>
-                      <button className='mx-1 bg-red-500 text-white rounded-md px-2 py-1 hover:bg-red-600 hover:scale-105 transition ease-in duration-200 cursor-pointer'>Да, премахване на обява</button>
-                    </div>
-                    </div>
-                </div>
-          </div>
-          </div> */}
         <div className="bg-white rounded-lg shadow-xl pb-8">
             <div className="w-full h-[250px]">
                 <img src="https://vojislavd.com/ta-template-demo/assets/img/profile-background.jpg" className="w-full h-full rounded-tl-lg rounded-tr-lg" />
@@ -348,15 +346,15 @@ const CompanyPage = () => {
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
                     />
                   </li>
-                  {/* <li className="flex border-b py-2">
-                    <span className="font-bold w-24">Телефон:</span>
+                  <li className="flex border-b py-2">
+                    <span className="font-bold w-24">Уебсайт:</span>
                     <input
                       type="text"
-                      value={editedInfo.phone}
-                      onChange={(e) => setEditedInfo({ ...editedInfo, phone: e.target.value })}
+                      value={editedInfo.website}
+                      onChange={(e) => setEditedInfo({ ...editedInfo, website: e.target.value })}
                       className="border-0 border-b border-gray-500 p-0 m-0 outline-none  focus:ring-0 bg-transparent text-gray-700"
                     />
-                  </li> */}
+                  </li>
                   <li className="flex border-b py-2">
                     <span className="font-bold w-24">Email:</span>
                     <input
@@ -383,14 +381,10 @@ const CompanyPage = () => {
                         <span className="font-bold w-24">Бранш:</span>
                         <span className="text-gray-700">{user.industry}</span>
                       </li>
-                      {/* <li className="flex border-b py-2">
-                        <span className="font-bold w-24">Дата на основаване:</span>
-                        <span className="text-gray-700">{user.created_at}</span>
-                      </li> */}
-                      {/* <li className="flex border-b py-2">
-                        <span className="font-bold w-24">Телефон:</span>
-                        <span className="text-gray-700">{user.phone}</span>
-                      </li> */}
+                      <li className="flex border-b py-2">
+                        <span className="font-bold w-24">Уебсайт:</span>
+                        <span className="text-gray-700">{user.website}</span>
+                      </li>
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Email:</span>
                         <span className="text-gray-700">{user.email}</span>
@@ -450,8 +444,7 @@ const CompanyPage = () => {
               <div className="offers">
                 <div className="offers-grid">
                   {offers.map(offer => (
-
-                    <article key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
+                    <div key={offer.id} className="my-4 rounded-xl border-2 border-gray-100 bg-white shadow-sm trasition duration-200 hover:scale-[101%] hover:shadow-md">
                     <div className="flex flex-row justify-between items-start gap-4 p-4 sm:p-6 lg:p-8">
                         <div>
                           <h3 className="font-medium sm:text-lg">
@@ -495,12 +488,20 @@ const CompanyPage = () => {
                     </div>
                     <div>
                     {loggedInUser.id === user.id && (
-                    <Trash
-                      className='bg-red-500 text-white rounded-md p-1 w-8 h-8 hover:bg-red-600 hover:scale-105 transition ease-in duration-200 cursor-pointer'
-                      onClick={() => deleteOffer(offer.slug)}>
-                    </Trash>
+                    <div className='flex flex-row items-center justify-between'>
+                      <Trash
+                        className='mr-0.5 bg-red-500 text-white rounded-md p-1 w-8 h-8 hover:bg-red-600 hover:scale-105 transition ease-in duration-200 cursor-pointer'
+                        onClick={() => handleDeleteClick(offer.slug)} >
+                      </Trash>
+                      
+                      {/* <Edit
+                        className='ml-0.5 shadow-md rounded-md p-1 w-8 h-8 hover:scale-105 transition ease-in duration-200 cursor-pointer'
+                        >
+                      </Edit> */}
+                    </div>  
                     )}
                     </div>
+                    
                   </div>
                   
                   <div className="flex justify-end">
@@ -508,8 +509,31 @@ const CompanyPage = () => {
                       Свържи се
                     </Link>
                   </div>
-                </article>
+                </div>
                   ))}
+                  {/* Delete Offer Popup */}
+                  {showDeletePopup && (
+                  <div className="fixed inset-0 bg-gray-800 bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-white rounded-xl p-6 max-w-md">
+                      <p className="text-lg font-semibold mb-4">Сигурни ли сте, че искате да изтриете тази обява?</p>
+                      <div className="flex justify-end">
+                        <button
+                          className="text-white bg-[#0852bf] px-4 py-2 rounded-md mr-2"
+                          onClick={() => setShowDeletePopup(false)}
+                        >
+                          Отказ
+                        </button>
+                        <button
+                          className="text-white bg-red-600 hover:bg-red-700 hover:scale-105 transition-200 duration-200 px-4 py-2 rounded-md"
+                          onClick={handleConfirmDelete}
+                        >
+                          Изтриване
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  )}
+                  
                 </div>
               </div>
             )}
