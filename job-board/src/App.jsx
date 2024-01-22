@@ -18,6 +18,8 @@ import AddOffer from "./pages/AddOffer";
 import Login from "./pages/Login"
 import Register from "./pages/Register";
 import RegisterConfirmation from "./pages/RegisterConfirmation";
+import ResetPasswordEmail from "./pages/ResetPasswordEmail";
+import ResetPassword from "./pages/ResetPassword";
 
 import NotFound from "./pages/NotFound";
 
@@ -35,8 +37,10 @@ function App() {
           <Route path='/blog' element={<Blog/>} />
           <Route path='/blog/:slug' element={<BlogPost/>} />
           <Route path='/register' element={<Register/>} />
-          <Route path='/register-confirmation' element={<RegisterConfirmation/>} />
           <Route path='/login' element={<Login/>} />
+          <Route path='/register-confirmation' element={<RegisterConfirmation/>} />
+          <Route path='/reset-password-email' element={<ResetPasswordEmail/>} />
+          <Route path='/reset-password' element={<ResetPassword/>} />
           <Route path='/company/:slug' element={<CompanyPage/>}/>
           <Route path='/company/offers/:slug' element={<OfferPage/>} />
           <Route path='/company/:slug/addOffer' element={<AddOffer/>} />
