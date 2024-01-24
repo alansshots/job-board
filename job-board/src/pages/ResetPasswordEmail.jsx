@@ -33,7 +33,7 @@ function ResetPasswordEmail() {
             </h2>
 
             <p className="mt-4 leading-relaxed ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, nobis?
+              Изгубихте достъп до акаунта си? Въведете вашия имейл, и ние ще Ви насочим как да подновите паролата си."
             </p>
           </div>
         </section>
@@ -47,7 +47,7 @@ function ResetPasswordEmail() {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, ex.
+                Изгубихте достъп до акаунта си? Въведете вашия имейл, и ние ще Ви насочим как да подновите паролата си."
               </p>
             </div>
 

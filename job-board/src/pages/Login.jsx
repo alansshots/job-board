@@ -23,7 +23,7 @@ const Login = () => {
       }, 10000);
     } else {
       localStorage.setItem('accessToken', data.session.access_token);
-      navigate('/');
+      navigate('/offers');
     }
   }
 

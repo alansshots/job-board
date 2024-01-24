@@ -21,7 +21,7 @@ const Offers = () => {
   }; 
 
   return (
-    <div id="Offers bg-gray-100 h-screen">
+    <div id="Offers" className='px-2'>
       <ScrollToTop/>
       <SearchBar onSearch={handleSearch} />
       <div className='flex flex-col md:flex-row justify-center items-start m-auto max-w-4xl'>

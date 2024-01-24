@@ -42,7 +42,7 @@ function ResetPassword() {
             </h2>
 
             <p className="mt-4 leading-relaxed ">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Magnam, nobis?
+              Промяна на забравена парола. 
             </p>
           </div>
         </section>
@@ -56,7 +56,7 @@ function ResetPassword() {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quidem, ex.
+                Моля въведете нова парола, за вашия профил.
               </p>
             </div>
 
@@ -82,7 +82,7 @@ function ResetPassword() {
               
               <div className="col-span-6">
                 <label htmlFor="Password" className="block text-sm font-semibold text-gray-700">
-                  Нова Парола
+                  Промяна
                 </label>
 
                 <input
@@ -98,10 +98,10 @@ function ResetPassword() {
                 <button
                  onClick={resetPassword} 
                  type='button' className="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
-                  Промяна  
+                  Изпрати   
                 </button>
-
               </div>
+              
             </form>
           </div>
         </div>

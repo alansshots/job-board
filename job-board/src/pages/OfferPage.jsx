@@ -59,13 +59,14 @@ const OfferPage = () => {
             <div className='bg-white rounded-xl p-6'>
               <h2 className='text-2xl'>{offer.title}</h2>
               <div className="mt-2 sm:flex sm:items-center sm:gap-2">
-                <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md">
-                  {offer.salary} лв.
-                </span>
-      
-                <span className="whitespace-nowrap rounded-full bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md">
-                  {offer.experience}
-                </span>
+                {offer.salary ==! null && (  
+                  <span className="whitespace-nowrap rounded-full mx-0.5 bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md">
+                    {offer.salary} лв.
+                  </span>
+                 )}
+                  <span className="whitespace-nowrap rounded-full mx-0.5 bg-[#0852bf] px-2.5 py-0.5 text-md text-white shadow-md">
+                    {offer.experience}
+                  </span>
               </div>      
             </div>
             <div className='bg-white rounded-xl p-6 mt-5'>

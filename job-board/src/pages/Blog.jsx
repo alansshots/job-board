@@ -37,7 +37,7 @@ const Blog = () => {
   );
   if (error) return <pre>{error.message}</pre>
   return (
-    <div id="Blog">
+    <div id="Blog" className='px-2'>
         {/* <div className='mx-auto flex max-w-4xl items-center justify-between p-4'>
           <h2 className='text-3xl font-semibold'>Последни постове</h2>
         </div> */}

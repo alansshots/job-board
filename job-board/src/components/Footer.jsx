@@ -21,18 +21,18 @@ const Footer = () => {
                         </a>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <a className="text-gray-500 transition hover:opacity-75">
                            
                         </a>
-                    </li>
+                    </li> */}
                     </ul>
                 </nav>
 
                 <ul className="flex justify-center gap-6 mt-8 sm:mt-0 lg:justify-end">
                     <li>
                     <a
-                        href="/"
+                        href="https://www.instagram.com/stazhant/"
                         rel="noreferrer"
                         target="_blank"
                         className="text-gray-700 transition hover:opacity-75"
@@ -44,7 +44,7 @@ const Footer = () => {
 
                     <li>
                     <a
-                        href="/"
+                        href="https://www.instagram.com/stazhant/"
                         rel="noreferrer"
                         target="_blank"
                         className="text-gray-700 transition hover:opacity-75" >

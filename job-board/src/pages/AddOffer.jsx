@@ -212,7 +212,7 @@ const AddOffer = () => {
   }
 
   return (
-    <div>
+    <div className='px-4'>
       <div className='m-auto max-w-6xl mt-12'>
           <h1 className='text-5xl font-semibold'><span className='text-[#0146b1]'>Създай</span> Обява</h1>
       </div>
