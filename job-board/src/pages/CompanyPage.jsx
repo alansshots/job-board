@@ -383,7 +383,7 @@ const CompanyPage = () => {
                       </li>
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Уебсайт:</span>
-                        <span className="text-gray-700">{user.website}</span>
+                        <a href={user.website} target='_blank' className="text-gray-700 text-sky-700 over:text-[#0852bf] transition-200 duration-200">{user.website}</a>
                       </li>
                       <li className="flex border-b py-2">
                         <span className="font-bold w-24">Email:</span>
