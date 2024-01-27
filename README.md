@@ -11,6 +11,9 @@
      <li>CSS Framework -> TailwindCSS (https://tailwindcss.com/)</li>
      <li>Backend -> Supabase (https://supabase.com/)</li> 
      <li>Illustrations -> unDraw (https://undraw.co/)</li>  
+     <ul>
+       <li>Instagram Page -> https://www.instagram.com/stazhant</li>
+     </ul>
   </ul>
 </p>
 
