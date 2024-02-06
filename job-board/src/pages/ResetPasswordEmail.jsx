@@ -47,7 +47,7 @@ function ResetPasswordEmail() {
               </h1>
 
               <p className="mt-4 leading-relaxed text-gray-500">
-                Изгубихте достъп до акаунта си? Въведете вашия имейл, и ние ще Ви насочим как да подновите паролата си."
+                Изгубихте достъп до акаунта си? Въведете вашия имейл, и ние ще Ви насочим как да подновите паролата си.
               </p>
             </div>
 
@@ -89,7 +89,7 @@ function ResetPasswordEmail() {
                 <button
                  onClick={resetPasswordEmail} 
                  type='button' className="inline-block shrink-0 rounded-md border border-[#0146b1] bg-[#0146b1] px-12 py-3 text-sm font-semibold text-white  transition hover:bg-transparent hover:text-[#0146b1] focus:outline-none focus:ring active:text-[#0146b1]">
-                  Промяна  
+                  Изпрати
                 </button>
 
               </div>
